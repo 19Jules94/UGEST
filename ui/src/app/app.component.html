@@ -1,17 +1,25 @@
 <header>
   <nav id="menu" class="navbar navbar-dark bg-dark">
-      <a><img src="../assets/css/img/main-logo.png"></a>
-      <div class="d-flex">
-          <button style="margin: 1em;" class="btn btn-warning" type="button"><i class="fas fa-sign-in-alt"></i>Iniciar Sesion
-          </button>
-      </div>     
-    </nav>
-  </header>  
-    <footer class="mt-auto text-white"> 
-               
-      <div class="text-center p-3" style="background-color: #073349">
-        © 2021 Planificacion y Direccion de Proyectos
-        <a><img src="../assets/css/img/logo_small.png"></a>
-      </div>
-   
-    </footer>
+    <a><img src="../assets/img/main-logo.png"></a>
+    <div class="d-flex">
+      <button style="margin: 1em;" class="btn btn-warning" type="button"><i class="fas fa-sign-in-alt"></i>Iniciar
+        Sesion
+      </button>
+    </div>
+  </nav>
+</header>
+<main role="main" class=" container mt-0 mb-5">
+
+  <div class="container" >
+    <router-outlet></router-outlet>
+  </div>
+
+</main>
+<footer class="mt-auto text-white fixed-bottom">
+
+  <div class="text-center p-3" style="background-color: #073349">
+    © 2021 Planificacion y Direccion de Proyectos
+
+  </div>
+
+</footer>
