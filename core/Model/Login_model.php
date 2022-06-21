@@ -1,7 +1,7 @@
 <?php
 
-include_once './Base_model.php';
-include_once '../utils/AuthJWT.php';
+include_once 'C:\wamp64\www\UGEST\core\Model\Base_model.php';
+include_once 'C:\wamp64\www\UGEST\core\utils\AuthJWT.php';
 
 
 class Login_model extends Base_Model{
