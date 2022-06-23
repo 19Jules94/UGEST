@@ -1,25 +1,96 @@
 <header>
-  <nav id="menu" class="navbar navbar-dark bg-dark">
-    <a><img src="../assets/img/main-logo.png"></a>
-    <div class="d-flex">
-      <button style="margin: 1em;" class="btn btn-warning" type="button"[routerLink]="['/iniciar-sesion']"><i class="fas fa-sign-in-alt"></i>Iniciar
-        Sesion
-      </button>
+  <nav id="menu" class="navbar navbar-dark bg-dark ">
+    <a><img src="../assets/img/logo-uvigo-blanco.png" style="width:200px ;"></a>
+    <div class="d-flex"> 
+      
+      <div style="margin: 1em;" class="dropdown">
+        <button  *ngIf="isLogged()" class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-user"></i>{{getUsuario()?.nombre}}
+        </button>
+        <button  *ngIf="!isLogged()" class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          <i  class="fas fa-cogs"></i>Opciones</button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li  *ngIf="isLogged()"> <a class="dropdown-item" [routerLink]="['/perfil']"><i class="fas fa-user"></i>{{'app.perfil' | translate}}</a></li>
+          <li  *ngIf="isLogged()"><a class="dropdown-item" (click)="logOut()"><i class="fas fa-sign-out-alt"></i>{{'app.logout' | translate}}</a></li>
+          <li *ngIf="!isLogged()"><a class="dropdown-item"href="#" (click)="changeLang('es')">{{'app.espanol' | translate}}</a></li>
+          <li *ngIf="!isLogged()"><a class="dropdown-item" href="#"(click)="changeLang('gl')">{{'app.gallego' | translate}}</a></li>
+         
+        </ul>
+      </div>
+      
     </div>
+
   </nav>
 </header>
 <main role="main" class=" container mt-0 mb-5">
-
-  <div class="container" >
+  <div *ngIf="!isLogged()" class="container-main-nl" >
+    <router-outlet></router-outlet>
+  </div>
+  <div *ngIf="isLogged()"class="container-main" >
     <router-outlet></router-outlet>
   </div>
 
 </main>
-<footer class="mt-auto text-white fixed-bottom">
 
-  <div class="text-center p-3" style="background-color: #073349">
-    © 2021 Planificacion y Direccion de Proyectos
+  <footer class="bg-dark text-white text-center text-md-start "style="background-color: #073349">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          <img src="../assets/img/ESEI-logo.png" alt="" srcset="">
+        </div>
+        <!--Grid column-->
 
-  </div>
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0 justify-content-left">         
 
-</footer>
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="https://goo.gl/maps/KvpWsZ9iFNSwbouw8" class="text-white"><i class="fas fa-map-marker-alt"></i>Campus de Ourense - Edif. Politécnico 32004 - Ourense. Galicia (Spain)</a>
+            </li>
+            <li>
+              <a href="tel:+34988387000" class="text-white"><i class="fas fa-phone-alt"></i>+34 988 387 000</a>
+            </li>
+            <li>
+              <a href="https://wa.me/34628816000" class="text-white"><i class="fab fa-whatsapp"></i>+34 628 816 000</a>
+            </li>
+            <li>
+              <a href="mailto:info@esei.uvigo.es" class="text-white"><i class="fas fa-envelope"></i>info@esei.uvigo.es</a>
+            </li>
+          </ul>
+         
+          
+          
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">         
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="https://esei.uvigo.es/a-esei/localizacion-e-contacto/" class="text-white"><i class="fas fa-angle-right"></i>Localización e contacto</a>
+            </li>
+            <li>
+              <a href="https://secretaria.uvigo.gal/uv/web/qsp/" class="text-white"><i class="fas fa-angle-right"></i>Reclamacións e suxestións</a>
+            </li>
+            <li>
+              <a href="https://www.uvigo.gal/aviso-legal" class="text-white"><i class="fas fa-angle-right"></i> Aviso Legal </a>
+            </li>        
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: #073349;">
+      © 2022 Planificacion y Direccion de Proyectos
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->

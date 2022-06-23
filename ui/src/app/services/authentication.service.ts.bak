@@ -76,7 +76,7 @@ export class AuthenticationService {
             localStorage.setItem(ACCIONES_FUNCIONALIDADES_ITEM, JSON.stringify(credentials.RESOURCES.acciones_funcionalidades));
             localStorage.setItem(PROFILE, JSON.stringify(credentials.RESOURCES.profile));
             resourc = credentials.RESOURCES;
-console.log(resourc);
+
           } else {
             throw new Error();
           }

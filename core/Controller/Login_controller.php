@@ -1,6 +1,6 @@
 <?php
 
-include_once './Service/Login_service.php';
+include './Service/Login_service.php';
 
 class Login_controller
 {
@@ -19,8 +19,8 @@ class Login_controller
                 echo json_encode($toret);
             } else {
                 $resultadoAccionesFuncionalidades = $Login_Service->obtenerFuncionalidades($_POST['dni']);
-
-                $toret = array("STATUS" => "OK", "CODE" => "200", "RESOURCES" => array("token" => $resultado, "acciones_funcionalidades" => $resultadoAccionesFuncionalidades));
+                $profile = $Login_Service->getProfile($_POST['dni']);
+                $toret = array("STATUS" => "OK", "CODE" => "200", "RESOURCES" => array("token" => $resultado, "acciones_funcionalidades" => $resultadoAccionesFuncionalidades,"profile" => $profile));
                 echo json_encode($toret);
             }
         } else {

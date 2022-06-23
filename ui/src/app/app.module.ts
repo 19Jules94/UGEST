@@ -1,33 +1,75 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './components/inicio/inicio.component';
-import { IniciarSesionComponent } from './components/iniciar-sesion/iniciar-sesion.component';
-import {JwtAuthenticationInterceptor} from './lifecycle/jwt-authentication.interceptor';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PanelPrincipalComponent } from './components/panel-principal/panel-principal.component';
+
+import {JwtAuthenticationInterceptor} from './lifecycle/jwt-authentication.interceptor';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {FilterPipe} from "./utils/FilterPipe";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
+if (localStorage.getItem('selectedLanguage') == null) {
+  localStorage.setItem('selectedLanguage', 'es');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent,
-    IniciarSesionComponent
+    InicioComponent,   
+    PanelPrincipalComponent,   
+    FilterPipe
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    TranslateModule.forRoot(
+      {
+        defaultLanguage: localStorage.getItem('selectedLanguage')!,
+
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      }),
+    NgbModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [ 
+  exports: [
+    TranslateModule
+  ],
+  providers: [
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: JwtAuthenticationInterceptor,
-    multi: true
-  }],
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtAuthenticationInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

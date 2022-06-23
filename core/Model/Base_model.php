@@ -1,5 +1,5 @@
 <?php
-include_once 'C:\wamp64\www\UGEST\core\Model\Base_model.php';
+include_once './Model/Access_DB.php';
 
 class Base_model {
 

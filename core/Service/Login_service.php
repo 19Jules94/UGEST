@@ -22,7 +22,12 @@ class Login_service
     }
     function obtenerFuncionalidades($DNI)
     {
-        $LoginModel = new Login_Model($DNI, "");
+        $LoginModel = new Login_model($DNI, "");
         return $LoginModel->obtenerFuncionalidadesAcciones();
+    }
+    public function getProfile($dni)
+    {
+        $LoginModel = new Login_model($dni, "");
+        return $LoginModel->getProfile($dni);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
-include_once 'C:\wamp64\www\UGEST\core\Model\Base_model.php';
-include_once 'C:\wamp64\www\UGEST\core\utils\AuthJWT.php';
+include_once './Model/Base_model.php';
+include_once './utils/AuthJWT.php';
 
 
 class Login_model extends Base_Model{
@@ -53,6 +53,14 @@ class Login_model extends Base_Model{
         }
         error_reporting(-1);
         return $acciones;
+    }
+    public function getProfile($dni)
+    {
+        $sql = "SELECT dni, nombre, apellidos, email FROM usuario WHERE dni='$dni'";
+
+        $resultado = $this->db->query($sql);
+
+        return $resultado->fetch_all(MYSQLI_ASSOC)[0];
     }
 
 }

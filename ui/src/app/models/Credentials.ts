@@ -1,8 +1,10 @@
-import { Perfil } from './Perfil';
-export class Credenciales {
+import {Profile} from "./Profile";
+
+export class Credentials {
   public constructor(
     public token: string,
     public acciones_funcionalidades: Array<any>,
-    public perfil: Perfil
+    public profile: Profile
   ) {}
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-include_once './Controller/Login_controller.php';
+include_once 'Controller/Login_controller.php';
 
 
 mb_internal_encoding('UTF-8');
@@ -14,7 +14,9 @@ header('Access-Control-Allow-Methods: GET, POST');
 header('Content-Type: application/json; charset=UTF-8');
 
 if (!isset($_REQUEST['controller'])) {
+    
     http_response_code(400);
+   
 } else {
     switch ($_REQUEST['controller']) { //se evalua la action que llega por get
         case 'login': //Login
