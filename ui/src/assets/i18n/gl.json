@@ -1,13 +1,14 @@
 {
   "lan" : "gl",
   "app": {
+    "saludo":"Ola ",
     "login": "Iniciar Sesión",
     "logout": "Sair",
     "autores": "Autores",
     "idioma": "Idioma",
     "perfil": "Perfil",
-    "espanol": "Español (es)",
-    "gallego": "Galego (gl)",
+    "espanol": "Castelan",
+    "gallego": "Galego",
     "options": "Opcións",
     "volver":"Volver",
     "cancelar":"Cancelar",

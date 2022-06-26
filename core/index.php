@@ -1,7 +1,8 @@
 <?php
 
 include_once 'Controller/Login_controller.php';
-
+include_once './Controller/Usuarios_controller.php';
+include_once './Controller/Acciones_controller.php';
 
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');
@@ -21,7 +22,13 @@ if (!isset($_REQUEST['controller'])) {
     switch ($_REQUEST['controller']) { //se evalua la action que llega por get
         case 'login': //Login
             new Login_controller();
-            break;       
+            break;   
+        case 'usuarios': //Login
+            new Usuarios_controller();
+            break;      
+         case 'acciones': //Acciones
+             new Acciones_controller();
+             break;
         default://caso default
             http_response_code(400);
     }

@@ -25,10 +25,7 @@ body {
 #h3-log {
   color: white;
 }
-#icon-user,
-#icon-lock {
-  background-color: #ffc720;
-}
+
 i{
   margin-right: 1em;
 }
@@ -39,4 +36,10 @@ i{
 }
 .container-main-nl{
     min-height: 66.8vh;
+}
+
+#icon-show{
+  cursor: pointer!important;
+  color: white;
+  background-color: #0097fc;
 }

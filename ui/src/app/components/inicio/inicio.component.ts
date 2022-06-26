@@ -49,7 +49,7 @@ export class InicioComponent implements OnInit {
     this.authenticationService.login(dniValue, passwordValue)
     .subscribe(
       value => {
-        this.router.navigate(['/panel-principal'], {queryParams: {flashok: this.ts.instant("login.bienvenido")}});
+        this.router.navigate(['/panel-principal']);
       },
       error => {
         this.error = this.ts.instant('login.error');

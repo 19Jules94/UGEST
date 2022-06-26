@@ -1,0 +1,21 @@
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">{{'gestion-acciones.accion' | translate}}</th>
+        <th scope="col">{{'gestion-acciones.descripcion' | translate}}</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let accion of acciones;let indice=index">
+        <th scope="row">{{indice+1}}</th>
+        <td>{{accion.nombre}}</td>
+        <td>{{accion.descripcion}}</td>
+        
+      </tr>
+     
+    </tbody>
+  </table>
+  <button class="btn btn-secondary" [routerLink]="['/panel-principal']">{{'gestion-usuarios.volver' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>

@@ -27,6 +27,7 @@ export class AuthenticationService {
     const item = localStorage.getItem(CREDENTIALS_ITEM);
     const acc_func = localStorage.getItem(ACCIONES_FUNCIONALIDADES_ITEM);
     const profile = localStorage.getItem(PROFILE);
+    console.log("perfil"+profile);
 
     if (item && acc_func && profile) {
       return new Credentials(item, JSON.parse(acc_func), JSON.parse(profile));
@@ -71,12 +72,14 @@ export class AuthenticationService {
       .pipe(
         map(credentials => {
           let resourc;
+         
           if (credentials.CODE == '200') {
             localStorage.setItem(CREDENTIALS_ITEM, credentials.RESOURCES.token);
             localStorage.setItem(ACCIONES_FUNCIONALIDADES_ITEM, JSON.stringify(credentials.RESOURCES.acciones_funcionalidades));
-            localStorage.setItem(PROFILE, JSON.stringify(credentials.RESOURCES.profile));
+            localStorage.setItem(PROFILE, JSON.stringify(credentials.RESOURCES.profile)); 
+                    
             resourc = credentials.RESOURCES;
-console.log(resourc);
+            console.log(resourc);
           } else {
             throw new Error();
           }

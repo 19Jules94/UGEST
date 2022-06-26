@@ -3,17 +3,15 @@
     <a [routerLink]="['/']"><img src="../assets/img/logo-uvigo-blanco.png" style="width:200px ;"></a>
     <div class="d-flex"> 
       
-      <div style="margin: 1em;" class="dropdown">
-        <button  *ngIf="isLogged()" class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-user"></i>{{getUsuario()?.nombre}}
-        </button>
-        <button  *ngIf="!isLogged()" class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-          <i  class="fas fa-cogs"></i>Opciones</button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <div *ngIf="isLogged()" style="margin: 1em;" class="dropdown">
+        <a  class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-user"></i>{{'app.saludo' | translate}}{{getUsuario()?.nombre}}</a>
+             
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <li  *ngIf="isLogged()"> <a class="dropdown-item" [routerLink]="['/perfil']"><i class="fas fa-user"></i>{{'app.perfil' | translate}}</a></li>
           <li  *ngIf="isLogged()"><a class="dropdown-item" (click)="logOut()"><i class="fas fa-sign-out-alt"></i>{{'app.logout' | translate}}</a></li>
-          <li *ngIf="!isLogged()"><a class="dropdown-item"href="#" (click)="changeLang('es')">{{'app.espanol' | translate}}</a></li>
-          <li *ngIf="!isLogged()"><a class="dropdown-item" href="#"(click)="changeLang('gl')">{{'app.gallego' | translate}}</a></li>
+          <li *ngIf="isLogged()"><a class="dropdown-item"href="#" (click)="changeLang('es')">{{'app.espanol' | translate}}</a></li>
+          <li *ngIf="isLogged()"><a class="dropdown-item" href="#"(click)="changeLang('gl')">{{'app.gallego' | translate}}</a></li>
          
         </ul>
       </div>

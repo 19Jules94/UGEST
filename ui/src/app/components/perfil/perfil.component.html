@@ -1,0 +1,34 @@
+<div *ngIf="usuario">
+    <div id="login">
+
+    <div class="card">
+        <div id="enc-log" class="card-header">
+            <h3 id="h3-log" class="text-center">Perfil</h3>
+        </div>
+        <div class="card-body">
+            <form >
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'profile.dni' | translate}}</label>
+                    <input  readonly class="form-control" value="{{usuario.dni}}">
+                </div>
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label">{{'profile.nombre' | translate}}</label>
+                    <input id="perfil-form" readonly class="form-control" value="{{usuario.nombre}}">
+                </div>
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label">{{'profile.apellidos' | translate}}</label>
+                    <input  readonly class="form-control" value="{{usuario.apellidos}}">
+                </div>
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label">{{'profile.email' | translate}}</label>
+                    <input  readonly class="form-control" value="{{usuario.email}}">
+                </div>
+                <div class="float-end">
+                    <button  [routerLink]="['/perfil/edit']"class="btn btn-success" type="button"  >Modificar datos  <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+            </form>
+        </div>
+  
+</div>
+</div>
+</div>

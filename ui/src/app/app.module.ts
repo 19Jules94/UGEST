@@ -19,6 +19,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { ModificarPerfilComponent } from './components/modificar-perfil/modificar-perfil.component';
+import { MostrarAccionesComponent } from './components/gestion-acciones/mostrar-acciones/mostrar-acciones.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -34,7 +37,7 @@ if (localStorage.getItem('selectedLanguage') == null) {
     AppComponent,
     InicioComponent,   
     PanelPrincipalComponent,   
-    FilterPipe
+    FilterPipe, PerfilComponent, ModificarPerfilComponent, MostrarAccionesComponent
 
   ],
   imports: [
