@@ -43,3 +43,7 @@ i{
   color: white;
   background-color: #0097fc;
 }
+
+.fa-trash-alt{
+  cursor: pointer!important;
+}

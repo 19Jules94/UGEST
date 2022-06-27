@@ -18,16 +18,20 @@ class Acciones_controller extends Basic_Controller
         } else if (!isset($_REQUEST['action'])) {
             $this->echoBadRequest("Es necesario indicar una acción");
         } else {
-            switch ($_REQUEST['action']) {                
-                case 'showall'://ver todas
+            switch ($_REQUEST['action']) {
+                case 'add': //añadir
+                    $this->canUseAction("ACCION", "ADD") ? $this->addAccion() : $this->echoForbidden("ACCION", "ADD");
+                    break;
+                case 'showall': //ver todas
                     $this->canUseAction("ACCION", "SHOWALL") ? $this->mostrarTodas() : $this->echoForbidden("ACCION", "SHOWALL");
                     break;
-            
-                default://caso default
+                 case 'delete'://borrar
+                    $this->canUseAction("ACCION", "DELETE") ? $this->deleteAccion() : $this->echoForbidden("ACCION", "DELETE");
+                    break;
+                default: //caso default
                     $this->echoBadRequest("No se puede realizar esa acción");
             }
         }
-
     }
     function mostrarTodas()
     {
@@ -35,5 +39,41 @@ class Acciones_controller extends Basic_Controller
         $resultado = $Acciones_Service->showall();
         $this->echoOk($resultado);
     }
+    function addAccion()
+    {
+        if (!isset($_POST['nombre']) && !isset($_POST['descripcion'])) {
+            $this->echoBadRequest("Es necesario enviar el nombre y descripcion para añadir una accion");
+        } else {
+            $nombre = $_POST['nombre'];
+            $descripcion = $_POST['descripcion'];
 
+
+            $Acciones_Service = new Acciones_service();
+            $resultado = $Acciones_Service->addAccion($nombre, $descripcion);
+            if ($resultado) {
+                $this->echoOk(array("resultado" => strval($resultado)));
+            } else {
+                $this->echoOk(array("resultado" => "La acción no se pudo añadir"));
+            }
+        }
+    }
+
+    function deleteAccion()
+    {
+        if (!isset($_POST['id'])) {
+            $this->echoBadRequest("Es necesario enviar el id para borrar");
+        } else {
+            $id = $_POST['id'];
+          
+                $Acciones_Service = new Acciones_service();
+                $resultado = $Acciones_Service->deleteAccion($id);
+                if ($resultado) {
+                    $this->echoOk(array("resultado" => "Acción eliminada"));
+                } else {
+                    $this->echoConstraintError(array("resultado" => "La acción no se pudo eliminar"));
+                }
+          
+        }
+
+    }
 }

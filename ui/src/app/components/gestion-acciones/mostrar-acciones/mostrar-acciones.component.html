@@ -1,11 +1,15 @@
+<div class="container mt-5">
 
-<table class="table">
+  <button class="btn btn-success m-2"
+    [routerLink]="['/panel-principal/gestion-acciones/add']">{{'gestion-acciones.add-accion' | translate}}<i
+      style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+  <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
         <th scope="col">{{'gestion-acciones.accion' | translate}}</th>
         <th scope="col">{{'gestion-acciones.descripcion' | translate}}</th>
-      
+        <th scope="col" class="text-center" *ngIf="hasFuncionalidadAccion('ACCION','DELETE')">{{'app.options' | translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -13,9 +17,12 @@
         <th scope="row">{{indice+1}}</th>
         <td>{{accion.nombre}}</td>
         <td>{{accion.descripcion}}</td>
-        
+        <td *ngIf="hasFuncionalidadAccion('ACCION','DELETE')"><div (click)="delete(accion)"><i style="margin-left: 2em;" class="far fa-trash-alt"></i></div></td>
       </tr>
-     
+
     </tbody>
   </table>
-  <button class="btn btn-secondary" [routerLink]="['/panel-principal']">{{'gestion-usuarios.volver' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-usuarios.volver' | translate}}<i
+      style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+
+</div>

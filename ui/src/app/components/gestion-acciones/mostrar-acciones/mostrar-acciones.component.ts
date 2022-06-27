@@ -12,7 +12,7 @@ import {AuthenticationService} from "../../../services/authentication.service";
 })
 export class MostrarAccionesComponent implements OnInit {
   public acciones?: Array<Accion>;
-
+  
 
   constructor(private readonly gestionAccionesService: GestionAccionesService,
     private readonly router: Router,
@@ -28,6 +28,33 @@ export class MostrarAccionesComponent implements OnInit {
   }
   actualizarAcciones() {
     this.gestionAccionesService.mostrarTodas().subscribe(acciones => this.acciones = acciones.acciones);
+  }
+  delete(accion: Accion) {
+    if (accion) {
+      this.gestionAccionesService.deleteAccion(accion.id).subscribe(
+        () => {
+          this.remove()
+
+        },
+
+        error => {
+          switch (error.message) {
+            case '4001':
+             console.log("error")
+              break;
+            default:
+              console.log("error")
+              break;
+          }
+        }
+      )
+      this.actualizarAcciones();
+    }
+  }  
+  private remove() {
+    this.router.navigate(['/panel-principal/gestion-acciones/showall'], {queryParams: {flashok: this.ts.instant("gestion-acciones.eliminar-ok")}});
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  
   }
 
 }

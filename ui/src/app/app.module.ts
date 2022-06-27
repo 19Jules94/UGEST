@@ -22,6 +22,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ModificarPerfilComponent } from './components/modificar-perfil/modificar-perfil.component';
 import { MostrarAccionesComponent } from './components/gestion-acciones/mostrar-acciones/mostrar-acciones.component';
+import { AddAccionComponent } from './components/gestion-acciones/add-accion/add-accion.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -37,7 +38,11 @@ if (localStorage.getItem('selectedLanguage') == null) {
     AppComponent,
     InicioComponent,   
     PanelPrincipalComponent,   
-    FilterPipe, PerfilComponent, ModificarPerfilComponent, MostrarAccionesComponent
+    FilterPipe, 
+    PerfilComponent, 
+    ModificarPerfilComponent, 
+    MostrarAccionesComponent, 
+    AddAccionComponent
 
   ],
   imports: [
