@@ -27,54 +27,16 @@
     "edit-ok": "Contrasinal modificado correctamente",
     "edit-error": "Non se puido modificar o contrasinal"
   },
-  "test": {
-    "test-aplicacion": "Tests da aplicación",
-    "ejecutar-tests" : "Executar tests",
-    "accion": "Acción",
-    "descripción-test": "Descrición do test",
-    "resultado": "Resultado",
-    "ningun-test-ejecutado": "Non se executou ningún test",
-    "all": "Todos os test",
-    "test-login": "Test de Login",
-    "test-acciones": "Test de Accións",
-    "test-departamentos": "Test de Departamentos",
-    "test-funcionalidades": "Test de Funcionalidades",
-    "test-permisos": "Test de Permisos",
-    "test-anho-academico": "Test de Anos Académicos",
-    "test-profesores": "Test de Profesores",
-    "test-usuarios": "Test de Usuarios",
-    "test-roles-usuario": "Test de Roles de Usuario",
-    "test-roles": "Test de Roles",
-    "test-titulaciones": "Test de Titulacións",
-    "test-centros": "Test de Centros",
-    "test-universidades": "Test de Universidades",
-    "test-edificios": "Test de Edificios",
-    "test-tutorias": "Test de Titorías",
-    "test-departamento": "Test de Departamentos",
-    "test-asignaturas": "Test de Asignaturas",
-    "test-espacios": "Test de Espazos",
-    "test-grupos": "Test de Grupos",
-    "test-horarios": "Test de Horarios",
-    "test-pda": "Test de PDA",
-    "test-pod": "Test de POD",
-    "num-test": "Test Totales",
-    "num-test-true": "Test Acertados",
-    "num-test-false": "Test Fallidos"
-  },
-  "inicio": {
-    "bienvenida": "Benvido a UniGest",
-    "mensaje": "Mesaxe de benvida",
-    "iniciosesion": "Sesión iniciada correctamente",
-    "requisito": "Para acceder o sistema debe iniciar sesión"
-  },
+  
+ 
   "login": {
     "DNI": "DNI",
     "Password": "Contrasinal",
-    "restric4": "Máximo 4 caracteres",
+    "restric4": "Mínimo 4 caracteres",
     "restric20": "Máximo 20 caracteres",
     "aviso": "Este campo es obligatorio",
-    "error": "DNI ou contrasinal incorrectos",
-    "bienvenido": "Iniciaches sesión correctamente: Benvido a UniGest!"
+    "error": "DNI ou contrasinal incorrectos"
+   
   },
   "panel-principal": {
     "panel-principal": "Panel Principal",

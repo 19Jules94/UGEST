@@ -11,12 +11,21 @@
                               class="fa-solid fa-user"></i></span>
                               <input type="text" name="dni" class="form-control" placeholder="dni" formControlName="dni"/>
                   </div>
+                  <div *ngIf="userForm.get('dni')?.errors && userForm.get('email')?.dirty" class="form-text text-danger">
+                    <small *ngIf="userForm.get('dni')?.hasError('required')">{{'login.aviso | translate'}}</small>
+                  </div>
                   <div class="input-group mb-3">
                       <span id="icon-lock" class="input-group-text" id="basic-addon1"><i
                               class="fa-solid fa-lock"></i></span>
                       <input type="password" name="password"class="form-control" placeholder="password" aria-label="password"
                           aria-describedby="password" formControlName="password"/>
                   </div>
+                  <div *ngIf="userForm.get('password')?.errors && userForm.get('password')?.dirty" class="form-text text-danger">
+                    <small *ngIf="userForm.get('password')?.hasError('required')">{{'login.aviso' | translate}}</small>
+                    <small *ngIf="userForm.get('password')?.hasError('minlength')">{{'login.restric4' | translate}}</small>
+                    <small *ngIf="userForm.get('password')?.hasError('maxlength')">{{'login.restric20' | translate}}</small>
+                  </div>
+                  <div *ngIf="error" class="form-row alert alert-danger">{{error}}</div>
                   <div class="float-end">
                       <button class="btn btn-success" type="button" (click)="onSubmit()" ><i class="fas fa-sign-in-alt"></i>Iniciar Sesion</button>
                   </div>

@@ -1,7 +1,7 @@
 <?php
 
 include_once './Model/Login_model.php';
-
+include_once './utils/Validaciones.php';
 class Login_service
 {
     function __construct()
@@ -10,15 +10,14 @@ class Login_service
 
     function login($DNI, $PASS)
     {
-
-        if(!$this->validarDNI($DNI)){
-            return null;
+        if( !validarDNI($DNI)){
+            throw new ValidationException("DNI incorrecto o mal formado.");
         }
 
-        if(!$this->validadPass($PASS)){
-            return null;
+        if( !validarPass($PASS)){
+            throw new ValidationException("Contraseña incorrecta.");
         }
-        
+       
         $LoginModel = new Login_model($DNI, $PASS);
         $result = $LoginModel->login();
 
@@ -40,25 +39,5 @@ class Login_service
         return $LoginModel->getProfile($dni);
     }
 
-    public function validarDNI($DNI)
-    {
-        $letra = strtoupper(substr($DNI, -1));
-        $numeros = substr($DNI, 0, -1);
-
-        if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeros % 23, 1) == $letra && strlen($letra) == 1 && strlen($numeros) == 8) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function validadPass($password){
-        $len =  strlen($password);
-
-        if($len >= 4 && $len <=30){
-            return true;
-        }else{
-            return false;
-        }
-    }
+    
 }

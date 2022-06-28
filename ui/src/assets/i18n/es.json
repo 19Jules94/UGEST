@@ -27,20 +27,15 @@
     "edit-ok": "Contraseña modificada correctamente",
     "edit-error": "No se ha podido modificar la contraseña"
   },
-  "inicio": {
-    "bienvenida": "Bienvenido a UniGest",
-    "mensaje": "Mensaje de bienvenida",
-    "iniciosesion": "Sesión iniciada correctamente",
-    "requisito": "Para acceder al sistema debe iniciar sesión"
-  },
+ 
   "login": {
     "DNI": "DNI",
     "Password": "Contraseña",
-    "restric4": "Máximo 4 caracteres",
+    "restric4": "Mínimo 4 caracteres",
     "restric20": "Máximo 20 caracteres",
     "aviso": "Este campo es obligatorio",
-    "error": "DNI ou contrasinal incorrectos",
-    "bienvenido": "Iniciaste sesión correctamente: ¡Bienvenido a UniGest!"
+    "error": "DNI ou contrasinal incorrectos"
+   
   },
   "panel-principal": {
     "panel-principal": "Panel Principal",
