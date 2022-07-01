@@ -12,23 +12,23 @@ class Usuarios_controller extends Basic_Controller
     function controller()
     {
     if (!$this->IS_LOGGED) {
-        $this->echoUnauthorized();
+        $this->unauthorized();
     } else if (!isset($_REQUEST['action'])) {
-        $this->echoBadRequest("Es necesario indicar un acción");
+        $this->notFound("Es necesario indicar un acción");
     } else {
         switch ($_REQUEST['action']) {          
-            case 'edit-password'://editar contraseña
+            case 'edit-password':
                 $this->modificarPassEmail();
                 break;
-            default://caso default
-                $this->echoBadRequest("No se puede realizar esa acción");
+            default:
+                $this->notFound("No se puede realizar esa acción");
         }
     }
 }
 private function modificarPassEmail()
 {
     if (!isset($_POST['password']) && !isset($_POST['email'])) {
-        $this->echoBadRequest("Es necesario enviar la nueva contraseña para modificarla");
+        $this->notFound("Es necesario enviar la nueva contraseña  para modificarla");
     } else {
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -42,9 +42,9 @@ private function modificarPassEmail()
                 $this->echoOk(array("resultado" => "La contraseña no se pudo cambiar"));
             }
         } catch (ResourceNotFound $ex) {
-            $this->echoResourceNotFound($ex->getERROR());
+            $this->notFound($ex->getERROR());
         } catch (ValidationException $ex) {
-            $this->echoBadRequest($ex->getERROR());
+            $this->notFound($ex->getERROR());
         }
     }
 }

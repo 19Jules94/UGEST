@@ -10,11 +10,8 @@ import {Profile} from "./models/Profile";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'unigest-angular';
+  title = 'ui';
 
-  public flashAlert?: string;
-  public flashError?: string;
-  public flashOk?: string;
 
   constructor(
     private translate: TranslateService,
@@ -25,24 +22,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.flashAlert = params.flashalert;
-      this.flashError = params.flasherror;
-      this.flashOk = params.flashok;
-    });
+   
+
   }
 
-  public getFlash(): string | undefined {
-    return this.flashAlert;
-  }
-
-  public getflashError(): string | undefined {
-    return this.flashError;
-  }
-
-  public getflashOk(): string | undefined {
-    return this.flashOk;
-  }
+ 
 
   changeLang(lang: string): void {
     this.translate.use(lang).subscribe();
@@ -55,7 +39,7 @@ export class AppComponent implements OnInit {
   }
 
   public isLogged(): boolean {
-    return this.authenticationService.hasCredentials();
+    return this.authenticationService.tieneCredenciales();
   }
 
   public getUsuario(): Profile | undefined {
@@ -63,10 +47,5 @@ export class AppComponent implements OnInit {
   }
 
 
-  public onCloseFlash() {
-    this.flashAlert = undefined;
-    this.flashError = undefined;
-    this.flashOk = undefined;
-    this.router.navigate(this.route.snapshot.url);
-  }
+ 
 }

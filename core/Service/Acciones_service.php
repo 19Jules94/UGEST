@@ -18,19 +18,19 @@ class Acciones_service
 
     function addAccion($nombre, $descripcion)
     {
-        if(!validarNombreAccion($nombre)){
-            throw new ValidationException("El nombre no es válido, no puede superar los 20 caracteres");
+        if (validarNombreAccion($nombre) == true && validarDescripcionAccion($nombre) == true) {
+            return $this->ACCIONES_MODEL->addAccion($nombre, $descripcion);
+        } else {
+            return null;
         }
-        if(!validarDescripcionAccion($nombre)){
-            throw new ValidationException("La descripcion no es válida, no puede superar los 300 caracteres");
-        }
-        return $this->ACCIONES_MODEL->addAccion($nombre, $descripcion);
     }
 
-    function deleteAccion($id){
-        if(!validarID($id)){
-            throw new ValidationException("El id no es válido");
+    function deleteAccion($id)
+    {
+        if (validarID($id) == true) {
+            return $this->ACCIONES_MODEL->deleteAccion($id);
+        } else {
+            return null;
         }
-        return $this->ACCIONES_MODEL->deleteAccion($id);
     }
 }

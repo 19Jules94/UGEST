@@ -11,16 +11,14 @@ class Usuarios_service
     {
         $this->USUARIOS_MODEL = new Usuarios_model();
     }
-    public function modificarPasswordEmail($dni,$email,$password)
+    public function modificarPasswordEmail($dni, $email, $password)
     {
-     
-        if(!validarEmail($email)){
-            throw new ValidationException("Email incorrecto o mal formado.");
+
+        if (validarEmail($email) == true && validarPass($password) == true) {
+
+            return $this->USUARIOS_MODEL->modificarPasswordEmail($dni, $email, $password);
+        } else {
+            return null;
         }
-        if(validarPass($password)){
-            throw new ValidationException("Contraseña incorrecta o mal formada.");
-        }
-        
-        return $this->USUARIOS_MODEL->modificarPasswordEmail($dni,$email,$password);
     }
 }

@@ -20,8 +20,8 @@ export class MostrarAccionesComponent implements OnInit {
     public ts: TranslateService,
     private readonly authenticationService: AuthenticationService) { }
     
-  hasFuncionalidadAccion(func:string, action:string): boolean{
-    return this.authenticationService.hasFuncionalidadAction(func, action);
+    tieneFuncionalidadAction(func:string, action:string): boolean{
+    return this.authenticationService.tieneFuncionalidadAction(func, action);
   }
   ngOnInit(): void {
     this.actualizarAcciones();
@@ -39,7 +39,7 @@ export class MostrarAccionesComponent implements OnInit {
 
         error => {
           switch (error.message) {
-            case '4001':
+            case '1451':
              console.log("error")
               break;
             default:
@@ -52,7 +52,7 @@ export class MostrarAccionesComponent implements OnInit {
     }
   }  
   private remove() {
-    this.router.navigate(['/panel-principal/gestion-acciones/showall'], {queryParams: {flashok: this.ts.instant("gestion-acciones.eliminar-ok")}});
+    this.router.navigate(['/panel-principal/gestion-acciones/showall']);
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }

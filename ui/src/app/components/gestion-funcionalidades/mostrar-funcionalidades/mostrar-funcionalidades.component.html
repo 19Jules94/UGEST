@@ -1,0 +1,29 @@
+<div class="container mt-5">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-funcionalidades/add']">{{'gestion-funcionalidades.add-funcionalidad' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-funcionalidades.accion' | translate}}</th>
+          <th scope="col">{{'gestion-acciones.descripcion' | translate}}</th>
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('FUNCIONALIDAD','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let funcionalidad of funcionalidades;let indice=index">
+            <th scope="row">{{indice+1}}</th>
+            <td>{{funcionalidad.nombre}}</td>
+            <td>{{funcionalidad.descripcion}}</td>
+            <td *ngIf="tieneFuncionalidadAction('FUNCIONALIDAD','DELETE')"><div (click)="delete(funcionalidad)"><i style="margin-left: 2em;" class="far fa-trash-alt"></i></div></td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-usuarios.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
+  

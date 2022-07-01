@@ -16,7 +16,7 @@ export class NotAuthenticatedGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authenticationService.hasCredentials()) {
+    if (this.authenticationService.tieneCredenciales()) {
       this.router.navigate(['/panel-principal']);
       return false;
     } else {

@@ -10,6 +10,10 @@ import { MostrarAccionesComponent } from './components/gestion-acciones/mostrar-
 import { GestionAccionesMTGuard } from 'src/guards/gestion-acciones-mt.guard';
 import { AddAccionComponent } from './components/gestion-acciones/add-accion/add-accion.component';
 import { GestionAccionesAddGuard } from 'src/guards/gestion-acciones-add.guard';
+import { AddFuncionalidadComponent } from './components/gestion-funcionalidades/add-funcionalidad/add-funcionalidad.component';
+import { MostrarFuncionalidadesComponent } from './components/gestion-funcionalidades/mostrar-funcionalidades/mostrar-funcionalidades.component';
+import { GestionFuncionalidadesMTGuard } from 'src/guards/gestion-funcionalidades-mt.guard';
+import { GestionFuncionalidadesAddGuard } from 'src/guards/gestion-funcionalidades-add.guard';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -18,6 +22,10 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-acciones/showall', component: MostrarAccionesComponent, canActivate: [GestionAccionesMTGuard]},
   {path: 'panel-principal/gestion-acciones', redirectTo: '/panel-principal/gestion-acciones/showall', pathMatch: 'full'},
   {path: 'panel-principal/gestion-acciones/add',component: AddAccionComponent,canActivate: [GestionAccionesAddGuard]},
+  {path: 'panel-principal/gestion-funcionalidades/showall', component: MostrarFuncionalidadesComponent, canActivate: [GestionFuncionalidadesMTGuard]},
+  {path: 'panel-principal/gestion-funcionalidades', redirectTo: '/panel-principal/gestion-funcionalidades/showall', pathMatch: 'full'},
+  {path: 'panel-principal/gestion-funcionalidades/add',component: AddFuncionalidadComponent,canActivate: [GestionFuncionalidadesAddGuard]},
+
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}
 ];

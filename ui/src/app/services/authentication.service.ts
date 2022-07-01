@@ -18,7 +18,7 @@ export class AuthenticationService {
 
   constructor(private readonly http: HttpClient) { }
 
-  public hasCredentials(): boolean {
+  public tieneCredenciales(): boolean {
     return localStorage.getItem(CREDENTIALS_ITEM) !== null;
   }
 
@@ -37,7 +37,7 @@ export class AuthenticationService {
 
   }
 
-  public hasFuncionalidad(func: string) : boolean {
+  public tieneFuncionalidad(func: string) : boolean {
     const acc_func = localStorage.getItem(ACCIONES_FUNCIONALIDADES_ITEM);
     if (acc_func) {
       const acc_func_parsed = JSON.parse(acc_func);
@@ -47,7 +47,7 @@ export class AuthenticationService {
     }
   }
 
-  public hasFuncionalidadAction(func: string, action: string) : boolean {
+  public tieneFuncionalidadAction(func: string, action: string) : boolean {
     const acc_func = localStorage.getItem(ACCIONES_FUNCIONALIDADES_ITEM);
     if (acc_func) {
       const acc_func_parsed = JSON.parse(acc_func);

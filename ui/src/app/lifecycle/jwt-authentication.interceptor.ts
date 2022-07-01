@@ -16,7 +16,7 @@ export class JwtAuthenticationInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (this.authenticationService.hasCredentials()) {
+    if (this.authenticationService.tieneCredenciales()) {
 
       const credentials = this.authenticationService.getCredentials();
 

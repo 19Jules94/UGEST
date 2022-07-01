@@ -23,6 +23,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { ModificarPerfilComponent } from './components/modificar-perfil/modificar-perfil.component';
 import { MostrarAccionesComponent } from './components/gestion-acciones/mostrar-acciones/mostrar-acciones.component';
 import { AddAccionComponent } from './components/gestion-acciones/add-accion/add-accion.component';
+import { MostrarFuncionalidadesComponent } from './components/gestion-funcionalidades/mostrar-funcionalidades/mostrar-funcionalidades.component';
+import { AddFuncionalidadComponent } from './components/gestion-funcionalidades/add-funcionalidad/add-funcionalidad.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -42,7 +44,7 @@ if (localStorage.getItem('selectedLanguage') == null) {
     PerfilComponent, 
     ModificarPerfilComponent, 
     MostrarAccionesComponent, 
-    AddAccionComponent
+    AddAccionComponent, MostrarFuncionalidadesComponent, AddFuncionalidadComponent
 
   ],
   imports: [

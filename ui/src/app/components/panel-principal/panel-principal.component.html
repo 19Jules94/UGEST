@@ -1,191 +1,177 @@
 <div class="container mt-5"> 
-
+     
       <div class="row justify-content-center">
-
-        <div *ngIf="hasFuncionalidad('TUTORIA') || hasFuncionalidad('HORARIO')" class="card col col-12 col-md-3 m-3 border-primary" style="width: 18rem;">
-          <div class="card-body ">
-            <h5 class="card-title">{{'panel-principal.calendario' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-calendario' | translate}}</p>
+        <h4 class="text-center">Bienvenido {{getUsuario()?.nombre}} esto es lo que puedes gestionar</h4>
+        
+        <div *ngIf="tieneFuncionalidad('TUTORIA') || tieneFuncionalidad('HORARIO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">       
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.calendario' | translate}}</h5>          
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/calendario']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('ACCION')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-acciones' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-acciones' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('ACCION')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">        
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-acciones' | translate}}</h5>           
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-acciones']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('FUNCIONALIDAD')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-funcionalidades' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-funcionalidades' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('FUNCIONALIDAD')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-funcionalidades' | translate}}</h5>          
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-funcionalidades']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('ROL')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-roles' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-roles' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('ROL')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-roles' | translate}}</h5>        
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-roles']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
 
-        <div *ngIf="hasFuncionalidad('PERMISO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-permisos' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-permisos' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('PERMISO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+         
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-permisos' | translate}}</h5>          
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-permisos']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('AACADEMICO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-anho-academico' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-anho-academico' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('AACADEMICO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-anho-academico' | translate}}</h5>       
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-anho-academico']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('PROFESOR')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-profesores' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-profesores' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('PROFESOR')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-profesores' | translate}}</h5>         
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-profesores']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('HORARIO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-horarios' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-horarios' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('HORARIO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-horarios' | translate}}</h5>         
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-horarios']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('USUARIO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-usuarios' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-usuarios' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('USUARIO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-usuarios' | translate}}</h5>        
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-usuarios']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('ROL_USUARIO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-roles-usuario' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-roles-usuario' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('ROL_USUARIO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-roles-usuario' | translate}}</h5>          
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-roles-usuario']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('TITULACION')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-titulaciones' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-titulaciones' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('TITULACION')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-titulaciones' | translate}}</h5>            
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-titulaciones']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
-        <div *ngIf="hasFuncionalidad('CENTRO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-centros' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-centros' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('CENTRO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-centros' | translate}}</h5>        
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-centros']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('UNIVERSIDAD')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-universidades' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-universidades' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('UNIVERSIDAD')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-universidades' | translate}}</h5>           
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-universidades']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('EDIFICIO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-edificios' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-edificios' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('EDIFICIO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-edificios' | translate}}</h5>     
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-edificios']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('TUTORIA')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
+        <div *ngIf="tieneFuncionalidad('TUTORIA')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
             <h5 class="card-title">{{'panel-principal.gestion-tutorias' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-tutorias' | translate}}</p>
-            <a href="#" class="card-link"
+              <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-tutorias']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('DEPARTAMENTO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
+        <div *ngIf="tieneFuncionalidad('DEPARTAMENTO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
             <h5 class="card-title">{{'panel-principal.gestion-departamento' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-departamento' | translate}}</p>
+         
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-departamentos']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('ASIGNATURA')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
+        <div *ngIf="tieneFuncionalidad('ASIGNATURA')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
             <h5 class="card-title">{{'panel-principal.gestion-asignaturas' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-asignaturas' | translate}}</p>
+       
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-asignaturas']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('ESPACIO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
+        <div *ngIf="tieneFuncionalidad('ESPACIO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
             <h5 class="card-title">{{'panel-principal.gestion-espacios' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-espacios' | translate}}</p>
+      
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-espacios']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('GRUPO')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
+        <div *ngIf="tieneFuncionalidad('GRUPO')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
             <h5 class="card-title">{{'panel-principal.gestion-grupos' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-grupos' | translate}}</p>
+  
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-grupos']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('PDA')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
+        <div *ngIf="tieneFuncionalidad('PDA')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
             <h5 class="card-title">{{'panel-principal.gestion-pda' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-pda' | translate}}</p>
+       
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-pda']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="hasFuncionalidad('POD')" class="card col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">{{'panel-principal.gestion-pod' | translate}}</h5>
-            <p class="card-text">{{'panel-principal.msg-pod' | translate}}</p>
+        <div *ngIf="tieneFuncionalidad('POD')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{'panel-principal.gestion-pod' | translate}}</h5>   
             <a href="#" class="card-link"
                [routerLink]="['/panel-principal/gestion-pod']">{{'panel-principal.acceder' | translate}}</a>
           </div>

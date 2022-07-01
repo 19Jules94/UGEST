@@ -14,7 +14,7 @@ export class GestionAccionesMTGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.authenticationService.hasFuncionalidadAction("ACCION","SHOWALL")) {
+    if (!this.authenticationService.tieneFuncionalidadAction("ACCION","SHOWALL")) {
       this.router.navigate(['/panel-principal']);
       return false;
     } else {

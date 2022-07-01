@@ -6,7 +6,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticatedGuard implements CanActivate {
+export class GestionFuncionalidadesAddGuard implements CanActivate {
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly router: Router
@@ -16,12 +16,12 @@ export class AuthenticatedGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authenticationService.tieneCredenciales()) {
-      return true;
-    } else {
-      this.router.navigate(['/iniciar-sesion'], {queryParams: {redirect: state.url}});
+    if (!this.authenticationService.tieneFuncionalidadAction("FUNCIONALIDAD","ADD")) {
+      this.router.navigate(['/panel-principal']);
       return false;
+    } else {
+      return true;
     }
   }
-
+  
 }

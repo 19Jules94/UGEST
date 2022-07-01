@@ -1,8 +1,6 @@
 <?php
 
-include_once 'Controller/Login_controller.php';
-include_once './Controller/Usuarios_controller.php';
-include_once './Controller/Acciones_controller.php';
+require_once 'autoload.php';
 
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');
@@ -26,9 +24,12 @@ if (!isset($_REQUEST['controller'])) {
         case 'usuarios': //Login
             new Usuarios_controller();
             break;      
-         case 'acciones': //Acciones
+        case 'acciones': //Acciones
              new Acciones_controller();
              break;
+        case 'funcionalidades': //Acciones
+            new Funcionalidades_controller();
+            break;
         default://caso default
             http_response_code(400);
     }

@@ -14,7 +14,7 @@ export class GestionAccionesAddGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.authenticationService.hasFuncionalidadAction("ACCION","ADD")) {
+    if (!this.authenticationService.tieneFuncionalidadAction("ACCION","ADD")) {
       this.router.navigate(['/panel-principal']);
       return false;
     } else {

@@ -56,7 +56,7 @@ export class ModificarPerfilComponent implements OnInit {
     this.gestionUsuariosService.editPasswordEmail(emailValue,passwordValue)
       .subscribe(
         value => {
-          this.router.navigate(['/perfil'], {queryParams: {flashok: this.ts.instant("profile.edit-ok")}});
+          this.router.navigate(['/perfil']);
         },
         error => {
           switch (error.message) {

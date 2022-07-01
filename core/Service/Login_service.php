@@ -10,34 +10,40 @@ class Login_service
 
     function login($DNI, $PASS)
     {
-        if( !validarDNI($DNI)){
-            throw new ValidationException("DNI incorrecto o mal formado.");
-        }
+        if (validarDNI($DNI) == true && validarPass($PASS) == true) {
 
-        if( !validarPass($PASS)){
-            throw new ValidationException("Contraseña incorrecta.");
-        }
-       
-        $LoginModel = new Login_model($DNI, $PASS);
-        $result = $LoginModel->login();
 
-        if ($result == null) {
-            return null;
+            $LoginModel = new Login_model($DNI, $PASS);
+            $result = $LoginModel->login();
+
+            if ($result == null) {
+                return null;
+            } else {
+
+                return AuthJWT::crearToken($DNI);
+            }
         } else {
-
-            return AuthJWT::crearToken($DNI);
+            throw new ValidationException("El DNI o Contraseña no son correctos");
         }
     }
+
     function obtenerFuncionalidades($DNI)
     {
-        $LoginModel = new Login_model($DNI, "");
-        return $LoginModel->obtenerFuncionalidadesAcciones();
+        if (validarDNI($DNI) == true) {
+            $LoginModel = new Login_model($DNI, "");
+            return $LoginModel->obtenerFuncionalidadesAcciones();
+        } else {
+            return null;
+        }
     }
+    
     public function getProfile($dni)
     {
-        $LoginModel = new Login_model($dni, "");
-        return $LoginModel->getProfile($dni);
+        if (validarDNI($dni) == true) {
+            $LoginModel = new Login_model($dni, "");
+            return $LoginModel->getProfile($dni);
+        } else {
+            return null;
+        }
     }
-
-    
 }

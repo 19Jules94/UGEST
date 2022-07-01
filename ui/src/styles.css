@@ -47,3 +47,10 @@ i{
 .fa-trash-alt{
   cursor: pointer!important;
 }
+.card-panel{
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  border-radius: .25rem;
+}
+.card-panel:hover{
+  border: 2px solid #0097fc;
+}
