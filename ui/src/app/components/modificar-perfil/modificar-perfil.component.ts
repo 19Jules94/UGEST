@@ -3,7 +3,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import { GestionarUsuarioService } from 'src/app/services/gestionar-usuario.service';
 import {TranslateService} from "@ngx-translate/core";
-
+import { Profile } from 'src/app/models/Profile';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 @Component({
   selector: 'app-modificar-perfil',
   templateUrl: './modificar-perfil.component.html',
@@ -17,7 +18,7 @@ export class ModificarPerfilComponent implements OnInit {
   constructor(  private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly gestionUsuariosService: GestionarUsuarioService,
-
+    private  authenticationService:AuthenticationService,
     public ts: TranslateService) {  this.passForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -47,7 +48,9 @@ export class ModificarPerfilComponent implements OnInit {
       
     }
     }
-  
+    public getUsuario(): Profile | undefined {
+      return this.authenticationService.getProfile();
+    }
   onSubmit() {
     const emailValue = this.passForm.get("email")?.value;
     const passwordValue = this.passForm.get("password")?.value;

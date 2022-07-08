@@ -33,7 +33,7 @@ export class AddFuncionalidadComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(300),
-        Validators.pattern('^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]{0,200}$'),
+        Validators.pattern('^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]{0,300}$'),
       ]),
     });
   }

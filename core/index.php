@@ -30,6 +30,9 @@ if (!isset($_REQUEST['controller'])) {
         case 'funcionalidades': //Acciones
             new Funcionalidades_controller();
             break;
+            case 'roles': //Roles
+                new Roles_controller();
+                break;
         default://caso default
             http_response_code(400);
     }

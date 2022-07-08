@@ -32,7 +32,7 @@ export class AddAccionComponent implements OnInit {
       descripcion: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(200),
+        Validators.maxLength(300),
         Validators.pattern('^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]{0,200}$'),
       ]),
     });
@@ -44,12 +44,13 @@ export class AddAccionComponent implements OnInit {
     this.gestionAccionesService.addAccion(nombreValue, descripcionValue)
       .subscribe(
         value => {
-          this.router.navigate(['/panel-principal/gestion-acciones/showall'], {queryParams: {flashok: this.ts.instant("gestion-acciones.add-ok")}});
+          this.router.navigate(['/panel-principal/gestion-acciones/showall']);
         },
         error => {
           switch (error.message){
-            case '4002':
+            case '1451':
               this.error = this.ts.instant('gestion-acciones.add-error-name');
+              console.log(error.message)
               break;
             default:
               this.error = this.ts.instant('gestion-acciones.add-error');
@@ -60,5 +61,6 @@ export class AddAccionComponent implements OnInit {
       )
 
   }
+ 
   ngOnInit(): void {}
 }

@@ -1,7 +1,7 @@
 <?php
 const DB_name = "sced";
-const user = "root";
-const pass = "";
+const user = "perytavalley";
+const pass = "perytavalley";
 const host = "localhost";
 
 function Connect(){

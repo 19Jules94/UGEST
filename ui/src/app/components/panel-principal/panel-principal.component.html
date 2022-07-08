@@ -160,22 +160,15 @@
           </div>
         </div>
 
-        <div *ngIf="tieneFuncionalidad('PDA')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
+        <div *ngIf="tieneFuncionalidad('TFG')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
           <div class="card-body text-center">
-            <h5 class="card-title">{{'panel-principal.gestion-pda' | translate}}</h5>
+            <h5 class="card-title">{{'panel-principal.gestion-tfg' | translate}}</h5>
        
             <a href="#" class="card-link"
-               [routerLink]="['/panel-principal/gestion-pda']">{{'panel-principal.acceder' | translate}}</a>
+               [routerLink]="['/panel-principal/gestion-tfg']">{{'panel-principal.acceder' | translate}}</a>
           </div>
         </div>
 
-        <div *ngIf="tieneFuncionalidad('POD')" class="card-panel col col-12 col-md-3 m-3" style="width: 18rem;">
-          <div class="card-body text-center">
-            <h5 class="card-title">{{'panel-principal.gestion-pod' | translate}}</h5>   
-            <a href="#" class="card-link"
-               [routerLink]="['/panel-principal/gestion-pod']">{{'panel-principal.acceder' | translate}}</a>
-          </div>
-        </div>
 
 
       </div>

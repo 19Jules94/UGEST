@@ -25,6 +25,9 @@ import { MostrarAccionesComponent } from './components/gestion-acciones/mostrar-
 import { AddAccionComponent } from './components/gestion-acciones/add-accion/add-accion.component';
 import { MostrarFuncionalidadesComponent } from './components/gestion-funcionalidades/mostrar-funcionalidades/mostrar-funcionalidades.component';
 import { AddFuncionalidadComponent } from './components/gestion-funcionalidades/add-funcionalidad/add-funcionalidad.component';
+import { AddRolComponent } from './components/gestion-roles/add-rol/add-rol.component';
+import { MostrarRolesComponent } from './components/gestion-roles/mostrar-roles/mostrar-roles.component';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,7 +47,7 @@ if (localStorage.getItem('selectedLanguage') == null) {
     PerfilComponent, 
     ModificarPerfilComponent, 
     MostrarAccionesComponent, 
-    AddAccionComponent, MostrarFuncionalidadesComponent, AddFuncionalidadComponent
+    AddAccionComponent, MostrarFuncionalidadesComponent, AddFuncionalidadComponent, AddRolComponent, MostrarRolesComponent
 
   ],
   imports: [

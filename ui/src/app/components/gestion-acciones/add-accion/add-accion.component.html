@@ -10,14 +10,26 @@
                     <label class="col-2 col-form-label form-control-label" >Nombre</label>
                     <input class="form-control" type="text" formControlName="nombre" name="nombre" maxlength="20">
                 </div>
+                <div *ngIf="accionForm.get('nombre')?.errors && accionForm.get('nombre')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="accionForm.get('nombre')?.hasError('required')">{{'gestion-acciones.add-nombre-req' | translate}}</small>
+                    <small class="col-12" *ngIf="accionForm.get('nombre')?.hasError('minlength')">{{'gestion-acciones.add-nombre-min' | translate}}</small>
+                    <small class="col-12" *ngIf="accionForm.get('nombre')?.hasError('maxlength')">{{'gestion-acciones.add-nombre-max' | translate}}</small>
+                    <small class="col-12" *ngIf="accionForm.get('nombre')?.hasError('pattern')">{{'gestion-acciones.add-nombre-pat' | translate}}</small>
+                  </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label">Descripcion</label>
-                    <textarea class="form-control" formControlName="descripcion" name="descripcion" maxlength="200 "></textarea>
+                    <textarea class="form-control" formControlName="descripcion" name="descripcion" maxlength="300 "></textarea>
                 </div>
-
+                <div *ngIf="accionForm.get('descripcion')?.errors && accionForm.get('descripcion')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="accionForm.get('descripcion')?.hasError('required')">{{'gestion-acciones.add-nombre-req' | translate}}</small>
+                    <small class="col-12" *ngIf="accionForm.get('descripcion')?.hasError('minlength')">{{'gestion-acciones.add-nombre-min' | translate}}</small>
+                    <small class="col-12" *ngIf="accionForm.get('descripcion')?.hasError('maxlength')">{{'gestion-acciones.add-nombre-max' | translate}}</small>
+                    <small class="col-12" *ngIf="accionForm.get('descripcion')?.hasError('pattern')">{{'gestion-acciones.add-nombre-pat' | translate}}</small>
+                  </div>
+               
                 <div class="float-end">
                     <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-acciones']">{{'gestion-acciones.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()" [routerLink]="['/perfil/edit']"class="btn btn-success ml-2" type="button"> Añadir accion  <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button  (click)="onSubmit()" [disabled]="!accionForm.valid" [routerLink]="['/perfil/edit']"class="btn btn-success ml-2" type="button"> Añadir accion  <i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
             </form>
         </div>

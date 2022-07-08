@@ -14,6 +14,10 @@ import { AddFuncionalidadComponent } from './components/gestion-funcionalidades/
 import { MostrarFuncionalidadesComponent } from './components/gestion-funcionalidades/mostrar-funcionalidades/mostrar-funcionalidades.component';
 import { GestionFuncionalidadesMTGuard } from 'src/guards/gestion-funcionalidades-mt.guard';
 import { GestionFuncionalidadesAddGuard } from 'src/guards/gestion-funcionalidades-add.guard';
+import { GestionRolesAddGuard } from 'src/guards/gestion-roles-add.guard';
+import { GestionRolesMostrarTodosGuard } from 'src/guards/gestion-roles-mostrar-todos.guard';
+import { AddRolComponent } from './components/gestion-roles/add-rol/add-rol.component';
+import { MostrarRolesComponent } from './components/gestion-roles/mostrar-roles/mostrar-roles.component';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -25,7 +29,9 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-funcionalidades/showall', component: MostrarFuncionalidadesComponent, canActivate: [GestionFuncionalidadesMTGuard]},
   {path: 'panel-principal/gestion-funcionalidades', redirectTo: '/panel-principal/gestion-funcionalidades/showall', pathMatch: 'full'},
   {path: 'panel-principal/gestion-funcionalidades/add',component: AddFuncionalidadComponent,canActivate: [GestionFuncionalidadesAddGuard]},
-
+  {path: 'panel-principal/gestion-roles/add', component: AddRolComponent, canActivate: [GestionRolesAddGuard]},
+  {path: 'panel-principal/gestion-roles/showall', component: MostrarRolesComponent, canActivate: [GestionRolesMostrarTodosGuard]},
+  {path: 'panel-principal/gestion-roles', redirectTo: '/panel-principal/gestion-roles/showall', pathMatch: 'full'},
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}
 ];

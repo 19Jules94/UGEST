@@ -47,7 +47,7 @@ class Acciones_controller extends Basic_Controller
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
 
-
+         
             $Acciones_Service = new Acciones_service();
             $resultado = $Acciones_Service->addAccion($nombre, $descripcion);
             if ($resultado) {
