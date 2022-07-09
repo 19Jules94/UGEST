@@ -1,0 +1,48 @@
+<div id="login">
+
+    <div class="card">
+        <div id="enc-log" class="card-header">
+            <h3 id="h3-log" class="text-center">Añadir Permiso</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="rolPermisoForm">
+                <div class="form-group row">
+                    <label class="col-12 col-form-label form-control-label" >{{'gestion-roles.rol' |
+                      translate}}</label>
+                <div class="input-group mb-3">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"formControlName="rol_id" name="rol_id" id="rol_id">
+                        <option value="" selected disabled="disabled">{{'gestion-permisos.select-rol' | translate}}</option>
+                        <option *ngFor="let rol of roles;" value="{{rol.id}}">{{rol.nombre}}</option>
+                      </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-12 col-form-label form-control-label"
+                       >{{'gestion-funcionalidades.funcionalidad' | translate}}</label>
+                  <div class="input-group mb-3">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" formControlName="funcionalidad_id" name="funcionalidad_id" id="funcionalidad_id">
+                        <option value="" selected disabled="disabled">{{'gestion-permisos.select-func' | translate}}</option>
+                        <option *ngFor="let func of funcionalidades;" value="{{func.id}}">{{func.nombre}}</option>
+                      </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-12 col-form-label form-control-label" >{{'gestion-acciones.accion' |
+                  translate}}</label>
+                <div class="input-group mb-3">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" formControlName="accion_id" name="accion_id" id="accion_id">
+                        <option value="" selected disabled="disabled">{{'gestion-permisos.select-action' | translate}}</option>
+                        <option *ngFor="let accion of acciones;" value="{{accion.id}}">{{accion.nombre}}</option>
+                      </select>
+                </div>
+            
+                <div class="float-end">
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-permisos']">{{'gestion-acciones.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir Rol <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+            </div>
+            </form>
+        
+  
+</div>
+</div>

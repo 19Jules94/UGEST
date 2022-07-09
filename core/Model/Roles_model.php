@@ -1,6 +1,6 @@
 <?php
 
-class Roles_model extends Base_Model{
+class Roles_model extends Base_model{
 
     function __construct()
     {

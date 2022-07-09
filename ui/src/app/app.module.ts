@@ -27,6 +27,10 @@ import { MostrarFuncionalidadesComponent } from './components/gestion-funcionali
 import { AddFuncionalidadComponent } from './components/gestion-funcionalidades/add-funcionalidad/add-funcionalidad.component';
 import { AddRolComponent } from './components/gestion-roles/add-rol/add-rol.component';
 import { MostrarRolesComponent } from './components/gestion-roles/mostrar-roles/mostrar-roles.component';
+import { AddPermisoComponent } from './components/gestion-permisos/add-permiso/add-permiso.component';
+import { MostrarPermisosComponent } from './components/gestion-permisos/mostrar-permisos/mostrar-permisos.component';
+import { AddAAcademicoComponent } from './components/gestion-aacademicos/add-aacademico/add-aacademico.component';
+import { MostrarAAcademicoComponent } from './components/gestion-aacademicos/mostrar-aacademico/mostrar-aacademico.component';
 
 
 
@@ -47,7 +51,7 @@ if (localStorage.getItem('selectedLanguage') == null) {
     PerfilComponent, 
     ModificarPerfilComponent, 
     MostrarAccionesComponent, 
-    AddAccionComponent, MostrarFuncionalidadesComponent, AddFuncionalidadComponent, AddRolComponent, MostrarRolesComponent
+    AddAccionComponent, MostrarFuncionalidadesComponent, AddFuncionalidadComponent, AddRolComponent, MostrarRolesComponent, AddPermisoComponent, MostrarPermisosComponent, AddAAcademicoComponent, MostrarAAcademicoComponent
 
   ],
   imports: [

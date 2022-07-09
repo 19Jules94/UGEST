@@ -19,16 +19,16 @@ class Roles_controller extends Basic_Controller
             $this->notFound("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
-                case 'add'://añadir
+                case 'add':
                     $this->canUseAction("ROL", "ADD") ? $this->addRol() : $this->forbidden("ROL", "ADD");
                     break;
-                case 'showall'://ver todas
+                case 'showall':
                     $this->canUseAction("ROL", "SHOWALL") ? $this->mostrarRoles() : $this->forbidden("ROL", "SHOWALL");
                     break;
-                case 'delete'://borrar
+                case 'delete':
                     $this->canUseAction("ROL", "DELETE") ? $this->deleteRol() : $this->forbidden("ROL", "DELETE");
                     break;
-                default://caso default
+                default:
                     $this->notFound("No se puede realizar esa acción");
             }
         }

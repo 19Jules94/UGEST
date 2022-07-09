@@ -18,20 +18,35 @@ import { GestionRolesAddGuard } from 'src/guards/gestion-roles-add.guard';
 import { GestionRolesMostrarTodosGuard } from 'src/guards/gestion-roles-mostrar-todos.guard';
 import { AddRolComponent } from './components/gestion-roles/add-rol/add-rol.component';
 import { MostrarRolesComponent } from './components/gestion-roles/mostrar-roles/mostrar-roles.component';
+import { MostrarPermisosComponent } from './components/gestion-permisos/mostrar-permisos/mostrar-permisos.component';
+import { AddPermisoComponent } from './components/gestion-permisos/add-permiso/add-permiso.component';
+import { AddAAcademicoComponent } from './components/gestion-aacademicos/add-aacademico/add-aacademico.component';
+import { MostrarAAcademicoComponent } from './components/gestion-aacademicos/mostrar-aacademico/mostrar-aacademico.component';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
   {path: 'perfil', component:PerfilComponent,canActivate:[AuthenticatedGuard]},
   {path: 'perfil/edit', component: ModificarPerfilComponent, canActivate: [AuthenticatedGuard]},
+
   {path: 'panel-principal/gestion-acciones/showall', component: MostrarAccionesComponent, canActivate: [GestionAccionesMTGuard]},
   {path: 'panel-principal/gestion-acciones', redirectTo: '/panel-principal/gestion-acciones/showall', pathMatch: 'full'},
   {path: 'panel-principal/gestion-acciones/add',component: AddAccionComponent,canActivate: [GestionAccionesAddGuard]},
+
   {path: 'panel-principal/gestion-funcionalidades/showall', component: MostrarFuncionalidadesComponent, canActivate: [GestionFuncionalidadesMTGuard]},
   {path: 'panel-principal/gestion-funcionalidades', redirectTo: '/panel-principal/gestion-funcionalidades/showall', pathMatch: 'full'},
   {path: 'panel-principal/gestion-funcionalidades/add',component: AddFuncionalidadComponent,canActivate: [GestionFuncionalidadesAddGuard]},
+
   {path: 'panel-principal/gestion-roles/add', component: AddRolComponent, canActivate: [GestionRolesAddGuard]},
   {path: 'panel-principal/gestion-roles/showall', component: MostrarRolesComponent, canActivate: [GestionRolesMostrarTodosGuard]},
   {path: 'panel-principal/gestion-roles', redirectTo: '/panel-principal/gestion-roles/showall', pathMatch: 'full'},
+  
+  {path: 'panel-principal/gestion-permisos/add', component: AddPermisoComponent, canActivate: []},
+  {path: 'panel-principal/gestion-permisos/showall', component: MostrarPermisosComponent, canActivate: []},
+  {path: 'panel-principal/gestion-permisos', redirectTo: '/panel-principal/gestion-permisos/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-aacademico/add', component: AddAAcademicoComponent, canActivate: []},
+  {path: 'panel-principal/gestion-aacademico/showall', component: MostrarAAcademicoComponent, canActivate: []},
+  {path: 'panel-principal/gestion-aacademico', redirectTo: '/panel-principal/gestion-permisos/showall', pathMatch: 'full'},
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}
 ];
