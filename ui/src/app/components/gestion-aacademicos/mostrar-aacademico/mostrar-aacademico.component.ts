@@ -4,7 +4,6 @@ import { GestionEspacioService } from 'src/app/services/gestion-espacio.service'
 import {ActivatedRoute, Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {AuthenticationService} from "../../../services/authentication.service";
-import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import { GestionAacademicoService } from 'src/app/services/gestion-aacademico.service';
 import { Espacio } from 'src/app/models/Gestion-espacios/Espacio';
 
