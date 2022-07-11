@@ -40,6 +40,10 @@ import { AddUsuarioComponent } from './components/gestion-usuarios/add-usuario/a
 import { EditUsuarioComponent } from './components/gestion-usuarios/edit-usuario/edit-usuario.component';
 import { AddProfesorComponent } from './components/gestion-profesores/add-profesor/add-profesor.component';
 import { MostrarProfesoresComponent } from './components/gestion-profesores/mostrar-profesores/mostrar-profesores.component';
+import { EditProfesorComponent } from './components/gestion-profesores/edit-profesor/edit-profesor.component';
+import { MostrarEdificiosComponent } from './components/gestion-edificios/mostrar-edificios/mostrar-edificios.component';
+import { AddEdificioComponent } from './components/gestion-edificios/add-edificio/add-edificio.component';
+import { EditEdificioComponent } from './components/gestion-edificios/edit-edificio/edit-edificio.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -72,6 +76,10 @@ if (localStorage.getItem('selectedLanguage') == null) {
     EditUsuarioComponent,
     AddProfesorComponent,
     MostrarProfesoresComponent,
+    EditProfesorComponent,
+    MostrarEdificiosComponent,
+    AddEdificioComponent,
+    EditEdificioComponent,
   ],
   imports: [
     BrowserModule,

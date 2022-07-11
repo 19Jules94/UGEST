@@ -18,7 +18,7 @@ export class GestionProfesoresService {
 
   constructor(private readonly http: HttpClient) { }
   public mostrarTodos(): Observable<Profesores> {
-    return this.http.post<MostrarProfesoresWrapper>(`${environment.api}/?controller=$profesores&action=showall`, null)
+    return this.http.post<MostrarProfesoresWrapper>(`${environment.api}/?controller=profesores&action=showall`, null)
       .pipe(
         map(resultado => {
 
@@ -84,8 +84,11 @@ export class GestionProfesoresService {
               case '200':
                 return resultado.RESOURCES.resultado;
               case '4002':
+                
                 throw new Error('4002');
+                
               default:
+               
                 throw new Error(resultado.CODE);
             }
 
@@ -119,16 +122,19 @@ export class GestionProfesoresService {
     formData.append("dni", dni);
     formData.append("departamento", departamento);
     formData.append("dedicacion", dedicacion);
-
+    console.log(formData.get("dedicacion"));
     return this.http.post<EditProfesoresWrapper>(`${environment.api}/?controller=profesores&action=edit`, formData)
       .pipe(
         map(resultado => {
+          console.log(resultado)
             switch (resultado.CODE) {
               case '200':
                 return true;
               case '4002':
+                console.log("e1")
                 throw new Error('4002');
               default:
+                console.log(resultado.CODE)
                 throw new Error(resultado.CODE);
             }
           }

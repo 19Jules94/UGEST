@@ -1,6 +1,6 @@
 <?php
 
-class Profesores_model extends Base_Model
+class Profesores_model extends Base_model
 {
     function __construct()
     {

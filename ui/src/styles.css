@@ -52,5 +52,8 @@ i{
   border-radius: .25rem;
 }
 .card-panel:hover{
-  border: 2px solid #0097fc;
+  border: 1px solid #0097fc;
+}
+.card-link{
+  text-decoration: none;
 }

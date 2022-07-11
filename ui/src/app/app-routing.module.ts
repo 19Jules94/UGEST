@@ -25,6 +25,12 @@ import { MostrarAAcademicoComponent } from './components/gestion-aacademicos/mos
 import { MostrarUsuariosComponent } from './components/gestion-usuarios/mostrar-usuarios/mostrar-usuarios.component';
 import { AddUsuarioComponent } from './components/gestion-usuarios/add-usuario/add-usuario.component';
 import { EditUsuarioComponent } from './components/gestion-usuarios/edit-usuario/edit-usuario.component';
+import { MostrarProfesoresComponent } from './components/gestion-profesores/mostrar-profesores/mostrar-profesores.component';
+import { AddProfesorComponent } from './components/gestion-profesores/add-profesor/add-profesor.component';
+import { EditProfesorComponent } from './components/gestion-profesores/edit-profesor/edit-profesor.component';
+import { MostrarEdificiosComponent } from './components/gestion-edificios/mostrar-edificios/mostrar-edificios.component';
+import { EditEdificioComponent } from './components/gestion-edificios/edit-edificio/edit-edificio.component';
+import { AddEdificioComponent } from './components/gestion-edificios/add-edificio/add-edificio.component';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -55,7 +61,16 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-usuarios/showall', component: MostrarUsuariosComponent, canActivate: []},
   {path: 'panel-principal/gestion-usuarios/edit/:dni', component: EditUsuarioComponent, canActivate: []},
   {path: 'panel-principal/gestion-usuarios', redirectTo: '/panel-principal/gestion-usuarios/showall', pathMatch: 'full'},
- 
+
+  {path: 'panel-principal/gestion-profesores/add', component: AddProfesorComponent, canActivate: []},
+  {path: 'panel-principal/gestion-profesores/showall', component: MostrarProfesoresComponent, canActivate: []},
+  {path: 'panel-principal/gestion-profesores/edit/:dni', component: EditProfesorComponent, canActivate: []},
+  {path: 'panel-principal/gestion-profesores', redirectTo: '/panel-principal/gestion-profesores/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-edificios/add', component: AddEdificioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-edificios/showall', component: MostrarEdificiosComponent, canActivate: []},
+  {path: 'panel-principal/gestion-edificios/edit/:id', component: EditEdificioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-edificios', redirectTo: '/panel-principal/gestion-edificios/showall', pathMatch: 'full'},
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}
 ];

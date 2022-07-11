@@ -66,11 +66,11 @@ class Profesores_Service
             throw new ValidationException("El DNI introducido no es válido");
         }
 
-        if (validarNombre($dedicacion)!=true){
+        if (validarNombreDep($dedicacion)!=true){
             throw new ValidationException("La dedicación introducida no es válida.");
         }
 
-        if (validarId($departamento)!=true){
+        if (validarID($departamento)!=true){
             throw new ValidationException("El ID del departamento no es válido.");
         }
 

@@ -1,7 +1,7 @@
 <div class="container mt-5">
 
     <button class="btn btn-success mb-2"
-      [routerLink]="['/panel-principal/gestion-profesores/add']">{{'gestion-profesores.add-usuario' | translate}}<i
+      [routerLink]="['/panel-principal/gestion-profesores/add']">{{'gestion-profesores.add-profesor' | translate}}<i
         style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
     <table class="table">
       <thead class="thead-dark">
@@ -25,9 +25,9 @@
         <div>
          
           <i *ngIf="tieneFuncionalidadAction('PROFESOR','EDIT')"
-             [routerLink]="['/panel-principal/gestion-profesores/edit', usuario.dni]" class="fas fa-edit"></i>
+             [routerLink]="['/panel-principal/gestion-profesores/edit', profesor.dni]" class="fas fa-edit"></i>
           <i *ngIf="tieneFuncionalidadAction('PROFESOR','DELETE')" 
-             (click)="deleteUsuario(usuario)" class="fas fa-trash-alt"></i>
+             (click)="deleteProfesor(profesor)" class="fas fa-trash-alt"></i>
         </div>
       </td>
           </tr>

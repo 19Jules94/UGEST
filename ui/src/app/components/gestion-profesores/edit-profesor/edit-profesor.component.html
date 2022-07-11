@@ -2,17 +2,14 @@
 
     <div class="card">
         <div id="enc-log" class="card-header">
-            <h3 id="h3-log" class="text-center">Añadir Usuario</h3>
+            <h3 id="h3-log" class="text-center">Editar Profesor</h3>
         </div>
         <div class="card-body">
             <form [formGroup]="profesorForm">
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-profesores.usuario' | translate}}</label>
                     <div class="col-12">
-                        <select class="form-control" formControlName="dni" name="dni" id="dni">
-                          <option value="" selected="true" disabled="disabled">{{'gestion-profesores.select-dni' | translate}}</option>
-                          <option *ngFor="let usuario of usuarioSelect;" value="{{usuario.dni}}">{{usuario.dni}} ({{usuario.nombre}} {{usuario.apellidos}})</option>
-                        </select>
+                        <input class="form-control" formControlName="dni" name="dni" id="dni" type="text" readonly>
                       </div>
                 </div>
 
@@ -26,7 +23,7 @@
                       </div>
                 </div>
                 <div class="input-group mb-3">
-                    <label class="col-2 col-form-label form-control-label" >{{'gestion-profesores.usuario' | translate}}</label>
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-profesores.dedicacion' | translate}}</label>
                     <div class="col-12">
                         <select class="form-control" formControlName="dedicacion" name="dedicacion" id="dedicacion">
                             <option value="" selected="true" disabled="disabled">{{'gestion-profesores.select-dedicacion' | translate}}</option>
@@ -44,8 +41,8 @@
                 
             
                 <div class="float-end">
-                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-profesores/showall']">{{'gestion-profesores.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir profesor  <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-profesores']">{{'gestion-profesores.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Editar profesor <i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
             </form>
         </div>
