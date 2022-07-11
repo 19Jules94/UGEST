@@ -22,6 +22,9 @@ import { MostrarPermisosComponent } from './components/gestion-permisos/mostrar-
 import { AddPermisoComponent } from './components/gestion-permisos/add-permiso/add-permiso.component';
 import { AddAAcademicoComponent } from './components/gestion-aacademicos/add-aacademico/add-aacademico.component';
 import { MostrarAAcademicoComponent } from './components/gestion-aacademicos/mostrar-aacademico/mostrar-aacademico.component';
+import { MostrarUsuariosComponent } from './components/gestion-usuarios/mostrar-usuarios/mostrar-usuarios.component';
+import { AddUsuarioComponent } from './components/gestion-usuarios/add-usuario/add-usuario.component';
+import { EditUsuarioComponent } from './components/gestion-usuarios/edit-usuario/edit-usuario.component';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -47,6 +50,12 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-aacademico/add', component: AddAAcademicoComponent, canActivate: []},
   {path: 'panel-principal/gestion-aacademico/showall', component: MostrarAAcademicoComponent, canActivate: []},
   {path: 'panel-principal/gestion-aacademico', redirectTo: '/panel-principal/gestion-permisos/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-usuarios/add', component: AddUsuarioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-usuarios/showall', component: MostrarUsuariosComponent, canActivate: []},
+  {path: 'panel-principal/gestion-usuarios/edit/:dni', component: EditUsuarioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-usuarios', redirectTo: '/panel-principal/gestion-usuarios/showall', pathMatch: 'full'},
+ 
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}
 ];

@@ -1,0 +1,45 @@
+<div class="container mt-5">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-usuarios/add']">{{'gestion-usuarios.add-usuario' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-usuarios.dni' | translate}}</th>
+          <th scope="col">{{'gestion-usuarios.nombre' | translate}}</th>
+          <th scope="col">{{'gestion-usuarios.apellidos' | translate}}</th>
+          <th scope="col">{{'gestion-usuarios.email' | translate}}</th>
+          <th scope="col">{{'gestion-usuarios.password' | translate}}</th>
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('USUARIO','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios;let indice=index">
+            <th scope="row">{{indice+1}}</th>   
+            <td>{{usuario.dni}}</td>         
+            <td>{{usuario.nombre}}</td>
+            <td>{{usuario.apellidos}}</td>
+            <td>{{usuario.email}}</td>
+            <td>************</td>
+        <td
+        *ngIf="tieneFuncionalidadAction('USUARIO','EDIT') || tieneFuncionalidadAction('USUARIO','DELETE') || tieneFuncionalidadAction('USUARIO','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('USUARIO','EDIT')"
+             [routerLink]="['/panel-principal/gestion-usuarios/edit', usuario.dni]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('USUARIO','DELETE')" 
+             (click)="deleteUsuario(usuario)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-usuarios.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
+  

@@ -5,20 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PanelPrincipalComponent } from './components/panel-principal/panel-principal.component';
 
-import {JwtAuthenticationInterceptor} from './lifecycle/jwt-authentication.interceptor';
+import { JwtAuthenticationInterceptor } from './lifecycle/jwt-authentication.interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {FilterPipe} from "./utils/FilterPipe";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { FilterPipe } from './utils/FilterPipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ModificarPerfilComponent } from './components/modificar-perfil/modificar-perfil.component';
 import { MostrarAccionesComponent } from './components/gestion-acciones/mostrar-acciones/mostrar-acciones.component';
@@ -31,8 +35,11 @@ import { AddPermisoComponent } from './components/gestion-permisos/add-permiso/a
 import { MostrarPermisosComponent } from './components/gestion-permisos/mostrar-permisos/mostrar-permisos.component';
 import { AddAAcademicoComponent } from './components/gestion-aacademicos/add-aacademico/add-aacademico.component';
 import { MostrarAAcademicoComponent } from './components/gestion-aacademicos/mostrar-aacademico/mostrar-aacademico.component';
-
-
+import { MostrarUsuariosComponent } from './components/gestion-usuarios/mostrar-usuarios/mostrar-usuarios.component';
+import { AddUsuarioComponent } from './components/gestion-usuarios/add-usuario/add-usuario.component';
+import { EditUsuarioComponent } from './components/gestion-usuarios/edit-usuario/edit-usuario.component';
+import { AddProfesorComponent } from './components/gestion-profesores/add-profesor/add-profesor.component';
+import { MostrarProfesoresComponent } from './components/gestion-profesores/mostrar-profesores/mostrar-profesores.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -45,14 +52,26 @@ if (localStorage.getItem('selectedLanguage') == null) {
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent,   
-    PanelPrincipalComponent,   
-    FilterPipe, 
-    PerfilComponent, 
-    ModificarPerfilComponent, 
-    MostrarAccionesComponent, 
-    AddAccionComponent, MostrarFuncionalidadesComponent, AddFuncionalidadComponent, AddRolComponent, MostrarRolesComponent, AddPermisoComponent, MostrarPermisosComponent, AddAAcademicoComponent, MostrarAAcademicoComponent
-
+    InicioComponent,
+    PanelPrincipalComponent,
+    FilterPipe,
+    PerfilComponent,
+    ModificarPerfilComponent,
+    MostrarAccionesComponent,
+    AddAccionComponent,
+    MostrarFuncionalidadesComponent,
+    AddFuncionalidadComponent,
+    AddRolComponent,
+    MostrarRolesComponent,
+    AddPermisoComponent,
+    MostrarPermisosComponent,
+    AddAAcademicoComponent,
+    MostrarAAcademicoComponent,
+    MostrarUsuariosComponent,
+    AddUsuarioComponent,
+    EditUsuarioComponent,
+    AddProfesorComponent,
+    MostrarProfesoresComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,30 +82,29 @@ if (localStorage.getItem('selectedLanguage') == null) {
     Ng2SearchPipeModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TranslateModule.forRoot(
-      {
-        defaultLanguage: localStorage.getItem('selectedLanguage')!,
+    TranslateModule.forRoot({
+      defaultLanguage: localStorage.getItem('selectedLanguage')!,
 
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-        }
-      }),
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     NgbModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
-  exports: [
-    TranslateModule
-  ],
+  exports: [TranslateModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtAuthenticationInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

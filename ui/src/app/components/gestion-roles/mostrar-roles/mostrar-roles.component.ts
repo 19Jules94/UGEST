@@ -4,7 +4,7 @@ import { Rol } from 'src/app/models/Gestion-roles/Rol';
 import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService} from "../../../services/authentication.service";
-import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+
 
 @Component({
   selector: 'app-mostrar-roles',
@@ -14,16 +14,16 @@ import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 export class MostrarRolesComponent implements OnInit {
 
   public roles?: Array<Rol>;
-  public order:boolean;
+
 
   constructor(private readonly gestionRolesService: GestionRolesService,
               private readonly router: Router,
               private readonly route: ActivatedRoute,
               public ts: TranslateService,
               private readonly authenticationService: AuthenticationService,
-              private _modalService: NgbModal
+           
   ) {
-    this.order = true;
+
   }
 
   tieneFuncionalidadAction(func:string, action:string): boolean{

@@ -1,0 +1,44 @@
+<div id="login">
+
+    <div class="card">
+        <div id="enc-log" class="card-header">
+            <h3 id="h3-log" class="text-center">Editar Usuario</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="usuarioForm">
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.dni' | translate}}</label>
+                    <input readonly class="form-control" type="text" formControlName="dni" name="dni" maxlength="20">
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.nombre' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="nombre" name="nombre" maxlength="20">
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.apellidos' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="apellidos" name="apellidos" maxlength="20">
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.email' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="email" name="email" maxlength="20">
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.password' | translate}}</label>
+                    <span  (click)="verPass()" id="icon-show" class="input-group-text" ><i class="fa-solid fa-eye-slash"></i></span>
+                    <input id="pass" class="form-control" type="password" formControlName="password" name="password" maxlength="20">
+                </div>
+             
+            
+                <div class="float-end">
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-usuarios']">{{'gestion-usuarios.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Editar usuario  <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+            </form>
+        </div>
+  
+</div>
+</div>
