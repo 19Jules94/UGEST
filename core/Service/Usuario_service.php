@@ -43,7 +43,10 @@ class Usuarios_service
     {
         return $this->USUARIOS_MODEL->mostrarTodos();
     }
-
+    function show($dni)
+    {
+        return $this->USUARIOS_MODEL->show($dni);
+    }
     function deleteUsuario($dni)
     {
         if (validarDNI($dni)!=true) {

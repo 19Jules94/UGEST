@@ -38,7 +38,19 @@ if (!isset($_REQUEST['controller'])) {
         case 'aacademico':
             new AAcademico_controller();
             break;
-        default: 
+        case 'profesores':
+            new Profesores_Controller();
+            break;
+        case 'universidades': //Universidades
+            new Universidades_Controller();
+            break;
+        case 'centros': //centros
+            new Centros_Controller();
+            break;
+        case 'departamentos': //departamentos
+            new Departamentos_Controller();
+            break;
+        default:
             http_response_code(400);
     }
 }

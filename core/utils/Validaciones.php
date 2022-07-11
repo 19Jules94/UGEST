@@ -22,7 +22,15 @@ function validarPass($password)
         return false;
     }
 }
-
+function validarNombreDep($nombre){
+    return $nombre == "TC"
+        || $nombre == "P1"
+        || $nombre == "P2"
+        || $nombre == "P3"
+        || $nombre == "P4"
+        || $nombre == "P5"
+        || $nombre == "P6";
+}
 function validarEmail($email)
 {
     return (false !== filter_var($email, FILTER_VALIDATE_EMAIL));
@@ -48,4 +56,8 @@ function validarNombre($nombre)
 function validarApellidos($apellidos)
 {
     return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \s]{3,20}$/", $apellidos);
+}
+
+function validarCodigo($codigo){
+    return preg_match("/^[A-Z]{1}[0-9]{2}[a-z]{1}[0-9]{2}$/",$codigo);
 }

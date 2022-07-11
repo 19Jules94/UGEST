@@ -40,6 +40,7 @@ public addUsuario(dni: string, nombre: string, apellidos: string, email: string,
   formData.append("apellidos", apellidos);
   formData.append("email", email);
   formData.append("password", password);
+<<<<<<< HEAD
 
   return this.http.post<AddUsuariosWrapper>(`${environment.api}/?controller=usuarios&action=add`, formData)
   .pipe(
@@ -103,6 +104,71 @@ public show(dni: String): Observable<Usuario> {
   var formData: any = new FormData();
   formData.append("dni", dni);
 
+=======
+
+  return this.http.post<AddUsuariosWrapper>(`${environment.api}/?controller=usuarios&action=add`, formData)
+  .pipe(
+    map(resultado => {
+      switch (resultado.CODE) {
+        case '200':
+          return resultado.RESOURCES.resultado;
+        default:
+          throw new Error();
+      }
+
+    }
+    )
+  );
+}
+public deleteUsuario(dni: String): Observable<boolean>{
+  var formData: any = new FormData();
+  formData.append("dni", dni);
+
+
+  return this.http.post<DeleteUsuariosWrapper>(`${environment.api}/?controller=usuarios&action=delete`, formData)
+  .pipe(
+    map(resultado => {
+
+      switch (resultado.CODE) {
+        case '200':
+          return true;
+        case '4001':
+          throw new Error('4001');
+        case '4005':
+          throw new Error('4005');
+        default:
+          throw new Error();
+      }
+    }
+    )
+  );
+}
+public editUsuario(dni: string, nombre: string, apellidos: string, email: string,password: string){
+  var formData: any = new FormData();
+  formData.append("dni", dni);
+  formData.append("nombre", nombre);
+  formData.append("apellidos", apellidos);
+  formData.append("email", email);
+  formData.append("password", password);
+  return this.http.post<EditUsuariosWrapper>(`${environment.api}/?controller=usuarios&action=edit`, formData)
+  .pipe(
+    map(resultado => {
+      switch (resultado.CODE) {
+        case '200':
+          return resultado.RESOURCES.resultado;
+        default:
+          throw new Error();
+      }
+
+    }
+    )
+  );
+}  
+public show(dni: String): Observable<Usuario> {
+  var formData: any = new FormData();
+  formData.append("dni", dni);
+
+>>>>>>> a03f78d (nuevos controladores modelos y servicios)
   return this.http.post<UsuariosWrapper>(`${environment.api}/?controller=usuarios&action=show`, formData)
     .pipe(
       map(resultado => {
