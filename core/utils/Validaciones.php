@@ -40,3 +40,12 @@ function validarID($id)
 {
     return preg_match("/^[0-9]+$/", $id);
 }
+function validarNombre($nombre)
+{
+    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,20}$/", $nombre);
+}
+
+function validarApellidos($apellidos)
+{
+    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ \s]{3,20}$/", $apellidos);
+}

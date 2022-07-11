@@ -31,6 +31,10 @@ import { AddPermisoComponent } from './components/gestion-permisos/add-permiso/a
 import { MostrarPermisosComponent } from './components/gestion-permisos/mostrar-permisos/mostrar-permisos.component';
 import { AddAAcademicoComponent } from './components/gestion-aacademicos/add-aacademico/add-aacademico.component';
 import { MostrarAAcademicoComponent } from './components/gestion-aacademicos/mostrar-aacademico/mostrar-aacademico.component';
+import { MostrarUsuariosComponent } from './components/gestion-usuarios/mostrar-usuarios/mostrar-usuarios.component';
+import { AddUsuarioComponent } from './components/gestion-usuarios/add-usuario/add-usuario.component';
+import { EditUsuarioComponent } from './components/gestion-usuarios/edit-usuario/edit-usuario.component';
+import { VerUsuarioComponent } from './components/gestion-usuarios/ver-usuario/ver-usuario.component';
 
 
 
@@ -51,7 +55,7 @@ if (localStorage.getItem('selectedLanguage') == null) {
     PerfilComponent, 
     ModificarPerfilComponent, 
     MostrarAccionesComponent, 
-    AddAccionComponent, MostrarFuncionalidadesComponent, AddFuncionalidadComponent, AddRolComponent, MostrarRolesComponent, AddPermisoComponent, MostrarPermisosComponent, AddAAcademicoComponent, MostrarAAcademicoComponent
+    AddAccionComponent, MostrarFuncionalidadesComponent, AddFuncionalidadComponent, AddRolComponent, MostrarRolesComponent, AddPermisoComponent, MostrarPermisosComponent, AddAAcademicoComponent, MostrarAAcademicoComponent, MostrarUsuariosComponent, AddUsuarioComponent, EditUsuarioComponent, VerUsuarioComponent
 
   ],
   imports: [

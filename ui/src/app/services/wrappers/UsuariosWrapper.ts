@@ -1,6 +1,6 @@
-import { Usuario } from "src/app/models/Gestion-usuario/Usuario";
+import { Usuarios } from "src/app/models/Gestion-usuario/Usuarios";
 export class UsuariosWrapper {
   public STATUS!: string;
   public CODE!: string;
-  public RESOURCES!: Usuario;
+  public RESOURCES!: Usuarios;
 }

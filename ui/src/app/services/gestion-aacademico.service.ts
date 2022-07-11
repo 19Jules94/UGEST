@@ -7,7 +7,7 @@ import { AAcademicoWrapper } from './wrappers/AAcademicoWrapper';
 import { AddAAcademicoWrapper } from './wrappers/AddAAcademicoWrapper';
 import {BaseWrapper} from "./wrappers/BaseWrapper";
 import { AAcademicos } from '../models/Gestion-AAcademico/AAcademicos';
-
+import { DeleteAAcademicoWrapper } from './wrappers/DeleteAAcademicoWrapper';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +38,7 @@ export class GestionAacademicoService {
     var formData: any = new FormData();
     formData.append("id", id);
 
-    return this.http.post<AAcademicoWrapper>(`${environment.api}/?controller=aacademico&action=delete`, formData)
+    return this.http.post<DeleteAAcademicoWrapper>(`${environment.api}/?controller=aacademico&action=delete`, formData)
       .pipe(
         map(resultado => {
 
