@@ -269,15 +269,15 @@
   },
   "gestion-centros": {
     "showall": "Ver todos los centros",
-    "add": "Añadir centro",
+    "add-centro": "Añadir centro",
     "edit": "Editar centro",
     "delete": "Eliminar centro",
     "delete-msg": "Estás seguro de eliminar este centro?",
-    "Nombre": "Nombre",
-    "Ciudad": "Ciudad",
+    "nombre": "Nombre",
+    "ciudad": "Ciudad",
     "cancelar": "Cancelar",
-    "Responsable": "Responsable",
-    "Universidad": "Universidad",
+    "responsable": "Responsable",
+    "universidad": "Universidad",
     "select-responsable": "Selecciona un responsable",
     "select-universidad": "Selecciona una universidad",
     "add-ok": "El centro fue creado correctamente",
@@ -297,7 +297,8 @@
     "add-error-duplicado": "Ya existe un centro con el mismo nombre para esa universidad",
     "eliminar-ok": "Se borró el centro correctamente",
     "eliminar-error": "No se pudo borrar el centro",
-    "error-notfound": "Non se pudo encontrar el centro"
+    "error-notfound": "Non se pudo encontrar el centro",
+    "volver": "Volver"
   },
   "gestion-espacios": {
     "showall-espacio": "Ver todos los espacios",

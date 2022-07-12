@@ -1,0 +1,53 @@
+<div id="login">
+
+    <div class="card">
+        <div id="enc-log" class="card-header">
+            <h3 id="h3-log" class="text-center">Editar Centro</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="centroForm">
+              
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-centros.nombre' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="nombre" name="nombre" >
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-centros.ciudad' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="ciudad" name="ciudad" >
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-centros.responsable' | translate}}</label>
+                    <div class="col-10">
+                        <select class="form-control" formControlName="responsable" name="responsable" id="responsable">
+                          <option value="" selected="true" disabled="disabled">{{'gestion-centros.select-responsable' | translate}}</option>
+                            <option *ngFor="let responsable of responsableSelect;" value="{{responsable.dni}}">{{responsable.nombre}} {{responsable.apellidos}} ({{responsable.dni}})</option>
+                        </select>
+                      </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-centros.universidad' | translate}}</label>
+                    <div class="col-10">
+                        <select class="form-control" formControlName="universidad" name="universidad" id="universidad">
+                          <option value="" selected="true" disabled="disabled">{{'gestion-centros.universidad' | translate}}</option>
+                          <option *ngFor="let universidad of universidadSelect;" value="{{universidad.id}}">
+                            {{universidad.nombre}} 
+                            ({{universidad.ciudad}})
+                        </option></select>
+                      </div>
+                </div>
+               
+             
+            
+                <div class="float-end">
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-centros/showall']">{{'gestion-centros.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Editar centro <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+            </form>
+        </div>
+  
+</div>
+</div>

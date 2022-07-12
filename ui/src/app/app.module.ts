@@ -44,6 +44,9 @@ import { EditProfesorComponent } from './components/gestion-profesores/edit-prof
 import { MostrarEdificiosComponent } from './components/gestion-edificios/mostrar-edificios/mostrar-edificios.component';
 import { AddEdificioComponent } from './components/gestion-edificios/add-edificio/add-edificio.component';
 import { EditEdificioComponent } from './components/gestion-edificios/edit-edificio/edit-edificio.component';
+import { EditCentroComponent } from './components/gestion-centros/edit-centro/edit-centro.component';
+import { AddCentroComponent } from './components/gestion-centros/add-centro/add-centro.component';
+import { MostrarCentroComponent } from './components/gestion-centros/mostrar-centro/mostrar-centro.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -80,6 +83,9 @@ if (localStorage.getItem('selectedLanguage') == null) {
     MostrarEdificiosComponent,
     AddEdificioComponent,
     EditEdificioComponent,
+    EditCentroComponent,
+    AddCentroComponent,
+    MostrarCentroComponent,
   ],
   imports: [
     BrowserModule,

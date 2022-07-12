@@ -1,0 +1,43 @@
+<div class="container mt-5">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-centros/add']">{{'gestion-centros.add-centro' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-centros.nombre' | translate}}</th>
+          <th scope="col">{{'gestion-centros.ciudad' | translate}}</th>
+          <th scope="col">{{'gestion-centros.universidad' | translate}}</th>
+          <th scope="col">{{'gestion-centros.responsable' | translate}}</th>
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('CENTRO','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let centro of centros;let indice=index">
+            <th scope="row">{{indice+1}}</th>   
+            <td>{{centro.nombre}}</td>         
+            <td>{{centro.ciudad}}</td>
+            <td>{{centro.universidad_nombre}}</td> 
+            <td>{{centro.responsable}}</td>              
+        <td
+        *ngIf="tieneFuncionalidadAction('CENTRO','EDIT') || tieneFuncionalidadAction('CENTRO','DELETE') || tieneFuncionalidadAction('CENTRO','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('CENTRO','EDIT')"
+             [routerLink]="['/panel-principal/gestion-centros/edit', centro.id]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('CENTRO','DELETE')" 
+             (click)="deleteCentro(centro)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-centros.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
+  

@@ -31,6 +31,9 @@ import { EditProfesorComponent } from './components/gestion-profesores/edit-prof
 import { MostrarEdificiosComponent } from './components/gestion-edificios/mostrar-edificios/mostrar-edificios.component';
 import { EditEdificioComponent } from './components/gestion-edificios/edit-edificio/edit-edificio.component';
 import { AddEdificioComponent } from './components/gestion-edificios/add-edificio/add-edificio.component';
+import { AddCentroComponent } from './components/gestion-centros/add-centro/add-centro.component';
+import { MostrarCentroComponent } from './components/gestion-centros/mostrar-centro/mostrar-centro.component';
+import { EditCentroComponent } from './components/gestion-centros/edit-centro/edit-centro.component';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -71,6 +74,11 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-edificios/showall', component: MostrarEdificiosComponent, canActivate: []},
   {path: 'panel-principal/gestion-edificios/edit/:id', component: EditEdificioComponent, canActivate: []},
   {path: 'panel-principal/gestion-edificios', redirectTo: '/panel-principal/gestion-edificios/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-centros/add', component: AddCentroComponent, canActivate: []},
+  {path: 'panel-principal/gestion-centros/showall', component: MostrarCentroComponent, canActivate: []},
+  {path: 'panel-principal/gestion-centros/edit/:id', component: EditCentroComponent, canActivate: []},
+  {path: 'panel-principal/gestion-centros', redirectTo: '/panel-principal/gestion-centros/showall', pathMatch: 'full'},
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}
 ];

@@ -50,7 +50,7 @@ function validarID($id)
 }
 function validarNombre($nombre)
 {
-    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,20}$/", $nombre);
+    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,50}$/", $nombre);
 }
 
 function validarApellidos($apellidos)
