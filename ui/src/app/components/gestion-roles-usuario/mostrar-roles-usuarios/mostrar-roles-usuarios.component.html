@@ -1,0 +1,42 @@
+<div class="container mt-5">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-roles-usuarios/add']">{{'gestion-roles-usuario.add-roles-usuario' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-roles-usuario.nombre-usuario' | translate}}</th>
+          <th scope="col">{{'gestion-roles-usuario.apellidos-usuario' | translate}}</th>    
+          <th scope="col">{{'gestion-roles-usuario.dni-usuario' | translate}}</th>   
+          <th scope="col">{{'gestion-roles-usuario.rol' | translate}}</th>   
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('ROL_USUARIO','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rol_usuario of roles_usuario;let indice=index">
+            <th scope="row">{{indice+1}}</th>   
+            <td>{{rol_usuario.nombre_usuario}}</td>
+          <td>{{rol_usuario.apellidos_usuario}}</td>
+          <td>{{rol_usuario.id_rol}}</td>
+          <td>{{rol_usuario.usuario}}</td>
+          <td>{{rol_usuario.nombre_rol}}</td>
+              
+        <td
+        *ngIf="tieneFuncionalidadAction('ROL_USUARIO','EDIT') || tieneFuncionalidadAction('ROL_USUARIO','DELETE') || tieneFuncionalidadAction('ROL_USUARIO','SHOWCURRENT')"
+        class="text-center">
+        <div>         
+         
+          <i *ngIf="tieneFuncionalidadAction('ROL_USUARIO','DELETE')" 
+             (click)="deleteRolUsuario(rol_usuario)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-universidades.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>

@@ -61,3 +61,30 @@ function validarApellidos($apellidos)
 function validarCodigo($codigo){
     return preg_match("/^[A-Z]{1}[0-9]{2}[a-z]{1}[0-9]{2}$/",$codigo);
 }
+
+function validarCodigoTitulacion($codigo){
+    return preg_match("/^[A-Z]{1}[0-9]{2}[A-Z]{1}[0-9]{3}[A-Z]{1}[0-9]{2}$/",$codigo);
+}
+function validarHoras($horas){
+    return preg_match("/^[0-9]+$/",$horas)  <= 400;
+}
+function validarCuatrimestre($cuatrimestre){
+    return $cuatrimestre=='1' or $cuatrimestre=='2';
+}
+
+function validarTipo($tipo){
+    return $tipo=='OB' or $tipo=='OP' or $tipo=='FBH';
+}
+
+
+function validarCreditos($creditos){
+    return $creditos=='6' or $creditos=='12';
+}
+
+function validarCodigoAsignatura($codigo){
+    return preg_match("/^[A-Z]{1}[0-9]{2}[A-Z]{1}[0-9]{3}[A-Z]{1}[0-9]{5}$/",$codigo);    
+}
+
+function validarContenido($contenido){
+    return preg_match("/^.{3,}$/",$contenido);
+}

@@ -362,7 +362,9 @@
     "add-error-centro": "No existe el centro indicado.",
     "add-error": "No se pudo añadir el departamento.",
     "edit-error": "No se pudo editar el departamento.",
-    "select-centro": "Selecciona un centro"
+    "select-centro": "Selecciona un centro",
+    "volver": "Volver",
+    "cancelar": "Cancelar"
   },
   "gestion-asignaturas": {
     "showall": "Mostrando todas las asignaturas",

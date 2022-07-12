@@ -34,6 +34,20 @@ import { AddEdificioComponent } from './components/gestion-edificios/add-edifici
 import { AddCentroComponent } from './components/gestion-centros/add-centro/add-centro.component';
 import { MostrarCentroComponent } from './components/gestion-centros/mostrar-centro/mostrar-centro.component';
 import { EditCentroComponent } from './components/gestion-centros/edit-centro/edit-centro.component';
+import { AddUniversidadComponent } from './components/gestion-universidades/add-universidad/add-universidad.component';
+import { MostrarUniversidadComponent } from './components/gestion-universidades/mostrar-universidad/mostrar-universidad.component';
+import { EditUniversidadComponent } from './components/gestion-universidades/edit-universidad/edit-universidad.component';
+import { AddDepartamentoComponent } from './components/gestion-departamentos/add-departamento/add-departamento.component';
+import { MostrarDepartamentosComponent } from './components/gestion-departamentos/mostrar-departamentos/mostrar-departamentos.component';
+import { EditDepartamentoComponent } from './components/gestion-departamentos/edit-departamento/edit-departamento.component';
+import { MostrarRolesUsuariosComponent } from './components/gestion-roles-usuario/mostrar-roles-usuarios/mostrar-roles-usuarios.component';
+import { AddRolUsuarioComponent } from './components/gestion-roles-usuario/add-rol-usuario/add-rol-usuario.component';
+import { MostrarTitulacionesComponent } from './components/gestion-titulaciones/mostrar-titulaciones/mostrar-titulaciones.component';
+import { AddTitulacionesComponent } from './components/gestion-titulaciones/add-titulaciones/add-titulaciones.component';
+import { EditTitulacionesComponent } from './components/gestion-titulaciones/edit-titulaciones/edit-titulaciones.component';
+import { MostrarAsignaturasComponent } from './components/gestion-asignaturas/mostrar-asignaturas/mostrar-asignaturas.component';
+import { AddAsignaturasComponent } from './components/gestion-asignaturas/add-asignaturas/add-asignaturas.component';
+import { EditAsignaturasComponent } from './components/gestion-asignaturas/edit-asignaturas/edit-asignaturas.component';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -79,6 +93,32 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-centros/showall', component: MostrarCentroComponent, canActivate: []},
   {path: 'panel-principal/gestion-centros/edit/:id', component: EditCentroComponent, canActivate: []},
   {path: 'panel-principal/gestion-centros', redirectTo: '/panel-principal/gestion-centros/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-universidades/add', component: AddUniversidadComponent, canActivate: []},
+  {path: 'panel-principal/gestion-universidades/showall', component: MostrarUniversidadComponent, canActivate: []},
+  {path: 'panel-principal/gestion-universidades/edit/:id', component: EditUniversidadComponent, canActivate: []},
+  {path: 'panel-principal/gestion-universidades', redirectTo: '/panel-principal/gestion-universidades/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-departamentos/add', component: AddDepartamentoComponent, canActivate: []},
+  {path: 'panel-principal/gestion-departamentos/showall', component: MostrarDepartamentosComponent, canActivate: []},
+  {path: 'panel-principal/gestion-departamentos/edit/:id', component: EditDepartamentoComponent, canActivate: []},
+  {path: 'panel-principal/gestion-departamentos', redirectTo: '/panel-principal/gestion-departamentos/showall', pathMatch: 'full'},
+  
+  {path: 'panel-principal/gestion-roles-usuarios/add', component: AddRolUsuarioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-roles-usuarios/showall', component: MostrarRolesUsuariosComponent, canActivate: []},
+  {path: 'panel-principal/gestion-roles-usuarios', redirectTo: '/panel-principal/gestion-departamentos/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-titulaciones/add', component: AddTitulacionesComponent, canActivate: []},
+  {path: 'panel-principal/gestion-titulaciones/showall', component: MostrarTitulacionesComponent, canActivate: []},
+  {path: 'panel-principal/gestion-titulaciones/edit/:id', component: EditTitulacionesComponent, canActivate: []},
+  {path: 'panel-principal/gestion-titulaciones', redirectTo: '/panel-principal/gestion-titulaciones/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-asignaturas/add', component: AddAsignaturasComponent, canActivate: []},
+  {path: 'panel-principal/gestion-asignaturas/showall', component: MostrarAsignaturasComponent, canActivate: []},
+  {path: 'panel-principal/gestion-asignaturas/edit/:id', component: EditAsignaturasComponent, canActivate: []},
+  {path: 'panel-principal/gestion-asignaturas', redirectTo: '/panel-principal/gestion-titulaciones/showall', pathMatch: 'full'},
+
+
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}
 ];

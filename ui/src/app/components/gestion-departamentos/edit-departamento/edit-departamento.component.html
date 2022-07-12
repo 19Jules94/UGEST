@@ -1,0 +1,41 @@
+<div id="login">
+
+    <div class="card">
+        <div id="enc-log" class="card-header">
+            <h3 id="h3-log" class="text-center">Editar Departamento</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="departamentoForm">
+              
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-departamentos.nombre' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="nombre" name="nombre" >
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-departamentos.codigo' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="codigo" name="codigo" >
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-departamentos.centro' | translate}}</label>
+                    <div class="col-10">
+                        <select class="form-control" formControlName="centro" name="centro" id="centro">
+                          <option value="" selected="true" disabled="disabled">{{'gestion-departamentos.select-centro' | translate}}</option>
+                            <option *ngFor="let centro of centroSelect;" value="{{centro.id}}">{{centro.nombre}}  ({{centro.ciudad}})</option>
+                        </select>
+                      </div>
+                </div>
+                          
+             
+            
+                <div class="float-end">
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-departamentos/showall']">{{'gestion-departamentos.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir Departamento  <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+            </form>
+        </div>
+  
+</div>
+</div>

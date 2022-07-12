@@ -47,6 +47,20 @@ import { EditEdificioComponent } from './components/gestion-edificios/edit-edifi
 import { EditCentroComponent } from './components/gestion-centros/edit-centro/edit-centro.component';
 import { AddCentroComponent } from './components/gestion-centros/add-centro/add-centro.component';
 import { MostrarCentroComponent } from './components/gestion-centros/mostrar-centro/mostrar-centro.component';
+import { MostrarUniversidadComponent } from './components/gestion-universidades/mostrar-universidad/mostrar-universidad.component';
+import { AddUniversidadComponent } from './components/gestion-universidades/add-universidad/add-universidad.component';
+import { EditUniversidadComponent } from './components/gestion-universidades/edit-universidad/edit-universidad.component';
+import { EditDepartamentoComponent } from './components/gestion-departamentos/edit-departamento/edit-departamento.component';
+import { AddDepartamentoComponent } from './components/gestion-departamentos/add-departamento/add-departamento.component';
+import { MostrarDepartamentosComponent } from './components/gestion-departamentos/mostrar-departamentos/mostrar-departamentos.component';
+import { AddRolUsuarioComponent } from './components/gestion-roles-usuario/add-rol-usuario/add-rol-usuario.component';
+import { MostrarRolesUsuariosComponent } from './components/gestion-roles-usuario/mostrar-roles-usuarios/mostrar-roles-usuarios.component';
+import { MostrarTitulacionesComponent } from './components/gestion-titulaciones/mostrar-titulaciones/mostrar-titulaciones.component';
+import { AddTitulacionesComponent } from './components/gestion-titulaciones/add-titulaciones/add-titulaciones.component';
+import { EditTitulacionesComponent } from './components/gestion-titulaciones/edit-titulaciones/edit-titulaciones.component';
+import { EditAsignaturasComponent } from './components/gestion-asignaturas/edit-asignaturas/edit-asignaturas.component'; 
+import { AddAsignaturasComponent } from './components/gestion-asignaturas/add-asignaturas/add-asignaturas.component';
+import { MostrarAsignaturasComponent } from './components/gestion-asignaturas/mostrar-asignaturas/mostrar-asignaturas.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -86,6 +100,20 @@ if (localStorage.getItem('selectedLanguage') == null) {
     EditCentroComponent,
     AddCentroComponent,
     MostrarCentroComponent,
+    MostrarUniversidadComponent,
+    AddUniversidadComponent,
+    EditUniversidadComponent,
+    EditDepartamentoComponent,
+    AddDepartamentoComponent,
+    MostrarDepartamentosComponent,
+    AddRolUsuarioComponent,
+    MostrarRolesUsuariosComponent,
+    MostrarTitulacionesComponent,
+    AddTitulacionesComponent,
+    EditTitulacionesComponent,
+    EditAsignaturasComponent,
+    AddAsignaturasComponent,
+    MostrarAsignaturasComponent,
   ],
   imports: [
     BrowserModule,

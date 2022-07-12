@@ -1,0 +1,105 @@
+<div id="login">
+
+    <div class="card ">
+        <div id="enc-log" class="card-header">
+            <h3 id="h3-log" class="text-center">Editar Asignatura</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="asignaturaForm">
+
+                
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.nombre' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="nombre" name="nombre" >
+                </div>
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label">{{'gestion-asignaturas.contenido' | translate}}</label>
+                    <textarea class="form-control" formControlName="contenido" name="contenido" ></textarea>
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.codigo' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="codigo" name="codigo" >
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.creditos' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="creditos" name="creditos" >
+                </div>
+
+                <div class="input-group mb-3">
+                    <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.horas' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="horas" name="horas" >
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label class="col-6 col-form-label form-control-label"
+                            >{{'gestion-asignaturas.tipo' | translate}}</label>
+                        <select class="form-control" formControlName="tipo" name="tipo" id="tipo">
+                            <option value="" selected="true" disabled="disabled">{{'gestion-asignaturas.select-tipo' |
+                                translate}}</option>
+                            <option>OB</option>
+                            <option>OP</option>
+                            <option>FB</option>
+                        </select>
+                    </div>
+                   
+        
+                    <div class="col-6">
+                        <label class="col-6 col-form-label form-control-label"
+                            >{{'gestion-asignaturas.cuatrimestre' | translate}}</label>
+                        <select class="form-control" formControlName="cuatrimestre" name="cuatrimestre" id="cuatrimestre">
+                            <option value="" selected="true" disabled="disabled">{{'gestion-asignaturas.select-cuatri' |
+                                translate}}</option>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                  
+        
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-12 col-form-label form-control-label" >{{'gestion-asignaturas.departamento' | translate}}</label>
+                    <div class="col-12">
+                      <select class="form-control" formControlName="departamento" name="departamento" id="departamento">
+                        <option value="" selected="true" disabled="disabled">{{'gestion-asignaturas.select-departamento' | translate}}</option>
+                        <option *ngFor="let departamento of departamentoSelect;" value="{{departamento.id}}">{{departamento.nombre}} ({{departamento.centro_nombre}})</option>
+                      </select>
+                    </div>
+                 
+                  </div>
+        
+                  <div class="form-group row">
+                    <label class="col-12 col-form-label form-control-label" >{{'gestion-asignaturas.titulacion' | translate}}</label>
+                    <div class="col-12">
+                      <select class="form-control" formControlName="titulacion" name="titulacion" id="titulacion">
+                        <option value="" selected="true" disabled="disabled">{{'gestion-asignaturas.select-titulacion' | translate}}</option>
+                        <option *ngFor="let titulacion of titulacionSelect;" value="{{titulacion.id}}">{{titulacion.nombre}} ({{titulacion.anho}})</option>
+                      </select>
+                    </div>
+                 
+                  </div>
+        
+                  <div class="form-group row">
+                    <label class="col-12 col-form-label form-control-label" >{{'gestion-asignaturas.profesor' | translate}}</label>
+                    <div class="col-12">
+                      <select class="form-control" formControlName="profesor" name="profesor" id="profesor">
+                        <option value="" selected="true" disabled="disabled">{{'gestion-asignaturas.select-profesor' | translate}}</option>
+                        <option *ngFor="let profesor of usuarioSelect;" value="{{profesor.dni}}">{{profesor.nombre_usuario}} {{profesor.apellidos_usuario}} ({{profesor.dni}})</option>
+                      </select>
+                    </div>
+                  
+                  </div>
+        
+                
+
+                
+            
+                <div class="float-end">
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-asignaturas/showall']">{{'gestion-asignaturas.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Editar asignatura  <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+            </form>
+        </div>
+  
+</div>
+</div>
+

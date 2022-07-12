@@ -1,0 +1,42 @@
+<div class="container mt-5">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-departamentos/add']">{{'gestion-departamentos.add' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-departamentos.nombre' | translate}}</th>
+          <th scope="col">{{'gestion-departamentos.codigo' | translate}}</th>    
+          <th scope="col">{{'gestion-departamentos.centro' | translate}}</th>   
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('DEPARTAMENTO','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let departamento of departamentos;let indice=index">
+            <th scope="row">{{indice+1}}</th>   
+            <td>{{departamento.nombre}}</td>         
+            <td>{{departamento.codigo}}</td>
+            <td>{{departamento.centro_nombre}}</td>
+              
+        <td
+        *ngIf="tieneFuncionalidadAction('DEPARTAMENTO','EDIT') || tieneFuncionalidadAction('DEPARTAMENTO','DELETE') || tieneFuncionalidadAction('DEPARTAMENTO','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('DEPARTAMENTO','EDIT')"
+             [routerLink]="['/panel-principal/gestion-departamentos/edit', departamento.id]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('DEPARTAMENTO','DELETE')" 
+             (click)="deleteDepartamento(departamento)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-departamentos.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
+  

@@ -1,4 +1,4 @@
-import { Departamento } from "./Departamento";
+import {Departamento} from "./Departamento";
 
 export class Departamentos {
   public constructor(

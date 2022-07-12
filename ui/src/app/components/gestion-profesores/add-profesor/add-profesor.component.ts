@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { Universidad } from 'src/app/models/Gestion-Universidades/Universidad';
-import { Departamento } from 'src/app/models/Gestion-Departamento/Departamento';
+import { Departamento } from 'src/app/models/Gestion-departamentos/Departamento';
 import { Usuario } from 'src/app/models/Gestion-usuario/Usuario';
 import {ActivatedRoute, Router} from "@angular/router";
 import {GestionEdificiosService} from "../../../services/gestion-edificios.service";

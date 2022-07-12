@@ -1,0 +1,43 @@
+<div class="container mt-5 ">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-titulaciones/add']">{{'gestion-titulaciones.add' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-titulaciones.nombre' | translate}}</th>
+          <th scope="col">{{'gestion-titulaciones.centro' | translate}}</th>
+          <th scope="col">{{'gestion-titulaciones.codigo' | translate}}</th>         
+          <th scope="col">{{'gestion-titulaciones.anho' | translate}}</th>      
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('TITULACION','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let titulacion of titulaciones;let indice=index">
+            <th scope="row">{{indice+1}}</th>   
+            <td>{{titulacion.nombre}} </td>
+            <td>{{titulacion.centro}}</td>
+            <td>{{titulacion.codigo}}</td>      
+            <td>{{titulacion.anho_id}}</td>   
+        <td
+        *ngIf="tieneFuncionalidadAction('TITULACION','EDIT') || tieneFuncionalidadAction('TITULACION','DELETE') || tieneFuncionalidadAction('TITULACION','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('TITULACION','EDIT')"
+             [routerLink]="['/panel-principal/gestion-titulaciones/edit', titulacion.id]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('TITULACION','DELETE')" 
+             (click)="deleteTitulacion(titulacion)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-titulaciones.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
+  

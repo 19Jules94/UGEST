@@ -41,17 +41,26 @@ if (!isset($_REQUEST['controller'])) {
         case 'profesores':
             new Profesores_controller();
             break;
-            case 'edificios':
+        case 'edificios':
             new Edificios_controller();
-                break;
+            break;
         case 'universidades':
             new Universidades_controller();
             break;
-        case 'centros': 
+        case 'centros':
             new Centros_controller();
             break;
         case 'departamentos':
             new Departamentos_controller();
+            break;
+        case 'rol_usuario':
+            new Rol_Usuario_controller();
+            break;
+        case 'titulaciones': 
+            new Titulaciones_controller();
+            break;
+        case 'asignaturas': 
+            new Asignaturas_controller();
             break;
         default:
             http_response_code(400);

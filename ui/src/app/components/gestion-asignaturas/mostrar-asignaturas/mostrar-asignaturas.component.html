@@ -1,0 +1,53 @@
+<div class="container mt-5">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-asignaturas/add']">{{'gestion-asignaturas.add' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-asignaturas.nombre' | translate}}</th>
+          <th scope="col">{{'gestion-asignaturas.titulacion' | translate}}</th>
+          <th scope="col">{{'gestion-asignaturas.codigo' | translate}}</th>
+          <th scope="col">{{'gestion-asignaturas.creditos' | translate}}</th>
+          <th scope="col">{{'gestion-asignaturas.horas' | translate}}</th>
+          <th scope="col">{{'gestion-asignaturas.tipo' | translate}}</th>         
+          <th scope="col">{{'gestion-asignaturas.cuatrimestre' | translate}}</th>    
+          <th scope="col">{{'gestion-asignaturas.departamento' | translate}}</th>  
+          <th scope="col">{{'gestion-asignaturas.profesor' | translate}}</th>    
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('ASIGNATURA','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asignatura of asignaturas;let indice=index">
+            <th scope="row">{{indice+1}}</th>   
+            <td>{{asignatura.nombre}}</td>
+            <td>{{asignatura.nombre_titulacion}}</td>
+            <td>{{asignatura.codigo}}</td>
+            <td>{{asignatura.creditos}}</td>
+            <td>{{asignatura.horas}}</td>
+            <td>{{asignatura.tipo}}</td>
+            <td>{{asignatura.cuatrimestre}}</td>
+            <td>{{asignatura.nombre_departamento}}</td>
+            <td>{{asignatura.profesor}}</td>
+        <td
+        *ngIf="tieneFuncionalidadAction('ASIGNATURA','EDIT') || tieneFuncionalidadAction('ASIGNATURA','DELETE') || tieneFuncionalidadAction('ASIGNATURA','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('ASIGNATURA','EDIT')"
+             [routerLink]="['/panel-principal/gestion-asignaturas/edit', asignatura.id]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('ASIGNATURA','DELETE')" 
+             (click)="deleteAsignatura(asignatura)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-asignaturas.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
+  

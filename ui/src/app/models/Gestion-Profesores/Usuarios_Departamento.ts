@@ -1,5 +1,5 @@
 import { Usuario } from "../Gestion-usuario/Usuario";
-import { Departamento } from "../Gestion-Departamento/Departamento";
+import { Departamento } from "../Gestion-departamentos/Departamento";
 
 export class Usuarios_Departamentos {
   public constructor(
