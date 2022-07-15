@@ -1,0 +1,49 @@
+<div class="container mt-5">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-horarios/add']">{{'gestion-horarios.add' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-horarios.titulacion' | translate}}</th>
+          <th scope="col">{{'gestion-horarios.asignatura' | translate}}</th>
+          <th scope="col">{{'gestion-horarios.grupo' | translate}}</th>
+          <th scope="col">{{'gestion-horarios.espacio' | translate}}</th>
+          <th scope="col">{{'gestion-horarios.profesor' | translate}}</th>       
+          <th scope="col">{{'gestion-horarios.fecha' | translate}}</th>    
+          <th scope="col">{{'gestion-horarios.horario' | translate}}</th>         
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('HORARIO','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let horario of horarios;let indice=index">
+            <th scope="row">{{indice+1}}</th>  
+            <td>{{horario.titulacion}}</td>
+            <td>{{horario.asignatura}}</td>
+            <td>{{horario.grupo}}</td>
+            <td>{{horario.espacio}}</td>
+            <td>{{horario.profesor}}</td>            
+            <td>{{horario.fecha}}</td>
+            <td>{{horario.hora_inicio}} - {{horario.hora_fin}}</td>
+        <td
+        *ngIf="tieneFuncionalidadAction('HORARIO','EDIT') || tieneFuncionalidadAction('HORARIO','DELETE') || tieneFuncionalidadAction('HORARIO','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('HORARIO','EDIT')"
+             [routerLink]="['/panel-principal/gestion-horarios/edit', horario.id]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('HORARIO','DELETE')" 
+             (click)="deleteHorario(horario)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-asignaturas.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
+  

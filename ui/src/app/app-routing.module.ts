@@ -48,6 +48,15 @@ import { EditTitulacionesComponent } from './components/gestion-titulaciones/edi
 import { MostrarAsignaturasComponent } from './components/gestion-asignaturas/mostrar-asignaturas/mostrar-asignaturas.component';
 import { AddAsignaturasComponent } from './components/gestion-asignaturas/add-asignaturas/add-asignaturas.component';
 import { EditAsignaturasComponent } from './components/gestion-asignaturas/edit-asignaturas/edit-asignaturas.component';
+import { MostrarEspaciosComponent } from './components/gestion-espacios/mostrar-espacios/mostrar-espacios.component';
+import { AddEspacioComponent } from './components/gestion-espacios/add-espacio/add-espacio.component';
+import { EditEspacioComponent } from './components/gestion-espacios/edit-espacio/edit-espacio.component';
+import { MostrarGruposComponent } from './components/gestion-grupos/mostrar-grupos/mostrar-grupos.component';
+import { AddGrupoComponent } from './components/gestion-grupos/add-grupo/add-grupo.component';
+import { EditGrupoComponent } from './components/gestion-grupos/edit-grupo/edit-grupo.component';
+import { MostrarHorariosComponent } from './components/gestion-horarios/mostrar-horarios/mostrar-horarios.component';
+import { AddHorarioComponent } from './components/gestion-horarios/add-horario/add-horario.component';
+import { EditHorarioComponent } from './components/gestion-horarios/edit-horario/edit-horario.component';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -118,6 +127,22 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-asignaturas/edit/:id', component: EditAsignaturasComponent, canActivate: []},
   {path: 'panel-principal/gestion-asignaturas', redirectTo: '/panel-principal/gestion-titulaciones/showall', pathMatch: 'full'},
 
+  {path: 'panel-principal/gestion-espacios/add', component: AddEspacioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-espacios/showall', component: MostrarEspaciosComponent, canActivate: []},
+  {path: 'panel-principal/gestion-espacios/edit/:id', component: EditEspacioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-espacios', redirectTo: '/panel-principal/gestion-espacios/showall', pathMatch: 'full'},
+
+
+  
+  {path: 'panel-principal/gestion-grupos/add', component: AddGrupoComponent, canActivate: []},
+  {path: 'panel-principal/gestion-grupos/showall', component: MostrarGruposComponent, canActivate: []},
+  {path: 'panel-principal/gestion-grupos/edit/:id', component: EditGrupoComponent, canActivate: []},
+  {path: 'panel-principal/gestion-grupos', redirectTo: '/panel-principal/gestion-espacios/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-horarios/add', component: AddHorarioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-horarios/showall', component: MostrarHorariosComponent, canActivate: []},
+  {path: 'panel-principal/gestion-horarios/edit/:id', component: EditHorarioComponent, canActivate: []},
+  {path: 'panel-principal/gestion-horarios', redirectTo: '/panel-principal/gestion-espacios/showall', pathMatch: 'full'},
 
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}

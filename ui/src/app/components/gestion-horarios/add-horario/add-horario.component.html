@@ -1,0 +1,147 @@
+<div id="login">
+
+    <div class="card ">
+        <div id="enc-log" class="card-header">
+            <h3 id="h3-log" class="text-center">Añadir Horario</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="horarioForm">
+                
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-4 col-form-label form-control-label" >{{'gestion-horarios.titulacion' |
+                            translate}}</label>
+                        <select class="form-control" formControlName="titulacion" name="titulacion" id="titulacion" (change)="onChange($event)">
+                            <option value="" selected="true" disabled="disabled">{{'gestion-horarios.select-titulacion' |
+                                translate}}</option>
+                            <option *ngFor="let titulacion of titulacionSelect;"
+                                value="{{titulacion.id}}">{{titulacion.nombre}} ({{titulacion.anho}})</option>
+                        </select>
+                    </div>                  
+                </div>
+
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-4 col-form-label form-control-label" >{{'gestion-horarios.asignatura' |
+                            translate}}</label>
+                        <select class="form-control" formControlName="asignatura" name="asignatura" id="asignatura"(change)="onChangeAsignatura($event)">
+                            <option value="" selected="true" disabled="disabled">{{'gestion-horarios.select-asignatura' |
+                                translate}}</option>
+                                <option *ngFor="let asignatura of asignaturaSelect;" value="{{asignatura.id}}" >{{asignatura.nombre}}
+                                </option>
+                        </select>
+                    </div>
+               
+                </div>
+                   
+        
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-4 col-form-label form-control-label" >{{'gestion-horarios.grupo' |
+                            translate}}</label>
+                        <select class="form-control" formControlName="grupo" name="grupo" id="grupo">
+                            <option value="" selected="true" disabled="disabled">{{'gestion-horarios.select-grupo' |
+                                translate}}</option>
+                                <option *ngFor="let grupo of grupoSelect;" value="{{grupo.id}}">{{grupo.nombre}}
+                                </option>
+                        </select>
+                    </div>                 
+                </div>
+
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-12 col-form-label form-control-label" >{{'gestion-horarios.espacio'
+                            | translate}}</label>
+                        
+                            <select class="form-control" formControlName="espacio" name="espacio" id="espacio">
+                                <option value="" selected="true" disabled="disabled">{{'gestion-horarios.select-espacio' |
+                                    translate}}</option>
+                                <option *ngFor="let espacio of espacioSelect;" value="{{espacio.id}}">{{espacio.nombre}}
+                                </option>
+                            </select>
+                        
+                    </div>                
+                </div>
+                  
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-12 col-form-label form-control-label" >{{'gestion-horarios.espacio'
+                            | translate}}</label>
+                        
+                            <select class="form-control" formControlName="profesor" name="profesor" id="profesor">
+                                <option value="" selected="true" disabled="disabled">{{'gestion-horarios.select-profesor' |
+                                    translate}}</option>
+                                <option *ngFor="let profesor of profesorSelect;" value="{{profesor.dni}}">
+                                    {{profesor.nombre_usuario}} {{profesor.apellidos_usuario}} ({{profesor.dni}})
+                                </option>
+                            </select>
+                        
+                    </div>                
+                </div>
+                
+            
+            <div class="form-group row mb-2">
+                <div class="col-3" [style.z-index]="10000">
+                    <label class="col-4 col-form-label form-control-label" >{{'gestion-horarios.fecha'
+                        |
+                        translate}}</label>
+                        <div>
+                            <input class="form-control" type="date" formControlName="fecha" name="fecha"  min="2000-01-01" max="2100-12-31">
+                        </div>
+    
+                </div>
+             
+    
+                <div class="col-3">
+                    <label class="col-6 col-form-label form-control-label"
+                        >{{'gestion-horarios.hora_inicio' |
+                        translate}}</label>
+                        <div>
+                            <input class="form-control" type="time" formControlName="hora_inicio" name="hora_inicio" min="08:00" max="21:00" [(ngModel)]="hora_inicio_value">
+                        </div>
+                </div>
+    
+                <div class="col-3">
+                    <label class="col-6 col-form-label form-control-label"
+                        >{{'gestion-horarios.hora_fin' |
+                        translate}}</label>
+                        <div>
+                            <input class="form-control" type="time" formControlName="hora_fin" name="hora_fin" min="hora_inicio_value" max="21:00">
+                        </div>
+                </div>
+
+                <div class="col-3">
+                    <label class="col-12 col-form-label form-control-label" for="repetir">
+                        Repetir horario
+                      </label>
+                    <input class=" form-check-input" type="checkbox" value="" id="repetir" name="repetir" (click)="ocultar()">
+                 
+                </div>
+            </div>
+       
+            <div *ngIf="isShown">
+            <div class="col-12 mb-4" [style.z-index]="10000">
+                <label class="col-4 col-form-label form-control-label" >{{'gestion-horarios.fecha'
+                    |
+                    translate}}</label>
+                    <div>
+                        <input class="form-control" type="date" formControlName="fecha_fin" name="fecha_fin"  min="2000-01-01" max="2100-12-31">
+                    </div>
+
+            
+        </div>
+    </div>
+                <div class="float-end">
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-horarios/showall']">{{'app.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir horario  <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+           
+            
+            
+            </form>
+        </div>
+  
+</div>
+
+
+

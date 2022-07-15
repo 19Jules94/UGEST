@@ -1,0 +1,40 @@
+<div class="container mt-5 col-10">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-espacios/add']">{{'gestion-espacios.add-espacio' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-espacios.nombre' | translate}}</th>
+          <th scope="col">{{'gestion-espacios.tipo' | translate}}</th>
+          <th scope="col">{{'gestion-espacios.edificio' | translate}}</th>         
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('ESPACIO','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let espacio of espacios;let indice=index">
+            <th scope="row">{{indice+1}}</th>   
+            <td>{{espacio.nombre}}</td>
+            <td>{{espacio.tipo}}</td>
+            <td>{{espacio.edificio_nombre}} ({{espacio.edificio_universidad}} - {{espacio.edificio_ubicacion}})</td>   
+        <td
+        *ngIf="tieneFuncionalidadAction('ESPACIO','EDIT') || tieneFuncionalidadAction('ESPACIO','DELETE') || tieneFuncionalidadAction('ESPACIO','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('ESPACIO','EDIT')"
+             [routerLink]="['/panel-principal/gestion-espacios/edit', espacio.id]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('ESPACIO','DELETE')" 
+             (click)="deleteEspacio(espacio)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-espacios.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>

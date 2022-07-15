@@ -61,6 +61,15 @@ import { EditTitulacionesComponent } from './components/gestion-titulaciones/edi
 import { EditAsignaturasComponent } from './components/gestion-asignaturas/edit-asignaturas/edit-asignaturas.component'; 
 import { AddAsignaturasComponent } from './components/gestion-asignaturas/add-asignaturas/add-asignaturas.component';
 import { MostrarAsignaturasComponent } from './components/gestion-asignaturas/mostrar-asignaturas/mostrar-asignaturas.component';
+import { AddEspacioComponent } from './components/gestion-espacios/add-espacio/add-espacio.component';
+import { MostrarEspaciosComponent } from './components/gestion-espacios/mostrar-espacios/mostrar-espacios.component';
+import { EditEspacioComponent } from './components/gestion-espacios/edit-espacio/edit-espacio.component';
+import { AddGrupoComponent } from './components/gestion-grupos/add-grupo/add-grupo.component';
+import { EditGrupoComponent } from './components/gestion-grupos/edit-grupo/edit-grupo.component';
+import { MostrarGruposComponent } from './components/gestion-grupos/mostrar-grupos/mostrar-grupos.component';
+import { AddHorarioComponent } from './components/gestion-horarios/add-horario/add-horario.component';
+import { EditHorarioComponent } from './components/gestion-horarios/edit-horario/edit-horario.component';
+import { MostrarHorariosComponent } from './components/gestion-horarios/mostrar-horarios/mostrar-horarios.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -114,6 +123,15 @@ if (localStorage.getItem('selectedLanguage') == null) {
     EditAsignaturasComponent,
     AddAsignaturasComponent,
     MostrarAsignaturasComponent,
+    AddEspacioComponent,
+    MostrarEspaciosComponent,
+    EditEspacioComponent,
+    AddGrupoComponent,
+    EditGrupoComponent,
+    MostrarGruposComponent,
+    AddHorarioComponent,
+    EditHorarioComponent,
+    MostrarHorariosComponent,
   ],
   imports: [
     BrowserModule,

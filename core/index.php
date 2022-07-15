@@ -56,11 +56,20 @@ if (!isset($_REQUEST['controller'])) {
         case 'rol_usuario':
             new Rol_Usuario_controller();
             break;
-        case 'titulaciones': 
+        case 'titulaciones':
             new Titulaciones_controller();
             break;
-        case 'asignaturas': 
+        case 'asignaturas':
             new Asignaturas_controller();
+            break;
+        case 'espacios':
+            new Espacios_controller();
+            break;
+        case 'grupos':
+            new Grupos_controller();
+            break;
+        case 'horarios':
+            new Horarios_controller();
             break;
         default:
             http_response_code(400);

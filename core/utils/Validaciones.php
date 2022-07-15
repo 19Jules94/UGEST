@@ -50,7 +50,7 @@ function validarID($id)
 }
 function validarNombre($nombre)
 {
-    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,50}$/", $nombre);
+    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,60}$/", $nombre);
 }
 
 function validarApellidos($apellidos)
@@ -75,7 +75,9 @@ function validarCuatrimestre($cuatrimestre){
 function validarTipo($tipo){
     return $tipo=='OB' or $tipo=='OP' or $tipo=='FBH';
 }
-
+function validarAsignatura($id_ASIGNATURA){
+    return preg_match("/^[0-9]+$/",$id_ASIGNATURA);
+}
 
 function validarCreditos($creditos){
     return $creditos=='6' or $creditos=='12';
@@ -87,4 +89,30 @@ function validarCodigoAsignatura($codigo){
 
 function validarContenido($contenido){
     return preg_match("/^.{3,}$/",$contenido);
+}
+function validarNombreDespacho($nombre){
+    return preg_match("/^[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,60}$/",$nombre);
+}
+function validarTipoGrupo($tipo){
+    return $tipo=='GA' or $tipo=='GB' or $tipo=='GC';
+}
+function validarFecha($fecha){
+    return preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/",$fecha);
+}
+
+function validarHora($hora){
+    return preg_match("/^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$/",$hora);
+}
+
+function validarHorasHorario($hora_inicio,$hora_fin){ 
+    if($hora_inicio<$hora_fin) return true;
+    return false;
+}
+
+function validarAsistencia($asistencia){
+    return ($asistencia == 'Si' or $asistencia == 'No' or $asistencia == 'Pendiente');
+}
+
+function validarDia($dia){
+    return ($dia=='lunes' or $dia=='martes' or $dia=='miercoles' or $dia=='jueves' or $dia=='viernes');
 }

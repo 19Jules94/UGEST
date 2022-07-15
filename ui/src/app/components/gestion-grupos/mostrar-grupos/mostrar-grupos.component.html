@@ -1,0 +1,46 @@
+<div class="container mt-5 col-10">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-grupos/add']">{{'gestion-grupos.add' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-grupos.nombre' | translate}}</th>
+          <th scope="col">{{'gestion-grupos.codigo' | translate}}</th>
+          <th scope="col">{{'gestion-grupos.tipo' | translate}}</th>
+          <th scope="col">{{'gestion-grupos.horas' | translate}}</th>
+          <th scope="col">{{'gestion-grupos.asignatura' | translate}}</th>
+          <th scope="col">{{'gestion-grupos.titulacion' | translate}}</th>         
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('GRUPO','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grupo of grupos;let indice=index">
+            <th scope="row">{{indice+1}}</th>   
+            <td>{{grupo.nombre}}</td>
+            <td>{{grupo.codigo}}</td>
+            <td>{{grupo.tipo}}</td>
+            <td>{{grupo.horas}}</td>
+            <td>{{grupo.asignatura}}</td>
+            <td>{{grupo.titulacion}}</td>
+        <td
+        *ngIf="tieneFuncionalidadAction('GRUPO','EDIT') || tieneFuncionalidadAction('GRUPO','DELETE') || tieneFuncionalidadAction('GRUPO','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('GRUPO','EDIT')"
+             [routerLink]="['/panel-principal/gestion-grupos/edit', grupo.id]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('GRUPO','DELETE')" 
+             (click)="deleteGrupo(grupo)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-espacios.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
