@@ -70,6 +70,9 @@ import { MostrarGruposComponent } from './components/gestion-grupos/mostrar-grup
 import { AddHorarioComponent } from './components/gestion-horarios/add-horario/add-horario.component';
 import { EditHorarioComponent } from './components/gestion-horarios/edit-horario/edit-horario.component';
 import { MostrarHorariosComponent } from './components/gestion-horarios/mostrar-horarios/mostrar-horarios.component';
+import { AddTutoriaComponent } from './components/gestion-tutorias/add-tutoria/add-tutoria.component';
+import { EditTutoriaComponent } from './components/gestion-tutorias/edit-tutoria/edit-tutoria.component';
+import { MostrarTutoriasComponent } from './components/gestion-tutorias/mostrar-tutorias/mostrar-tutorias.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -132,6 +135,9 @@ if (localStorage.getItem('selectedLanguage') == null) {
     AddHorarioComponent,
     EditHorarioComponent,
     MostrarHorariosComponent,
+    AddTutoriaComponent,
+    EditTutoriaComponent,
+    MostrarTutoriasComponent,
   ],
   imports: [
     BrowserModule,

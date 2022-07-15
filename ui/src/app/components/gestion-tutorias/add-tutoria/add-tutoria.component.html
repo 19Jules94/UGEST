@@ -1,0 +1,137 @@
+<div id="login">
+
+    <div class="card ">
+        <div id="enc-log" class="card-header">
+            <h3 id="h3-log" class="text-center">Añadir Tutoria</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="tutoriaForm">
+                
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-4 col-form-label form-control-label" >{{'gestion-tutorias.profesor' |
+                            translate}}</label>
+                        <select class="form-control" formControlName="profesor" name="profesor" id="profesor" >
+                            <option value="" selected="true" disabled="disabled">{{'gestion-tutorias.select-profesor' |
+                                translate}}</option>
+                              <option *ngFor="let profesor of profesorSelect;" value="{{profesor.dni}}">
+                                {{profesor.nombre_usuario}} {{profesor.apellidos_usuario}} ({{profesor.dni}})
+                              </option>
+                        </select>
+                    </div>                  
+                </div>
+
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-4 col-form-label form-control-label" >{{'gestion-tutorias.espacio' |
+                            translate}}</label>
+                            <select class="form-control" formControlName="espacio" name="espacio" id="espacio">
+                                <option value="" selected="true" disabled="disabled">{{'gestion-tutorias.select-espacio' |
+                                  translate}}</option>
+                                <option *ngFor="let espacio of espaciosSelect;" value="{{espacio.id}}">{{espacio.nombre}}
+                                </option>
+                              </select>
+                    </div>
+               
+                </div>
+                   
+        
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-4 col-form-label form-control-label" >{{'gestion-tutorias.anho' |
+                            translate}}</label>
+                            <select class="form-control" formControlName="anho" name="anho" id="anho">
+                                <option value="" selected="true" disabled="disabled">{{'gestion-tutorias.select-anho' |
+                                  translate}}</option>
+                                <option *ngFor="let anho of anhoSelect;" value="{{anho.id}}">{{anho.anho}}
+                                </option>
+                              </select>
+                    </div>                 
+                </div>
+
+                <div class="form-group row col-12 ">
+                    <div class="col-12">
+                        <label class="col-12 col-form-label form-control-label" >{{'gestion-tutorias.asistencia'
+                            | translate}}</label>
+                        
+                            <select class="form-control" formControlName="asistencia" name="asistencia" id="asistencia">
+                                <option value="" disabled="disabled">{{'gestion-tutorias.select-asistencia' |
+                                  translate}}</option>
+                      
+                                <option value="Si">Si</option>
+                      
+                                <option value="No">No</option>
+                      
+                                <option selected value="Pendiente">Pendiente</option>
+                              </select>
+                        
+                    </div>                
+                </div>
+                  
+
+            
+            <div class="form-group row mb-2">
+                <div class="col-3" [style.z-index]="10000">
+                    <label class="col-4 col-form-label form-control-label" >{{'gestion-tutorias.fecha'
+                        |
+                        translate}}</label>
+                        <div>
+                            <input class="form-control" type="date" formControlName="fecha" name="fecha"  min="2000-01-01" max="2100-12-31">
+                        </div>
+    
+                </div>
+             
+    
+                <div class="col-3">
+                    <label class="col-6 col-form-label form-control-label"
+                        >{{'gestion-tutorias.hora_inicio' |
+                        translate}}</label>
+                        <div>
+                            <input class="form-control" type="time" formControlName="hora_inicio" name="hora_inicio" min="08:00" max="21:00" >
+                        </div>
+                </div>
+    
+                <div class="col-3">
+                    <label class="col-6 col-form-label form-control-label"
+                        >{{'gestion-tutorias.hora_fin' |
+                        translate}}</label>
+                        <div>
+                            <input class="form-control" type="time" formControlName="hora_fin" name="hora_fin" min="hora_inicio_value" max="21:00">
+                        </div>
+                </div>
+
+                <div class="col-3">
+                    <label class="col-12 col-form-label form-control-label" for="repetir">
+                        Repetir horario
+                      </label>
+                    <input class=" form-check-input" type="checkbox" value="" id="repetir" name="repetir" (click)="ocultar()">
+                 
+                </div>
+            </div>
+       
+            <div *ngIf="isShown">
+            <div class="col-12 mb-4" [style.z-index]="10000">
+                <label class="col-4 col-form-label form-control-label" >{{'gestion-tutorias.fecha'
+                    |
+                    translate}}</label>
+                    <div>
+                        <input class="form-control" type="date" formControlName="fecha_fin" name="fecha_fin"  min="2000-01-01" max="2100-12-31">
+                    </div>
+
+            
+        </div>
+    </div>
+                <div class="float-end">
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-horarios/showall']">{{'app.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir horario  <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+           
+            
+            
+            </form>
+        </div>
+  
+</div>
+
+
+

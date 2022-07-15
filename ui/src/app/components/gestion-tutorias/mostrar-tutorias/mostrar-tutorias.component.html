@@ -1,0 +1,48 @@
+<div class="container mt-5">
+
+    <button class="btn btn-success mb-2"
+      [routerLink]="['/panel-principal/gestion-tutorias/add']">{{'gestion-tutorias.add' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'gestion-tutorias.profesor' | translate}}</th>
+          <th scope="col">{{'gestion-tutorias.espacio' | translate}}</th>
+          <th scope="col">{{'gestion-tutorias.anho' | translate}}</th>
+          <th scope="col">{{'gestion-tutorias.asistencia' | translate}}</th>
+          <th scope="col">{{'gestion-tutorias.fecha' | translate}}</th>       
+          <th scope="col">{{'gestion-tutorias.horario' | translate}}</th>    
+   
+          <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('TUTORIA','DELETE')">{{'app.options' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tutoria of tutorias;let indice=index">
+            <th scope="row">{{indice+1}}</th>  
+            <td>{{tutoria?.profesor}} ({{tutoria?.nombre}} {{tutoria?.apellidos}})</td>
+            <td>{{tutoria.espacio}}</td>
+            <td>{{tutoria.anho}}</td>
+            <td>{{tutoria.asistencia}}</td>
+            <td>{{tutoria.fecha}}</td>
+            <td>{{tutoria.hora_inicio}} - {{tutoria.hora_fin}}</td>
+        <td
+        *ngIf="tieneFuncionalidadAction('TUTORIA','EDIT') || tieneFuncionalidadAction('TUTORIA','DELETE') || tieneFuncionalidadAction('TUTORIA','SHOWCURRENT')"
+        class="text-center">
+        <div>
+         
+          <i *ngIf="tieneFuncionalidadAction('TUTORIA','EDIT')"
+             [routerLink]="['/panel-principal/gestion-horarios/edit', tutoria.id]" class="fas fa-edit"></i>
+          <i *ngIf="tieneFuncionalidadAction('TUTORIA','DELETE')" 
+             (click)="deleteTutoria(tutoria)" class="fas fa-trash-alt"></i>
+        </div>
+      </td>
+          </tr>
+  
+      </tbody>
+    </table>
+    <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-asignaturas.volver' | translate}}<i
+        style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  </div>
+  

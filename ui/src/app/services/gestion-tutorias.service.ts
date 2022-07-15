@@ -2,22 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Horario } from '../models/Gestion-horarios/Horario';
-import { Horarios } from '../models/Gestion-horarios/Horarios';
-import { AddHorariosWrapper } from './wrappers/AddHorariosWrapper';
-import { HorariosWrapper } from './wrappers/HorariosWrapper';
-import { InfoAddHorariosWrapper } from './wrappers/InfoAddHorariosWrapper';
-import { MostrarHorariosWrapper } from './wrappers/MostrarHorariosWrapper';
+import { Tutoria } from '../models/Gestion-tutorias/Tutoria';
+import { Tutorias } from '../models/Gestion-tutorias/Tutorias';
+import { AddTutoriasWrapper } from './wrappers/AddTutoriasWrapper';
+import { InfoAddTutoriasWrapper } from './wrappers/InfoAddTutoriasWrapper';
+import { MostrarTutoriasWrapper } from './wrappers/MostrarTutoriasWrapper';
+import { TutoriasWrapper } from './wrappers/TutoriasWrapper';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GestionHorariosService {
+export class GestionTutoriasService {
 
   constructor(private readonly http: HttpClient) { }
 
-  public mostrartodos(): Observable<Horarios> {
-    return this.http.post<MostrarHorariosWrapper>(`${environment.api}/?controller=horarios&action=showall`, null)
+  public mostrartodas(): Observable<Tutorias> {
+    return this.http.post<MostrarTutoriasWrapper>(`${environment.api}/?controller=tutorias&action=showall`, null)
       .pipe(
         map(resultado => {
           switch (resultado.CODE) {
@@ -32,27 +32,17 @@ export class GestionHorariosService {
   }
 
 
-  public addHorario(titulacion: string, anho: string,
-    asignatura: string, grupo: string, profesor: string, espacio: string,
-    asistencia: string, hora_inicio: string, hora_fin: string,
-    dia: string, fecha: string
-  ): Observable<string>  {
-
+  public addTutoria(anho: string, profesor: string, espacio: string, asistencia: string, fecha: string, hora_inicio: string, hora_fin: string): Observable<string> {
     var formData: any = new FormData();
-    formData.append("titulacion", titulacion);
     formData.append("anho", anho);
-    formData.append("asignatura", asignatura);
-    formData.append("grupo", grupo);
     formData.append("profesor", profesor);
     formData.append("espacio", espacio);
     formData.append("asistencia", asistencia);
+    formData.append("fecha", fecha);
     formData.append("hora_inicio", hora_inicio);
     formData.append("hora_fin", hora_fin);
-    formData.append("dia", dia);
-    formData.append("fecha", fecha);
 
-
-    return this.http.post<AddHorariosWrapper>(`${environment.api}/?controller=horarios&action=add`, formData)
+    return this.http.post<AddTutoriasWrapper>(`${environment.api}/?controller=tutorias&action=add`, formData)
       .pipe(
         map(resultado => {
           switch (resultado.CODE) {
@@ -77,26 +67,18 @@ export class GestionHorariosService {
   }
 
 
-  public editHorario(id: string, titulacion: string, anho: string,
-    asignatura: string, grupo: string, profesor: string, espacio: string,
-    asistencia: string, hora_inicio: string, hora_fin: string,
-    dia: string, fecha: string): Observable<boolean> {
-
+  public editTutoria(id: string, anho: string, profesor: string, espacio: string, asistencia: string, fecha: string, hora_inicio: string, hora_fin: string): Observable<boolean> {
     var formData: any = new FormData();
     formData.append("id", id);
-    formData.append("profesor", profesor);
-    formData.append("grupo", grupo);
-    formData.append("asignatura", asignatura);
     formData.append("anho", anho);
-    formData.append("titulacion", titulacion);
+    formData.append("profesor", profesor);
     formData.append("espacio", espacio);
+    formData.append("asistencia", asistencia);
+    formData.append("fecha", fecha);
     formData.append("hora_inicio", hora_inicio);
     formData.append("hora_fin", hora_fin);
-    formData.append("asistencia", asistencia);
-    formData.append("dia", dia);
-    formData.append("fecha", fecha);
 
-    return this.http.post<HorariosWrapper>(`${environment.api}/?controller=horarios&action=edit`, formData)
+    return this.http.post<TutoriasWrapper>(`${environment.api}/?controller=tutorias&action=edit`, formData)
       .pipe(
         map(resultado => {
           switch (resultado.CODE) {
@@ -115,16 +97,16 @@ export class GestionHorariosService {
       );
   }
 
-  public show(id: string): Observable<Horario> {
+  public show(id: string): Observable<Tutoria> {
     var formData: any = new FormData();
     formData.append("id", id);
 
-    return this.http.post<MostrarHorariosWrapper>(`${environment.api}/?controller=horarios&action=show`, formData)
+    return this.http.post<MostrarTutoriasWrapper>(`${environment.api}/?controller=tutorias&action=show`, formData)
       .pipe(
         map(resultado => {
             switch (resultado.CODE) {
               case '200':
-                return resultado.RESOURCES.horarios[0];
+                return resultado.RESOURCES.tutorias[0];
               case '4005':
                 throw new Error('4005');
               default:
@@ -135,11 +117,11 @@ export class GestionHorariosService {
       );
   }
 
-  public deleteHorario(id: string): Observable<boolean> {
+  public deleteTutoria(id: string): Observable<boolean> {
     var formData: any = new FormData();
     formData.append("id", id);
 
-    return this.http.post<HorariosWrapper>(`${environment.api}/?controller=horarios&action=delete`, formData)
+    return this.http.post<TutoriasWrapper>(`${environment.api}/?controller=tutorias&action=delete`, formData)
       .pipe(
         map(resultado => {
 
@@ -157,7 +139,7 @@ export class GestionHorariosService {
   }
 
   public info_add(): Observable<any> {
-    return this.http.post<InfoAddHorariosWrapper>(`${environment.api}/?controller=horarios&action=info_add`, null)
+    return this.http.post<InfoAddTutoriasWrapper>(`${environment.api}/?controller=tutorias&action=info_add`, null)
       .pipe(
         map(resultado => {
 
@@ -168,6 +150,25 @@ export class GestionHorariosService {
                 throw new Error();
             }
 
+          }
+        )
+      );
+  }
+
+  asistencia(id: string, asistencia: string) {
+    var formData: any = new FormData();
+    formData.append("id", id);
+    formData.append("asistencia", asistencia);
+
+    return this.http.post<TutoriasWrapper>(`${environment.api}/?controller=tutorias&action=asistencia`, formData)
+      .pipe(
+        map(resultado => {
+            switch (resultado.CODE) {
+              case '200':
+                return true;
+              default:
+                throw new Error(resultado.CODE);
+            }
           }
         )
       );

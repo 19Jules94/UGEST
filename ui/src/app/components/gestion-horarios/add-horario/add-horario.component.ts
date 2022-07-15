@@ -133,18 +133,18 @@ export class AddHorarioComponent implements OnInit {
 
   onSubmit() {
   
-    const grupo = this.horarioForm.get("grupo")?.value;
-    const espacio = this.horarioForm.get("espacio")?.value;
-    const profesor = this.horarioForm.get("profesor")?.value;
-    const asignatura = this.horarioForm.get("asignatura")?.value;
-    const titulacion = this.horarioForm.get("titulacion")?.value;
-    const fecha = this.horarioForm.get("fecha")?.value;
-    const hora_inicio = this.horarioForm.get("hora_inicio")?.value + ':00';
-    const hora_fin = this.horarioForm.get("hora_fin")?.value + ':00';
-    const asistencia = this.horarioForm.get("asistencia")?.value;
+    var grupo = this.horarioForm.get("grupo")?.value;
+    var espacio = this.horarioForm.get("espacio")?.value;
+    var profesor = this.horarioForm.get("profesor")?.value;
+    var asignatura = this.horarioForm.get("asignatura")?.value;
+    var titulacion = this.horarioForm.get("titulacion")?.value;
+    var fecha = this.horarioForm.get("fecha")?.value;
+    var hora_inicio = this.horarioForm.get("hora_inicio")?.value + ':00';
+    var hora_fin = this.horarioForm.get("hora_fin")?.value + ':00';
+    var asistencia = this.horarioForm.get("asistencia")?.value;
     var dia = this.dias_semana[new Date(this.horarioForm.get("fecha")?.value).getDay()]
-    const titulacionCompleta = this.titulacionSelect?.find(value => value.id = titulacion);
-    const fecha_fin = this.horarioForm.get("fecha_fin")?.value;
+    var titulacionCompleta = this.titulacionSelect?.find(value => value.id = titulacion);
+    var fecha_fin = this.horarioForm.get("fecha_fin")?.value;
     
     if(this.ocultar()==false){
     this.gestionHorarios.addHorario(titulacion, titulacionCompleta!.anho_id, asignatura, grupo, profesor,
@@ -183,14 +183,17 @@ export class AddHorarioComponent implements OnInit {
       )
     }
       if(this.ocultar()==true){
-        console.log(fecha.split("-")[2])
-        console.log(fecha_fin.split("-")[2])
+        //console.log(fecha.split("-")[2])
+       // console.log(fecha_fin.split("-")[2])
 
         this.d_inicio=parseInt(fecha.split("-")[2])
         this.d_fin=parseInt(fecha_fin.split("-")[2])
-        console.log(this.d_fin-this.d_inicio)
+        //console.log(this.d_fin-this.d_inicio)
+
+       
        while(this.d_inicio<=this.d_fin){
         console.log("d_inicio "+this.d_inicio);
+        console.log("fecha "+fecha)
         
         this.gestionHorarios.addHorario(titulacion, titulacionCompleta!.anho_id, asignatura, grupo, profesor,
           espacio, "Pendiente", hora_inicio, hora_fin, dia, fecha)
@@ -228,11 +231,15 @@ export class AddHorarioComponent implements OnInit {
               }
             }
           )
+          
           this.d_inicio=this.d_inicio+7;
-          this.semana_siguiente=parseInt(dia+7)
-          dia=this.semana_siguiente.toString();
+          
+         
+          
+          fecha=this.formatDate(this.sumarDias( fecha=new Date(fecha),7));
+
         }
-        this.router.navigate(['/panel-principal/gestion-horarios/showall'], {queryParams: {flashok: this.ts.instant("gestion-horarios.add-ok")}});
+        this.router.navigate(['/panel-principal/gestion-horarios/showall']);
       }
       
   }
@@ -246,7 +253,22 @@ public ocultar(){
 this.isShown = ! this.isShown;
 return true;
 }
-  
+public sumarDias(fecha:Date, dias:number){
+  fecha.setDate(fecha.getDate() + dias);
+  return fecha;
+}
+
+public formatDate(fecha:Date){
+  var year =fecha.getFullYear().toString();
+  var month =fecha.getMonth().toString();
+  var day = fecha.getDate().toString();
+
+  var fecha_final=year+'-'+0+month+'-'+day;
+
+  return fecha_final;
+
+
+}
   onChange($event: Event) {
     this.getAsignaturas(this.horarioForm.get("titulacion")?.value);
   }

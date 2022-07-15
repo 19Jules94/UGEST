@@ -57,6 +57,9 @@ import { EditGrupoComponent } from './components/gestion-grupos/edit-grupo/edit-
 import { MostrarHorariosComponent } from './components/gestion-horarios/mostrar-horarios/mostrar-horarios.component';
 import { AddHorarioComponent } from './components/gestion-horarios/add-horario/add-horario.component';
 import { EditHorarioComponent } from './components/gestion-horarios/edit-horario/edit-horario.component';
+import { MostrarTutoriasComponent } from './components/gestion-tutorias/mostrar-tutorias/mostrar-tutorias.component';
+import { AddTutoriaComponent } from './components/gestion-tutorias/add-tutoria/add-tutoria.component';
+import { EditTutoriaComponent } from './components/gestion-tutorias/edit-tutoria/edit-tutoria.component';
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -137,12 +140,17 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-grupos/add', component: AddGrupoComponent, canActivate: []},
   {path: 'panel-principal/gestion-grupos/showall', component: MostrarGruposComponent, canActivate: []},
   {path: 'panel-principal/gestion-grupos/edit/:id', component: EditGrupoComponent, canActivate: []},
-  {path: 'panel-principal/gestion-grupos', redirectTo: '/panel-principal/gestion-espacios/showall', pathMatch: 'full'},
+  {path: 'panel-principal/gestion-grupos', redirectTo: '/panel-principal/gestion-grupos/showall', pathMatch: 'full'},
 
   {path: 'panel-principal/gestion-horarios/add', component: AddHorarioComponent, canActivate: []},
   {path: 'panel-principal/gestion-horarios/showall', component: MostrarHorariosComponent, canActivate: []},
   {path: 'panel-principal/gestion-horarios/edit/:id', component: EditHorarioComponent, canActivate: []},
-  {path: 'panel-principal/gestion-horarios', redirectTo: '/panel-principal/gestion-espacios/showall', pathMatch: 'full'},
+  {path: 'panel-principal/gestion-horarios', redirectTo: '/panel-principal/gestion-horarios/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/gestion-tutorias/add', component: AddTutoriaComponent, canActivate: []},
+  {path: 'panel-principal/gestion-tutorias/showall', component: MostrarTutoriasComponent, canActivate: []},
+  {path: 'panel-principal/gestion-tutorias/edit/:id', component: EditTutoriaComponent, canActivate: []},
+  {path: 'panel-principal/gestion-tutorias', redirectTo: '/panel-principal/gestion-tutorias/showall', pathMatch: 'full'},
 
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}

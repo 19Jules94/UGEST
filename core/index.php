@@ -71,6 +71,9 @@ if (!isset($_REQUEST['controller'])) {
         case 'horarios':
             new Horarios_controller();
             break;
+        case 'tutorias':
+            new Tutorias_controller();
+            break;
         default:
             http_response_code(400);
     }

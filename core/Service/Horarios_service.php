@@ -208,7 +208,7 @@ class Horarios_service
 
     function show($id)
     {
-        if (validarID($id)){
+        if (validarID($id)!=true){
             throw new ValidationException("El id proporcionado no es válido");
         }
         return $this->HORARIOS_M->show($id);
