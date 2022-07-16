@@ -61,6 +61,7 @@ import { MostrarTutoriasComponent } from './components/gestion-tutorias/mostrar-
 import { AddTutoriaComponent } from './components/gestion-tutorias/add-tutoria/add-tutoria.component';
 import { EditTutoriaComponent } from './components/gestion-tutorias/edit-tutoria/edit-tutoria.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
+import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
@@ -86,7 +87,7 @@ const routes: Routes = [
 
   {path: 'panel-principal/gestion-aacademico/add', component: AddAAcademicoComponent, canActivate: []},
   {path: 'panel-principal/gestion-aacademico/showall', component: MostrarAAcademicoComponent, canActivate: []},
-  {path: 'panel-principal/gestion-aacademico', redirectTo: '/panel-principal/gestion-permisos/showall', pathMatch: 'full'},
+  {path: 'panel-principal/gestion-aacademico', redirectTo: '/panel-principal/gestion-aacademico/showall', pathMatch: 'full'},
 
   {path: 'panel-principal/gestion-usuarios/add', component: AddUsuarioComponent, canActivate: []},
   {path: 'panel-principal/gestion-usuarios/showall', component: MostrarUsuariosComponent, canActivate: []},
@@ -155,7 +156,7 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-tutorias', redirectTo: '/panel-principal/gestion-tutorias/showall', pathMatch: 'full'},
 
   {path: 'panel-principal/calendario', component: CalendarioComponent, canActivate: []},
-
+  {path: 'test', component: TestComponent, canActivate: [NotAuthenticatedGuard]},
   
 
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},

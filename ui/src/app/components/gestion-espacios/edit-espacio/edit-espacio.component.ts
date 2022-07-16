@@ -90,5 +90,12 @@ export class EditEspacioComponent implements OnInit {
         )
     }
   }
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+    this.error = undefined;
+  }
 
 }

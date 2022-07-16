@@ -2,7 +2,7 @@
 
     <div class="card">
         <div id="enc-log" class="card-header">
-            <h3 id="h3-log" class="text-center">Añadir Rol Usuario</h3>
+            <h3 id="h3-log" class="text-center">{{'gestion-roles-usuario.add-roles-usuario' | translate}}</h3>
         </div>
         <div class="card-body">
             <form [formGroup]="rolUsuarioForm">
@@ -15,6 +15,9 @@
                         <option *ngFor="let usuario of usuariosSelect;" value="{{usuario.dni}}">{{usuario.nombre}} {{usuario.apellidos}} ({{usuario.dni}})</option>
                       </select>
                 </div>
+                <div *ngIf="rolUsuarioForm.get('usuario_id')?.errors && rolUsuarioForm.get('usuario_id')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="rolUsuarioForm.get('usuario_id')?.hasError('required')">{{'gestion-roles-usuario.add-usuario-req' | translate}}</small>
+                  </div>
             </div>
             <div class="form-group row">
                 <label class="col-12 col-form-label form-control-label">{{'gestion-roles-usuario.rol' | translate}}</label>
@@ -24,14 +27,22 @@
                         <option *ngFor="let rol of rolesSelect;" value="{{rol.id}}">{{rol.nombre}}</option>
                       </select>
                 </div>
+                <div *ngIf="rolUsuarioForm.get('rol_id')?.errors && rolUsuarioForm.get('rol_id')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="rolUsuarioForm.get('rol_id')?.hasError('required')">{{'gestion-roles-usuario.add-rol-req' | translate}}</small>
+                  </div>
             </div>
            
             
                 <div class="float-end">
                     <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-roles-usuarios/showall']">{{'gestion-acciones.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir Rol <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button">{{'gestion-roles-usuario.add-roles-usuario' | translate}}<i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
-           
+                <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{getflashError()}}
+                    <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
             </form>
         </div>
   

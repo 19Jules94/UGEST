@@ -45,11 +45,11 @@ export class MostrarAAcademicoComponent implements OnInit {
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.removeError4001();
               break;
             default:
-              console.log("error")
+              this.removeError();
               break;
           }
         }
@@ -58,8 +58,17 @@ export class MostrarAAcademicoComponent implements OnInit {
     }
   }  
   private remove() {
-    this.router.navigate(['/panel-principal/gestion-aacademicos/showall']);
+    this.router.navigate(['/panel-principal/gestion-aacademico/showall']);
     window.scrollTo({top: 0, behavior: 'smooth'});
   
+  }
+  private removeError() {
+    this.router.navigate(['/panel-principal/gestion-aacademicoshowall'], {queryParams: {flasherror: this.ts.instant("gestion-aacademico.eliminar-error")}});
+   
+  }
+
+  private removeError4001() {
+    this.router.navigate(['/panel-principal/gestion-aacademico/showall'], {queryParams: {flasherror: this.ts.instant("gestion-aacademico.eliminar-error-foreign-key")}});
+    
   }
 }

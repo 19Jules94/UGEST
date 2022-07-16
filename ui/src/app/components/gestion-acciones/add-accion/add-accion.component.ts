@@ -48,9 +48,8 @@ export class AddAccionComponent implements OnInit {
         },
         error => {
           switch (error.message){
-            case '1451':
+            case '4002':
               this.error = this.ts.instant('gestion-acciones.add-error-name');
-              console.log(error.message)
               break;
             default:
               this.error = this.ts.instant('gestion-acciones.add-error');
@@ -61,6 +60,11 @@ export class AddAccionComponent implements OnInit {
       )
 
   }
- 
+  getflashError() {
+    return this.error;
+}
+onCloseFlash() {
+  this.error = undefined;
+}
   ngOnInit(): void {}
 }

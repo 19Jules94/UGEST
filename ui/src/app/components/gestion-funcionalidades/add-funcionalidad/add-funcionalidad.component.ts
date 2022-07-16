@@ -61,5 +61,11 @@ export class AddFuncionalidadComponent implements OnInit {
 
   }
   ngOnInit(): void {}
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+    this.error = undefined;
+  }
 }

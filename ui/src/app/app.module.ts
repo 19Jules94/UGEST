@@ -74,6 +74,7 @@ import { AddTutoriaComponent } from './components/gestion-tutorias/add-tutoria/a
 import { EditTutoriaComponent } from './components/gestion-tutorias/edit-tutoria/edit-tutoria.component';
 import { MostrarTutoriasComponent } from './components/gestion-tutorias/mostrar-tutorias/mostrar-tutorias.component';
 import { CalendarioComponent,NgbdModalMarcarAsistencia } from './components/calendario/calendario.component';
+import { TestComponent } from './components/test/test.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -141,7 +142,8 @@ if (localStorage.getItem('selectedLanguage') == null) {
     EditTutoriaComponent,
     MostrarTutoriasComponent,
     CalendarioComponent,
-    NgbdModalMarcarAsistencia
+    NgbdModalMarcarAsistencia,
+    TestComponent
   ],
   imports: [
     BrowserModule,

@@ -236,51 +236,71 @@ export class AddHorarioComponent implements OnInit {
             }
           )
           console.log(numero_dias)
-          if(this.comprobarFindeSemana(fecha=new Date(fecha),fecha_fin=new Date(fecha_fin))==true && numero_dias<=5){
-            this.d_inicio=this.d_inicio+1;
-            fecha=this.formatDate(this.sumarDias( fecha=new Date(fecha),1));
-            }else{
-              this.d_inicio=this.d_inicio+numero_dias;
-              fecha=this.formatDate(this.sumarDias( fecha=new Date(fecha),numero_dias));
-            }
-               
+          if (
+            this.comprobarFindeSemana(
+              (fecha = new Date(fecha)),
+              (fecha_fin = new Date(fecha_fin))
+            ) == true &&
+            numero_dias <= 5
+          ) {
+            this.d_inicio = this.d_inicio + 1;
+            fecha = this.formatDate(this.sumarDias((fecha = new Date(fecha)), 1));
+          }
+          
+          if (
+            this.comprobarFindeSemana(
+              (fecha = new Date(fecha)),
+              (fecha_fin = new Date(fecha_fin))
+            ) == true &&
+            numero_dias % 7 ==0)
+           {
+            this.d_inicio = this.d_inicio + 7;
+            console.log(this.d_inicio)
+            fecha = this.formatDate(this.sumarDias((fecha = new Date(fecha)), 7));
+            console.log("fFF",fecha )
+          }
         }
+  
+        
+      
         this.router.navigate(['/panel-principal/gestion-horarios/showall']);
       }
-      
-  }
-
- 
-   
-
-
-  public comprobarFindeSemana(finicio:Date,ffinal:Date){
-    if(finicio.getDay() ==0 || finicio.getDay()==6 ||ffinal.getDay() ==0 || ffinal.getDay()==6){
-      console.log("finicio",finicio.getDay());
-      console.log("ffinal",ffinal.getDay());
-      return false;
-    }else{
-      console.log("finicio",finicio.getDay());
-      console.log("ffinal",ffinal.getDay());
-      return true;
     }
-  }
-public sumarDias(fecha:Date, dias:number){
-  fecha.setDate(fecha.getDate() + dias);
-  return fecha;
-}
-
-public formatDate(fecha:Date){
-  var year =fecha.getFullYear().toString();
-  var month =(fecha.getMonth()+1).toString();
-  var day = fecha.getDate().toString();
-
-  var fecha_final=year+'-'+0+month+'-'+day;
-
-  return fecha_final;
-
-
-}
+  
+    public sumarDias(fecha: Date, dias: number) {
+      fecha.setDate(fecha.getDate() + dias);
+      return fecha;
+    }
+    public comprobarFindeSemana(finicio: Date, ffinal: Date) {
+      if (
+        finicio.getDay() == 0 ||
+        finicio.getDay() == 6 ||
+        ffinal.getDay() == 0 ||
+        ffinal.getDay() == 6
+      ) {
+        console.log('finicio', finicio.getDay());
+        console.log('ffinal', ffinal.getDay());
+        return false;
+      } else {
+        console.log('finicio', finicio.getDay());
+        console.log('ffinal', ffinal.getDay());
+        return true;
+      }
+    }
+    public formatDate(fecha: Date) {
+      var year = fecha.getFullYear().toString();
+      var month = (fecha.getMonth() + 1).toString();
+  
+      var day = fecha.getDate().toString();
+  
+      if(parseInt(day) <10){
+      var fecha_final = year + '-' + 0 + month + '-' + 0+day;
+      }else{
+        var fecha_final = year + '-' + 0 + month + '-' + day;
+      }
+      return fecha_final;
+    }
+  
   onChange($event: Event) {
     this.getAsignaturas(this.horarioForm.get("titulacion")?.value);
   }
@@ -288,5 +308,12 @@ public formatDate(fecha:Date){
   onChangeAsignatura($event: Event) {
     this.getGrupos(this.horarioForm.get("asignatura")?.value);
   }
- 
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+    this.error = undefined;
+  }
+
 }

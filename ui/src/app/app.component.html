@@ -1,6 +1,18 @@
 <header>
   <nav id="menu" class="navbar navbar-dark bg-dark ">
     <a [routerLink]="['/']"><img src="../assets/img/logo-uvigo-blanco.png" style="width:200px ;"></a>
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item" *ngIf="isLogged()">
+        <a class="nav-link" aria-current="page" href="#" [routerLink]="['/panel-principal']"
+           routerLinkActive="active">{{'panel-principal.panel-principal' | translate}}</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLogged()">
+        <a class="nav-link" href="#" [routerLink]="['/inicio']" routerLinkActive="active">Inicio</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLogged()">
+        <a class="nav-link" href="#" [routerLink]="['/test']" routerLinkActive="active">Test</a>
+      </li>
+    </ul>
     <div class="d-flex"> 
       
       <div *ngIf="isLogged()" style="margin: 1em;" class="dropdown">

@@ -179,6 +179,12 @@ export class EditHorarioComponent implements OnInit {
       )
 
   }
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+    this.error = undefined;
+  }
 
 }

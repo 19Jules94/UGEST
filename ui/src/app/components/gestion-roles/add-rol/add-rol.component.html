@@ -2,7 +2,7 @@
 
     <div class="card">
         <div id="enc-log" class="card-header">
-            <h3 id="h3-log" class="text-center">Añadir Rol</h3>
+            <h3 id="h3-log" class="text-center">{{'gestion-roles.add-rol' | translate}} </h3>
         </div>
         <div class="card-body">
             <form [formGroup]="rolForm">
@@ -11,16 +11,22 @@
                     <input class="form-control" type="text" formControlName="nombre" name="nombre" maxlength="20">
                 </div>
                 <div *ngIf="rolForm.get('nombre')?.errors && rolForm.get('nombre')?.dirty" class="form-text text-danger">
-                    <small class="col-12" *ngIf="rolForm.get('nombre')?.hasError('required')">{{'gestion-acciones.add-nombre-req' | translate}}</small>
-                    <small class="col-12" *ngIf="rolForm.get('nombre')?.hasError('minlength')">{{'gestion-acciones.add-nombre-min' | translate}}</small>
-                    <small class="col-12" *ngIf="rolForm.get('nombre')?.hasError('maxlength')">{{'gestion-acciones.add-nombre-max' | translate}}</small>
-                    <small class="col-12" *ngIf="rolForm.get('nombre')?.hasError('pattern')">{{'gestion-acciones.add-nombre-pat' | translate}}</small>
-                  </div>          
+                    <small class="col-12" *ngIf="rolForm.get('nombre')?.hasError('required')">{{'gestion-roles.add-nombre-req' | translate}}</small>
+                    <small class="col-12" *ngIf="rolForm.get('nombre')?.hasError('minlength')">{{'gestion-roles.add-nombre-min' | translate}}</small>
+                    <small class="col-12" *ngIf="rolForm.get('nombre')?.hasError('maxlength')">{{'gestion-roles.add-nombre-max' | translate}}</small>
+                    <small class="col-12" *ngIf="rolForm.get('nombre')?.hasError('pattern')">{{'gestion-roles.add-nombre-pat' | translate}}</small>
+                  </div>       
             
                 <div class="float-end">
                     <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-acciones']">{{'gestion-roles.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()"  [disabled]="!rolForm.valid" class="btn btn-success ml-2" type="button"> Añadir funcionalidad  <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> {{'gestion-roles.add-rol' | translate}}  <i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
+                <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{getflashError()}}
+                    <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
             </form>
         </div>
   

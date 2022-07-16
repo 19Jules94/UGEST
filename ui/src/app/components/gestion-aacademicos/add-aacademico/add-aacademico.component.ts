@@ -53,20 +53,27 @@ export class AddAAcademicoComponent implements OnInit {
     this.gestionAAcademicoService.addAAcademico(id)
       .subscribe(
         value => {
-          this.router.navigate(['/panel-principal/gestion-anho-academico/showall'], {queryParams: {flashok: this.ts.instant("gestion-anho-academico.add-ok")}});
+          this.router.navigate(['/panel-principal/gestion-aacademico/showall'], {queryParams: {flashok: this.ts.instant("gestion-aacademico.add-ok")}});
         },
         error => {
 
           switch (error.message) {
             case '4002':
-              this.error = this.ts.instant('gestion-anho-academico.add-error-duplicado');
+              this.error = this.ts.instant('gestion-aacademico.add-error-duplicado');
               break;
             default:
-              this.error = this.ts.instant('gestion-anho-academico.add-error');
+              this.error = this.ts.instant('gestion-aacademico.add-error');
               break;
           }
         }
       )
+  }
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+    this.error = undefined;
   }
 }
 

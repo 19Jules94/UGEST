@@ -2,7 +2,7 @@
 
     <div class="card ">
         <div id="enc-log" class="card-header">
-            <h3 id="h3-log" class="text-center">Añadir Asignatura</h3>
+            <h3 id="h3-log" class="text-center">{{'gestion-asignaturas.add' | translate}}</h3>
         </div>
         <div class="card-body">
             <form [formGroup]="asignaturaForm">
@@ -12,10 +12,40 @@
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.nombre' | translate}}</label>
                     <input class="form-control" type="text" formControlName="nombre" name="nombre" >
                 </div>
+                <div *ngIf="asignaturaForm.get('nombre')?.errors && asignaturaForm.get('nombre')?.dirty" class="form-text text-danger">
+                    <small class="col-12"
+                        *ngIf="asignaturaForm.get('nombre')?.hasError('required')">{{'gestion-asignaturas.add-nombre-req' |
+                        translate}}</small>
+                    <small class="col-12"
+                        *ngIf="asignaturaForm.get('nombre')?.hasError('minlength')">{{'gestion-asignaturas.add-nombre-min' |
+                        translate}}</small>
+                    <small class="col-12"
+                        *ngIf="asignaturaForm.get('nombre')?.hasError('maxlength')">{{'gestion-asignaturas.add-nombre-max' |
+                        translate}}</small>
+                    <small class="col-12"
+                        *ngIf="asignaturaForm.get('nombre')?.hasError('pattern')">{{'gestion-asignaturas.add-nombre-pat' |
+                        translate}}</small>
+                </div>
+
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label">{{'gestion-asignaturas.contenido' | translate}}</label>
                     <textarea class="form-control" formControlName="contenido" name="contenido" ></textarea>
                 </div>
+                <div *ngIf="asignaturaForm.get('contenido')?.errors && asignaturaForm.get('contenido')?.dirty"
+                class="form-text text-danger">
+                <small class="col-12"
+                    *ngIf="asignaturaForm.get('contenido')?.hasError('required')">{{'gestion-asignaturas.add-contenido-req' |
+                    translate}}</small>
+                <small class="col-12"
+                    *ngIf="asignaturaForm.get('contenido')?.hasError('minlength')">{{'gestion-asignaturas.add-contenido-min' |
+                    translate}}</small>
+                <small class="col-12"
+                    *ngIf="asignaturaForm.get('contenido')?.hasError('maxlength')">{{'gestion-asignaturas.add-contenido-max' |
+                    translate}}</small>
+                <small class="col-12"
+                    *ngIf="asignaturaForm.get('contenido')?.hasError('pattern')">{{'gestion-asignaturas.add-contenido-pat' |
+                    translate}}</small>
+            </div>
 
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.codigo' | translate}}</label>
@@ -23,11 +53,33 @@
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.creditos' | translate}}</label>
                     <input class="form-control" type="text" formControlName="creditos" name="creditos" >
                 </div>
+                <div *ngIf="asignaturaForm.get('codigo')?.errors && asignaturaForm.get('codigo')?.dirty"
+                class="form-text text-danger">
+                <small class="col-9"
+                    *ngIf="asignaturaForm.get('codigo')?.hasError('required')">{{'gestion-asignaturas.add-codigo-req' |
+                    translate}}</small>
+                <small class="col-9"
+                    *ngIf="asignaturaForm.get('codigo')?.hasError('pattern')">{{'gestion-asignaturas.add-codigo-pat' |
+                    translate}}</small>
+            </div>
 
+            <div *ngIf="asignaturaForm.get('creditos')?.errors && asignaturaForm.get('creditos')?.dirty"
+            class="form-text text-danger">
+            <small class="col-3"
+                *ngIf="asignaturaForm.get('creditos')?.hasError('required')">{{'gestion-asignaturas.add-creditos-req'
+                | translate}}</small>
+        </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.horas' | translate}}</label>
                     <input class="form-control" type="text" formControlName="horas" name="horas" >
                 </div>
+
+                <div *ngIf="asignaturaForm.get('horas')?.errors && asignaturaForm.get('horas')?.dirty"
+                class="form-text text-danger">
+                <small class="col-12"
+                    *ngIf="asignaturaForm.get('horas')?.hasError('required')">{{'gestion-asignaturas.add-horas-req' |
+                    translate}}</small>
+            </div>
                 <div class="form-group row">
                     <div class="col-6">
                         <label class="col-6 col-form-label form-control-label"
@@ -40,7 +92,11 @@
                             <option>FB</option>
                         </select>
                     </div>
-                   
+                    <div *ngIf="asignaturaForm.get('tipo')?.errors && asignaturaForm.get('tipo')?.dirty" class="form-text text-danger">
+                        <small class="col-6"
+                            *ngIf="asignaturaForm.get('tipo')?.hasError('required')">{{'gestion-asignaturas.add-tipo-req' |
+                            translate}}</small>
+                    </div>
         
                     <div class="col-6">
                         <label class="col-6 col-form-label form-control-label"
@@ -52,7 +108,12 @@
                             <option>2</option>
                         </select>
                     </div>
-                  
+                    <div *ngIf="asignaturaForm.get('cuatrimestre')?.errors && asignaturaForm.get('cuatrimestre')?.dirty"
+                class="form-text text-danger">
+                <small class="col-6"
+                    *ngIf="asignaturaForm.get('cuatrimestre')?.hasError('required')">{{'gestion-asignaturas.add-cuatrimestre-req'
+                    | translate}}</small>
+            </div>
         
                 </div>
 
@@ -64,7 +125,9 @@
                         <option *ngFor="let departamento of departamentoSelect;" value="{{departamento.id}}">{{departamento.nombre}} ({{departamento.centro_nombre}})</option>
                       </select>
                     </div>
-                 
+                    <div *ngIf="asignaturaForm.get('departamento')?.errors && asignaturaForm.get('departamento')?.dirty" class="form-text text-danger">
+                        <small class="col-12" *ngIf="asignaturaForm.get('departamento')?.hasError('required')">{{'gestion-asignaturas.add-departamento-req' | translate}}</small>
+                      </div>
                   </div>
         
                   <div class="form-group row">
@@ -75,7 +138,9 @@
                         <option *ngFor="let titulacion of titulacionSelect;" value="{{titulacion.id}}">{{titulacion.nombre}} ({{titulacion.anho}})</option>
                       </select>
                     </div>
-                 
+                    <div *ngIf="asignaturaForm.get('titulacion')?.errors && asignaturaForm.get('titulacion')?.dirty" class="form-text text-danger">
+                        <small class="col-12" *ngIf="asignaturaForm.get('titulacion')?.hasError('required')">{{'gestion-asignaturas.add-titulacion-req' | translate}}</small>
+                      </div>
                   </div>
         
                   <div class="form-group row">
@@ -86,7 +151,9 @@
                         <option *ngFor="let profesor of usuarioSelect;" value="{{profesor.dni}}">{{profesor.nombre_usuario}} {{profesor.apellidos_usuario}} ({{profesor.dni}})</option>
                       </select>
                     </div>
-                  
+                    <div *ngIf="asignaturaForm.get('profesor')?.errors && asignaturaForm.get('profesor')?.dirty" class="form-text text-danger">
+                        <small class="col-12" *ngIf="asignaturaForm.get('profesor')?.hasError('required')">{{'gestion-asignaturas.add-profesor-req' | translate}}</small>
+                      </div>
                   </div>
         
                 
@@ -94,8 +161,14 @@
                 
             
                 <div class="float-end">
-                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-profesores/showall']">{{'gestion-profesores.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir profesor  <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-asignaturas/showall']">{{'gestion-profesores.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> {{'gestion-asignaturas.add' | translate}}  <i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+                <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{getflashError()}}
+                    <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </form>
         </div>

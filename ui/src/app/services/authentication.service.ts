@@ -27,7 +27,7 @@ export class AuthenticationService {
     const item = localStorage.getItem(CREDENTIALS_ITEM);
     const acc_func = localStorage.getItem(ACCIONES_FUNCIONALIDADES_ITEM);
     const profile = localStorage.getItem(PROFILE);
-    console.log("perfil"+profile);
+    
 
     if (item && acc_func && profile) {
       return new Credentials(item, JSON.parse(acc_func), JSON.parse(profile));

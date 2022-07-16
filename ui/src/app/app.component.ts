@@ -11,7 +11,9 @@ import {Profile} from "./models/Profile";
 })
 export class AppComponent implements OnInit {
   title = 'ui';
-
+  public flashAlert?: string;
+  public flashError?: string;
+  public flashOk?: string;
 
   constructor(
     private translate: TranslateService,
@@ -22,7 +24,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+    this.route.queryParams.subscribe(params => {
+      this.flashAlert = params.flashalert;
+      this.flashError = params.flasherror;
+      this.flashOk = params.flashok;
+    });
 
   }
 
@@ -46,6 +52,22 @@ export class AppComponent implements OnInit {
     return this.authenticationService.getProfile();
   }
 
+  public getFlash(): string | undefined {
+    return this.flashAlert;
+  }
 
+  public getflashError(): string | undefined {
+    return this.flashError;
+  }
+
+  public getflashOk(): string | undefined {
+    return this.flashOk;
+  }
+  public onCloseFlash() {
+    this.flashAlert = undefined;
+    this.flashError = undefined;
+    this.flashOk = undefined;
+    this.router.navigate(this.route.snapshot.url);
+  }
  
 }

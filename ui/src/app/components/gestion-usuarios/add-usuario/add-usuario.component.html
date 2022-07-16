@@ -2,7 +2,7 @@
 
     <div class="card">
         <div id="enc-log" class="card-header">
-            <h3 id="h3-log" class="text-center">Añadir Usuario</h3>
+            <h3 id="h3-log" class="text-center">{{'gestion-usuarios.add-usuario' | translate}}</h3>
         </div>
         <div class="card-body">
             <form [formGroup]="usuarioForm">
@@ -10,32 +10,58 @@
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.dni' | translate}}</label>
                     <input class="form-control" type="text" formControlName="dni" name="dni" maxlength="20">
                 </div>
-
+                <div *ngIf="usuarioForm.get('dni')?.errors && usuarioForm.get('dni')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="usuarioForm.get('dni')?.hasError('required')">{{'gestion-usuarios.add-dni-req' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('dni')?.hasError('pattern')">{{'gestion-usuarios.add-dni-err' | translate}}</small>
+                  </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.nombre' | translate}}</label>
                     <input class="form-control" type="text" formControlName="nombre" name="nombre" maxlength="20">
                 </div>
-
+                <div *ngIf="usuarioForm.get('nombre')?.errors && usuarioForm.get('nombre')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="usuarioForm.get('nombre')?.hasError('required')">{{'gestion-usuarios.add-nombre-req' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('nombre')?.hasError('minlength')">{{'gestion-usuarios.add-nombre-min' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('nombre')?.hasError('maxlength')">{{'gestion-usuarios.add-nombre-max' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('nombre')?.hasError('pattern')">{{'gestion-usuarios.add-nombre-pat' | translate}}</small>
+                  </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.apellidos' | translate}}</label>
                     <input class="form-control" type="text" formControlName="apellidos" name="apellidos" maxlength="20">
                 </div>
-
+                <div *ngIf="usuarioForm.get('apellidos')?.errors && usuarioForm.get('apellidos')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="usuarioForm.get('apellidos')?.hasError('required')">{{'gestion-usuarios.add-apellidos-req' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('apellidos')?.hasError('minlength')">{{'gestion-usuarios.add-apellidos-min' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('apellidos')?.hasError('maxlength')">{{'gestion-usuarios.add-apellidos-max' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('apellidos')?.hasError('pattern')">{{'gestion-usuarios.add-apellidos-pat' | translate}}</small>
+                  </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.email' | translate}}</label>
                     <input class="form-control" type="text" formControlName="email" name="email" maxlength="20">
                 </div>
-
+                <div *ngIf="usuarioForm.get('email')?.errors && usuarioForm.get('email')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="usuarioForm.get('email')?.hasError('required')">{{'gestion-usuarios.add-email-req' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('email')?.hasError('email')">{{'gestion-usuarios.add-email-pat' | translate}}</small>
+                  </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-usuarios.password' | translate}}</label>
                     <input class="form-control" type="text" formControlName="password" name="password" maxlength="20">
                 </div>
-             
+                <div *ngIf="usuarioForm.get('password')?.errors && usuarioForm.get('password')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="usuarioForm.get('password')?.hasError('required')">{{'gestion-usuarios.add-password-req' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('password')?.hasError('minlength')">{{'gestion-usuarios.add-password-min' | translate}}</small>
+                    <small class="col-12" *ngIf="usuarioForm.get('password')?.hasError('maxlength')">{{'gestion-usuarios.add-password-max' | translate}}</small>
+                  </div>
             
                 <div class="float-end">
                     <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-usuarios']">{{'gestion-usuarios.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir usuario  <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> {{'gestion-usuarios.add-usuario' | translate}}  <i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
+                <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{getflashError()}}
+                    <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
             </form>
         </div>
   

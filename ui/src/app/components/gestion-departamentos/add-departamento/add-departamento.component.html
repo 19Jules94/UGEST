@@ -2,7 +2,7 @@
 
     <div class="card">
         <div id="enc-log" class="card-header">
-            <h3 id="h3-log" class="text-center">Añadir Departamento</h3>
+            <h3 id="h3-log" class="text-center">{{'gestion-departamentos.add' | translate}}</h3>
         </div>
         <div class="card-body">
             <form [formGroup]="departamentoForm">
@@ -12,12 +12,20 @@
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-departamentos.nombre' | translate}}</label>
                     <input class="form-control" type="text" formControlName="nombre" name="nombre" >
                 </div>
-
+                <div *ngIf="departamentoForm.get('nombre')?.errors && departamentoForm.get('nombre')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="departamentoForm.get('nombre')?.hasError('required')">{{'gestion-departamentos.add-nombre-req' | translate}}</small>
+                    <small class="col-12" *ngIf="departamentoForm.get('nombre')?.hasError('minlength')">{{'gestion-departamentos.add-nombre-min' | translate}}</small>
+                    <small class="col-12" *ngIf="departamentoForm.get('nombre')?.hasError('maxlength')">{{'gestion-departamentos.add-nombre-max' | translate}}</small>
+                    <small class="col-12" *ngIf="departamentoForm.get('nombre')?.hasError('pattern')">{{'gestion-departamentos.add-nombre-pat' | translate}}</small>
+                  </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-departamentos.codigo' | translate}}</label>
                     <input class="form-control" type="text" formControlName="codigo" name="codigo" >
                 </div>
-
+                <div *ngIf="departamentoForm.get('codigo')?.errors && departamentoForm.get('codigo')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="departamentoForm.get('codigo')?.hasError('required')">{{'gestion-departamentos.add-codigo-req' | translate}}</small>
+                    <small class="col-12" *ngIf="departamentoForm.get('codigo')?.hasError('pattern')">{{'gestion-departamentos.add-codigo-pat' | translate}}</small>  
+                  </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-departamentos.centro' | translate}}</label>
                     <div class="col-10">
@@ -26,14 +34,24 @@
                             <option *ngFor="let centro of centroSelect;" value="{{centro.id}}">{{centro.nombre}}  ({{centro.ciudad}})</option>
                         </select>
                       </div>
+                      <div *ngIf="departamentoForm.get('centro')?.errors && departamentoForm.get('centro')?.dirty" class="form-text text-danger">
+                        <small class="col-12" *ngIf="departamentoForm.get('centro')?.hasError('required')">{{'gestion-departamentos.add-centro-req' | translate}}</small>
+                      </div>
                 </div>
                           
              
             
                 <div class="float-end">
                     <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-departamentos/showall']">{{'gestion-departamentos.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir Departamento  <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> {{'gestion-departamentos.add' | translate}}  <i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
+
+                <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{getflashError()}}
+                    <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
             </form>
         </div>
   

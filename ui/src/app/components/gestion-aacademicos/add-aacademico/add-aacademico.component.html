@@ -1,12 +1,12 @@
 <div id="login">
     <div class="card " >
         <div id="enc-log" class="card-header">
-            <h3 id="h3-log" class="text-center">Añadir Año Academico</h3>
+            <h3 id="h3-log" class="text-center">{{'gestion-aacademico.add-anho' | translate}}</h3>
         </div>
         <div class="card-body">
             <form [formGroup]="anhoForm">
                 <div class="form-group row">
-                    <label class="col-12 col-form-label form-control-label" style="color: white;">{{'gestion-anho-academico.anho' | translate}}</label>
+                    <label class="col-12 col-form-label form-control-label" style="color: white;">{{'gestion-aacademico.anho' | translate}}</label>
                     <div class="col-12">
                       <div class="input-group mb-2">
                         <label class="col-2 col-form-label form-control-label" >Año de comienzo</label>
@@ -15,18 +15,24 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">/</div>
                         </div>
-                        <input class="form-control" type="text" formControlName="anho2" name="anho2" maxlength="10" readonly placeholder="{{'gestion-anho-academico.anho-fin' | translate}}">
+                        <input class="form-control" type="text" formControlName="anho2" name="anho2" maxlength="10" readonly placeholder="{{'gestion-aacademico.anho-fin' | translate}}">
                       </div>
                     </div>
                     <div *ngIf="anhoForm.get('anho1')?.errors && anhoForm.get('anho1')?.dirty" class="form-text text-danger">
-                      <small class="col-12" *ngIf="anhoForm.get('anho1')?.hasError('required')">{{'gestion-anho-academico.add-req' | translate}}</small>
+                      <small class="col-12" *ngIf="anhoForm.get('anho1')?.hasError('required')">{{'gestion-aacademico.add-req' | translate}}</small>
                     </div>
+                  </div>
+                  <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{getflashError()}}
+                    <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
               
               
                   <div class="float-end">
                     <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-aacademico/showall']">{{'gestion-acciones.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()" class="btn btn-success ml-2" type="button"> Añadir accion  <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button  (click)="onSubmit()" class="btn btn-success ml-2" type="button"> {{'gestion-aacademico.add-anho' | translate}}  <i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
               
             </form>

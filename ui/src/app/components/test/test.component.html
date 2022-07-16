@@ -1,0 +1,64 @@
+<div class="container mt-5">
+    <h3 class="text-center">{{'test.test-aplicacion' | translate}}</h3>
+  
+    <div class="row">
+  
+      <button class="btn btn-warning m-2" type="button" (click)="doTests()"><i
+        class="fas fa-vial"></i>{{'test.ejecutar-tests' | translate}}</button>
+      <select class="form-control m-2" [(ngModel)]="type">
+        <option value="ALL" selected>{{'test.all' | translate}}</option>
+        <option value="LOGIN">{{'test.test-login' | translate}}</option>
+        <option value="ACCIONES">{{'test.test-acciones' | translate}}</option>
+        <option value="DEPARTAMENTOS">{{'test.test-departamentos' | translate}}</option>
+        <option value="FUNCIONALIDADES">{{'test.test-funcionalidades' | translate}}</option>
+        <option value="ROLES">{{'test.test-roles' | translate}}</option>
+        <option value="USUARIOS">{{'test.test-usuarios' | translate}}</option>
+        <option value="PERMISOS">{{'test.test-permisos' | translate}}</option>
+        <option value="ROLESUSUARIO">{{'test.test-roles-usuario' | translate}}</option>
+        <option value="CENTROS">{{'test.test-centros' | translate}}</option>
+        <option value="UNIVERSIDADES">{{'test.test-universidades' | translate}}</option>
+        <option value="EDIFICIOS">{{'test.test-edificios' | translate}}</option>
+        <option value="ESPACIOS">{{'test.test-espacios' | translate}}</option>
+        <option value="ANHO">{{'test.test-anho-academico' | translate}}</option>
+        <option value="PROFESORES">{{'test.test-profesores' | translate}}</option>
+        <option value="TITULACIONES">{{'test.test-titulaciones' | translate}}</option>
+        <option value="ASIGNATURAS">{{'test.test-asignaturas' | translate}}</option>
+        <option value="GRUPOS">{{'test.test-grupos' | translate}}</option>
+        <option value="HORARIOS">{{'test.test-horarios' | translate}}</option>
+        <option value="TUTORIAS">{{'test.test-tutorias' | translate}}</option>
+      </select>
+    </div>
+    <div class="row justify-content-between m-3">
+      <div class="col-4 font-weight-bold text-center">{{'test.num-test' | translate}}: {{this.tests.length}}</div>
+      <div class="col-4 font-weight-bold text-center">{{'test.num-test-true' | translate}}: {{getAciertos()}}/{{this.tests.length}}</div>
+      <div class="col-4 font-weight-bold text-center">{{'test.num-test-false' | translate}}: {{getFallos()}}/{{this.tests.length}}</div>
+    </div>
+  
+    <div class="row">
+      <table class="table navbar-dark  table-striped rounded">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">{{'test.accion' | translate}} <i class="fas fa-sort"></i></th>
+          <th scope="col">{{'test.descripción-test' | translate}}</th>
+          <th scope="col" >{{'test.resultado' | translate}} <i class="fas fa-sort"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-white" *ngIf="tests.length == 0">
+          <td colspan="4">{{'test.ningun-test-ejecutado' | translate}}</td>
+        </tr>
+        <tr *ngFor="let test of tests; let indice=index">
+          <th scope="row">{{indice + 1}}</th>
+          <td>{{test.accion}}</td>
+          <td>{{test.descripcion}}</td>
+          <td *ngIf="test.flag" class="text-center"><i class="fas fa-check"></i></td>
+          <td *ngIf="!test.flag" class="text-center"><i class="fas fa-times"></i></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+  
+  

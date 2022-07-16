@@ -39,11 +39,11 @@ export class MostrarAccionesComponent implements OnInit {
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.removeError(this.ts.instant("gestion-acciones.eliminar-error-foreign"))
               break;
             default:
-              console.log("error")
+              this.removeError(this.ts.instant("gestion-acciones.eliminar-error"))
               break;
           }
         }
@@ -56,5 +56,9 @@ export class MostrarAccionesComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
-
+  private removeError(msg: string) {
+    this.router.navigate(['/panel-principal/gestion-acciones/showall'], {queryParams: {flasherror: msg}});
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    
+  }
 }

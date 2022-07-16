@@ -2,7 +2,7 @@
 
     <div class="card">
         <div id="enc-log" class="card-header">
-            <h3 id="h3-log" class="text-center">Añadir Centro</h3>
+            <h3 id="h3-log" class="text-center">{{'gestion-centros.add' | translate}}</h3>
         </div>
         <div class="card-body">
             <form [formGroup]="centroForm">
@@ -13,10 +13,24 @@
                     <input class="form-control" type="text" formControlName="nombre" name="nombre" >
                 </div>
 
+                <div *ngIf="centroForm.get('nombre')?.errors && centroForm.get('nombre')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="centroForm.get('nombre')?.hasError('required')">{{'gestion-universidades.add-nombre-req' | translate}}</small>
+                    <small class="col-12" *ngIf="centroForm.get('nombre')?.hasError('minlength')">{{'gestion-universidades.add-nombre-min' | translate}}</small>
+                    <small class="col-12" *ngIf="centroForm.get('nombre')?.hasError('maxlength')">{{'gestion-universidades.add-nombre-max' | translate}}</small>
+                    <small class="col-12" *ngIf="centroForm.get('nombre')?.hasError('pattern')">{{'gestion-universidades.add-nombre-pat' | translate}}</small>
+                  </div>
+
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-centros.ciudad' | translate}}</label>
                     <input class="form-control" type="text" formControlName="ciudad" name="ciudad" >
                 </div>
+
+                <div *ngIf="centroForm.get('ciudad')?.errors && centroForm.get('ciudad')?.dirty" class="form-text text-danger">
+                    <small class="col-12" *ngIf="centroForm.get('ciudad')?.hasError('required')">{{'gestion-universidades.add-ciudad-req' | translate}}</small>
+                    <small class="col-12" *ngIf="centroForm.get('ciudad')?.hasError('minlength')">{{'gestion-universidades.add-ciudad-min' | translate}}</small>
+                    <small class="col-12" *ngIf="centroForm.get('ciudad')?.hasError('maxlength')">{{'gestion-universidades.add-ciudad-max' | translate}}</small>
+                    <small class="col-12" *ngIf="centroForm.get('ciudad')?.hasError('pattern')">{{'gestion-universidades.add-ciudad-pat' | translate}}</small>
+                  </div>
 
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-centros.responsable' | translate}}</label>
@@ -25,6 +39,9 @@
                           <option value="" selected="true" disabled="disabled">{{'gestion-centros.select-responsable' | translate}}</option>
                             <option *ngFor="let responsable of responsableSelect;" value="{{responsable.dni}}">{{responsable.nombre}} {{responsable.apellidos}} ({{responsable.dni}})</option>
                         </select>
+                      </div>
+                      <div *ngIf="centroForm.get('responsable')?.errors && centroForm.get('responsable')?.dirty" class="form-text text-danger">
+                        <small class="col-12" *ngIf="centroForm.get('responsable')?.hasError('required')">{{'gestion-universidades.add-responsable-req' | translate}}</small>
                       </div>
                 </div>
 
@@ -38,14 +55,24 @@
                             ({{universidad.ciudad}})
                         </option></select>
                       </div>
+                      <div *ngIf="centroForm.get('universidad')?.errors && centroForm.get('universidad')?.dirty" class="form-text text-danger">
+                        <small class="col-12" *ngIf="centroForm.get('universidad')?.hasError('required')">{{'gestion-universidades.add-responsable-req' | translate}}</small>
+                      </div>
                 </div>
                
              
             
                 <div class="float-end">
                     <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-centros/showall']">{{'gestion-edificios.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
-                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> Añadir edificio  <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button  (click)="onSubmit()"   class="btn btn-success ml-2" type="button"> {{'gestion-centros.add' | translate}} <i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
+
+                <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{getflashError()}}
+                    <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
             </form>
         </div>
   

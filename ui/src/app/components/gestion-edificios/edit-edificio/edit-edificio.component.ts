@@ -89,4 +89,11 @@ export class EditEdificioComponent implements OnInit {
         );
     }
   }
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+    this.error = undefined;
+  }
 }

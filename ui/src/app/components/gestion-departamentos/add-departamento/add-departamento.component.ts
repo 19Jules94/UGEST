@@ -79,5 +79,11 @@ export class AddDepartamentoComponent implements OnInit {
       }
     )   
   }
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+    this.error = undefined;
+  }
 }

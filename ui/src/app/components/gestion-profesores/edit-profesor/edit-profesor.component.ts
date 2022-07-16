@@ -76,4 +76,11 @@ export class EditProfesorComponent implements OnInit {
       )
 
   }
+  getflashError() {
+    return this.error;
+  }
+  
+  onCloseFlash() {
+    this.error = undefined;
+  }
 }
