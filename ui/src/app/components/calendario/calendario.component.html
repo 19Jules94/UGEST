@@ -1,0 +1,115 @@
+<div class="container mt-5">
+  <h3 class="text-center">{{'calendario.calendario' | translate}}</h3>
+
+  <div class="row text-center mt-4">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          {{'calendario.anterior' | translate}}
+
+        </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          {{'calendario.hoy' | translate}}
+
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          {{'calendario.siguiente' | translate}}
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3 class="text-capitalize">{{ viewDate | calendarDate:(view + 'ViewTitle'):('lan' | translate) }}</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        >
+          {{'calendario.mes' | translate}}
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        >
+          {{'calendario.semana' | translate}}
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day"
+        >
+          {{'calendario.dia' | translate}}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      [locale]="'lan' | translate"
+      [weekStartsOn]="1"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [events]="events"
+      [locale]="'lan' | translate"
+      [refresh]="refresh"
+      [weekStartsOn]="1"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="events"
+      [locale]="'lan' | translate"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-day-view>
+  </div>
+
+</div>
+
+<table class="table text-dark mt-3">
+  <tr>
+    <th scope="col" class="text-dark text-center"><i class="fas fa-circle" style="color: #e3bc08"></i>{{'calendario.tut-pend' | translate}}</th>
+    <th scope="col" class="text-dark text-center"><i class="fas fa-circle" style="color: #1e90ff"></i>{{'calendario.cla-pend' | translate}}</th>
+    <th scope="col" class="text-dark text-center"><i class="fas fa-circle" style="color: #0B6730"></i>{{'calendario.tut-cla-si' | translate}}</th>
+    <th scope="col" class="text-dark text-center"><i class="fas fa-circle" style="color: #ad2121"></i>{{'calendario.tut-cla-no' | translate}}</th>
+  </tr>
+</table>
+

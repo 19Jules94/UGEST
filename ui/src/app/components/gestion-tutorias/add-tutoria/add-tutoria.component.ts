@@ -20,10 +20,14 @@ export class AddTutoriaComponent implements OnInit {
   public espaciosSelect?: Array<Espacio>;
   public defaultDate?: Date;
   public error?: string;
+
+
   isShown: boolean = false ; // hidden by default
   d_inicio:number=0
   d_fin:number=0
   semana_siguiente:number=0;
+
+
   constructor(private readonly route: ActivatedRoute,
               private readonly router: Router,
               private readonly gestionTutoriasService: GestionTutoriasService,
@@ -86,9 +90,19 @@ export class AddTutoriaComponent implements OnInit {
     const hora_inicio = this.tutoriaForm.get("hora_inicio")?.value + ':00';
     const hora_fin = this.tutoriaForm.get("hora_fin")?.value + ':00';
     var fecha_fin = this.tutoriaForm.get("fecha_fin")?.value;
-    
-    if(this.ocultar()==false){
 
+
+    this.d_inicio=parseInt(fecha.split("-")[2])
+    this.d_fin=parseInt(fecha_fin.split("-")[2])
+
+
+
+ 
+   var numero_dias=this.d_fin-this.d_inicio;
+    console.log(numero_dias)
+
+    if(numero_dias==0){
+      console.log("entra a false")
     this.gestionTutoriasService.addTutoria(anho, profesor, espacio, asistencia, fecha, hora_inicio, hora_fin)
       .subscribe(
         value => {
@@ -116,20 +130,15 @@ export class AddTutoriaComponent implements OnInit {
         }
       )
       }
-      if(this.ocultar()==true){
-        //console.log(fecha.split("-")[2])
-       // console.log(fecha_fin.split("-")[2])
-
-        this.d_inicio=parseInt(fecha.split("-")[2])
-        this.d_fin=parseInt(fecha_fin.split("-")[2])
-        //console.log(this.d_fin-this.d_inicio)
-
-       
+      if(numero_dias>0){
+        console.log("entra a true")
+        
+        
        while(this.d_inicio<=this.d_fin){
         this.gestionTutoriasService.addTutoria(anho, profesor, espacio, asistencia, fecha, hora_inicio, hora_fin)
       .subscribe(
         value => {
-          this.router.navigate(['/panel-principal/gestion-tutorias/showall'], {queryParams: {flashok: this.ts.instant("gestion-tutorias.add-ok")}});
+          //this.router.navigate(['/panel-principal/gestion-tutorias/showall'], {queryParams: {flashok: this.ts.instant("gestion-tutorias.add-ok")}});
         },
         error => {
 
@@ -152,29 +161,41 @@ export class AddTutoriaComponent implements OnInit {
           }
         }
       )
-      this.d_inicio=this.d_inicio+7;
-          
+      if(this.comprobarFindeSemana(fecha=new Date(fecha),fecha_fin=new Date(fecha_fin))==true && numero_dias<=5){
+      this.d_inicio=this.d_inicio+1;
+      fecha=this.formatDate(this.sumarDias( fecha=new Date(fecha),1));
+      }else{
+        this.d_inicio=this.d_inicio+numero_dias;
+        fecha=this.formatDate(this.sumarDias( fecha=new Date(fecha),numero_dias));
+      }
          
           
-      fecha=this.formatDate(this.sumarDias( fecha=new Date(fecha),7));
+    
 
     }
-    this.router.navigate(['/panel-principal/gestion-horarios/showall']);
+    this.router.navigate(['/panel-principal/gestion-tutorias/showall']);
   }
   }
-  public ocultar(){
 
-    this.isShown = ! this.isShown;
-    return true;
-    }
     public sumarDias(fecha:Date, dias:number){
       fecha.setDate(fecha.getDate() + dias);
       return fecha;
     }
-    
+    public comprobarFindeSemana(finicio:Date,ffinal:Date){
+      if(finicio.getDay() == 0 || finicio.getDay()==6 ||ffinal.getDay() ==0 || ffinal.getDay()==6){
+        console.log("finicio",finicio.getDay());
+        console.log("ffinal",ffinal.getDay());
+        return false;
+      }else{
+        console.log("finicio",finicio.getDay());
+                console.log("ffinal",ffinal.getDay());
+        return true;
+      }
+    }
     public formatDate(fecha:Date){
       var year =fecha.getFullYear().toString();
-      var month =fecha.getMonth().toString();
+      var month =(fecha.getMonth()+1).toString();
+     
       var day = fecha.getDate().toString();
     
       var fecha_final=year+'-'+0+month+'-'+day;

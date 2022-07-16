@@ -30,7 +30,21 @@ export class GestionTutoriasService {
         )
       );
   }
+  public calendar(): Observable<Tutorias> {
+    return this.http.post<MostrarTutoriasWrapper>(`${environment.api}/?controller=tutorias&action=calendar`, null)
+      .pipe(
+        map(resultado => {
 
+            switch (resultado.CODE) {
+              case '200':
+                return resultado.RESOURCES;
+              default:
+                throw new Error(resultado.CODE);
+            }
+          }
+        )
+      );
+  }
 
   public addTutoria(anho: string, profesor: string, espacio: string, asistencia: string, fecha: string, hora_inicio: string, hora_fin: string): Observable<string> {
     var formData: any = new FormData();

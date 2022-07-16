@@ -158,4 +158,6 @@ class Profesores_model extends Base_model
 
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
+
+    
 }

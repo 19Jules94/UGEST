@@ -60,6 +60,8 @@ import { EditHorarioComponent } from './components/gestion-horarios/edit-horario
 import { MostrarTutoriasComponent } from './components/gestion-tutorias/mostrar-tutorias/mostrar-tutorias.component';
 import { AddTutoriaComponent } from './components/gestion-tutorias/add-tutoria/add-tutoria.component';
 import { EditTutoriaComponent } from './components/gestion-tutorias/edit-tutoria/edit-tutoria.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
+
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
   {path: 'panel-principal', component: PanelPrincipalComponent, canActivate: [AuthenticatedGuard]},  
@@ -151,6 +153,10 @@ const routes: Routes = [
   {path: 'panel-principal/gestion-tutorias/showall', component: MostrarTutoriasComponent, canActivate: []},
   {path: 'panel-principal/gestion-tutorias/edit/:id', component: EditTutoriaComponent, canActivate: []},
   {path: 'panel-principal/gestion-tutorias', redirectTo: '/panel-principal/gestion-tutorias/showall', pathMatch: 'full'},
+
+  {path: 'panel-principal/calendario', component: CalendarioComponent, canActivate: []},
+
+  
 
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}

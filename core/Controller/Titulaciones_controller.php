@@ -17,7 +17,7 @@ class Titulaciones_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add': 
@@ -39,7 +39,7 @@ class Titulaciones_controller extends Basic_Controller
                     $this->canUseAction("TITULACION", "EDIT") ? $this->editTitulacion() : $this->forbidden("TITULACION", "EDIT");
                     break;
                 default: 
-                    $this->notFound("No se puede realizar esa acción");
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
     }
@@ -47,15 +47,15 @@ class Titulaciones_controller extends Basic_Controller
     function addTitulacion()
     {
         if (!isset($_POST['anho'])) {
-            $this->notFound("Es necesario enviar el id del año académico para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el id del año académico para añadir una titulación");
         }  elseif (!isset($_POST['centro'])) {
-            $this->notFound("Es necesario enviar id del centro para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar id del centro para añadir una titulación");
         }  elseif (!isset($_POST['codigo'])) {
-            $this->notFound("Es necesario enviar el codigo para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el codigo para añadir una titulación");
         }  elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir una titulación");
         } elseif (!isset($_POST['responsable'])) {
-            $this->notFound("Es necesario enviar el id del responsable para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el id del responsable para añadir una titulación");
         } else {
             $anho = $_POST['anho'];
             $centro = $_POST['centro'];
@@ -67,19 +67,19 @@ class Titulaciones_controller extends Basic_Controller
                 $Titulaciones_Service = new Titulaciones_service();
                 $resultado = $Titulaciones_Service->addTitulacion($anho, $centro, $codigo, $nombre, $responsable);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "La titulación no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "La titulación no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Titulación duplicada");
+                        $this->ErrorDuplicado("Titulación duplicada");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos.");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos.");
                         break;
                 }
             }
@@ -90,28 +90,28 @@ class Titulaciones_controller extends Basic_Controller
     {
         $Titulaciones_Service = new Titulaciones_service();
         $resultado = $Titulaciones_Service->mostrarTodas();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function deleteTitulacion()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar una titulación.");
+            $this->NoEncontrado("Es necesario enviar el id para borrar una titulación.");
         } else {
             $id = $_POST['id'];
             try {
                 $Titulaciones_Service = new Titulaciones_service();
                 $resultado = $Titulaciones_Service->deleteTitulacion($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Titulación eliminada"));
+                    $this->TodoOK(array("resultado" => "Titulación eliminada"));
                 } else {
-                    $this->notFound(array("resultado" => "La titulación no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "La titulación no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
             catch (ResourceNotFound $rnf){
-                $this->notFound("No se ha podido encontrar el id introducido.");
+                $this->ErrorRestriccion("No se ha podido encontrar el id introducido.");
             }
         }
     }
@@ -119,17 +119,17 @@ class Titulaciones_controller extends Basic_Controller
     function editTitulacion()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id del departamento para editarlo");
+            $this->NoEncontrado("Es necesario enviar el id del departamento para editarlo");
         } if (!isset($_POST['anho'])) {
-            $this->notFound("Es necesario enviar el id del año académico para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el id del año académico para añadir una titulación");
         }  elseif (!isset($_POST['centro'])) {
-            $this->notFound("Es necesario enviar id del centro para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar id del centro para añadir una titulación");
         }  elseif (!isset($_POST['codigo'])) {
-            $this->notFound("Es necesario enviar el codigo para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el codigo para añadir una titulación");
         }  elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir una titulación");
         } elseif (!isset($_POST['responsable'])) {
-            $this->notFound("Es necesario enviar el id del responsable para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el id del responsable para añadir una titulación");
         } else {
             $id = $_POST['id'];
             $anho = $_POST['anho'];
@@ -142,24 +142,24 @@ class Titulaciones_controller extends Basic_Controller
                 $Titulaciones_Service = new Titulaciones_service();
                 $resultado = $Titulaciones_Service->editTitulacion($id, $anho, $centro, $codigo, $nombre, $responsable);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "La titulación no se pudo editar"));
+                    $this->TodoOK(array("resultado" => "La titulación no se pudo editar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Titulación duplicada");
+                        $this->ErrorDuplicado("Titulación duplicada");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos");
                         break;
                 }
             }
             catch (ResourceNotFound $rnf){
-                $this->notFound("No se ha podido encontrar el id introducido.");
+                $this->ErrorRestriccion("No se ha podido encontrar el id introducido.");
             }
         }
     }
@@ -167,21 +167,21 @@ class Titulaciones_controller extends Basic_Controller
     function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar la titulación");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar la titulación");
         } else {
             $id = $_POST['id'];
             try {
                 $Titulaciones_Service = new Titulaciones_service();
                 $resultado = $Titulaciones_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "La titulación no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "La titulación no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -191,6 +191,6 @@ class Titulaciones_controller extends Basic_Controller
 
         $Titulaciones_Service = new Titulaciones_service();
         $resultado = $Titulaciones_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 }

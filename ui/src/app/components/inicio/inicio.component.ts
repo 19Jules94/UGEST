@@ -45,13 +45,15 @@ export class InicioComponent implements OnInit {
     const dniValue = this.userForm.get("dni")?.value;
     const passwordValue = this.userForm.get("password")?.value;
 
-
+    console.log(dniValue);
+    console.log(passwordValue)
     this.authenticationService.login(dniValue, passwordValue)
     .subscribe(
       value => {
         this.router.navigate(['/panel-principal']);
       },
       error => {
+        console.log(error)
         this.error = this.ts.instant('login.error');
       }
     )

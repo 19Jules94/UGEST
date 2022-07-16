@@ -74,6 +74,7 @@ if (!isset($_REQUEST['controller'])) {
         case 'tutorias':
             new Tutorias_controller();
             break;
+            
         default:
             http_response_code(400);
     }

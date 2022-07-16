@@ -17,7 +17,7 @@ class Departamentos_Controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add': 
@@ -39,7 +39,7 @@ class Departamentos_Controller extends Basic_Controller
                     $this->canUseAction("DEPARTAMENTO", "EDIT") ? $this->editDepartamento() : $this->forbidden("DEPARTAMENTO", "EDIT");
                     break;
                 default: 
-                    $this->notFound("No se puede realizar esa acción");
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
     }
@@ -47,11 +47,11 @@ class Departamentos_Controller extends Basic_Controller
     function addDepartamento()
     {
         if (!isset($_POST['codigo'])) {
-            $this->notFound("Es necesario enviar el codigo para añadir un departamento");
+            $this->NoEncontrado("Es necesario enviar el codigo para añadir un departamento");
         } elseif (!isset($_POST['centro'])) {
-            $this->notFound("Es necesario enviar id del centro para añadir un departamento");
+            $this->NoEncontrado("Es necesario enviar id del centro para añadir un departamento");
         } elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir un departamento");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir un departamento");
         }  else {
             $codigo = $_POST['codigo'];
             $centro = $_POST['centro'];
@@ -61,19 +61,19 @@ class Departamentos_Controller extends Basic_Controller
                 $Departamentos_Service = new Departamentos_service();
                 $resultado = $Departamentos_Service->addDepartamento($codigo, $centro, $nombre);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "El departamento no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "El departamento no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Departamento duplicado");
+                        $this->ErrorDuplicado("Departamento duplicado");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos.");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos.");
                         break;
                 }
             }
@@ -84,28 +84,28 @@ class Departamentos_Controller extends Basic_Controller
     {
         $Departamentos_Service = new Departamentos_service();
         $resultado = $Departamentos_Service->mostrarTodos();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function deleteDepartamento()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar un departamento");
+            $this->NoEncontrado("Es necesario enviar el id para borrar un departamento");
         } else {
             $id = $_POST['id'];
             try {
                 $Departamentos_Service = new Departamentos_service();
                 $resultado = $Departamentos_Service->deleteDepartamento($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Departamento eliminado"));
+                    $this->TodoOK(array("resultado" => "Departamento eliminado"));
                 } else {
-                    $this->notFound(array("resultado" => "El departamento no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "El departamento no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
             catch (ResourceNotFound $rnf){
-                $this->notFound("No se ha podido encontrar el id introducido.");
+                $this->ErrorNoExistente("No se ha podido encontrar el id introducido.");
             }
         }
     }
@@ -113,13 +113,13 @@ class Departamentos_Controller extends Basic_Controller
     function editDepartamento()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id del departamento para editarlo");
+            $this->NoEncontrado("Es necesario enviar el id del departamento para editarlo");
         } elseif (!isset($_POST['codigo'])) {
-        $this->notFound("Es necesario enviar el codigo para añadir un departamento");
+        $this->NoEncontrado("Es necesario enviar el codigo para añadir un departamento");
         } elseif (!isset($_POST['centro'])) {
-            $this->notFound("Es necesario enviar id del centro para añadir un departamento");
+            $this->NoEncontrado("Es necesario enviar id del centro para añadir un departamento");
         } elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir un departamento");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir un departamento");
         }  else {
             $id = $_POST['id'];
             $codigo = $_POST['codigo'];
@@ -130,24 +130,24 @@ class Departamentos_Controller extends Basic_Controller
                     $Departamentos_Service = new Departamentos_service();
                     $resultado = $Departamentos_Service->editDepartamento($id, $codigo, $centro, $nombre);
                     if ($resultado) {
-                        $this->echoOk(array("resultado" => strval($resultado)));
+                        $this->TodoOK(array("resultado" => strval($resultado)));
                     } else {
-                        $this->echoOk(array("resultado" => "El departamento no se pudo editar"));
+                        $this->TodoOK(array("resultado" => "El departamento no se pudo editar"));
                     }
                 } catch (ValidationException $ex) {
-                    $this->notFound($ex->getERROR());
+                    $this->NoEncontrado($ex->getERROR());
                 } catch (DBException $ex) {
                     switch ($ex->getERROR()) {
                         case "4002":
-                            $this->notFound("Centro duplicado");
+                            $this->ErrorDuplicado("Centro duplicado");
                             break;
                         case "4004":
-                            $this->notFound("Alguno de los elementos introducidos no existe en la base de datos");
+                            $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos");
                             break;
                     }
                 }
                 catch (ResourceNotFound $rnf){
-                    $this->notFound("No se ha podido encontrar el id introducido.");
+                    $this->ErrorNoExistente("No se ha podido encontrar el id introducido.");
                 }
         }
     }
@@ -155,21 +155,21 @@ class Departamentos_Controller extends Basic_Controller
     function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar el departamento");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar el departamento");
         } else {
             $id = $_POST['id'];
             try {
                 $Departamentos_Service = new Departamentos_service();
                 $resultado = $Departamentos_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "El departamento no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "El departamento no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -179,6 +179,6 @@ class Departamentos_Controller extends Basic_Controller
 
         $Departamentos_Service = new Departamentos_service();
         $resultado = $Departamentos_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 }

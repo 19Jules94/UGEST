@@ -17,23 +17,23 @@ class Rol_Usuario_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
-                case 'add'://añadir
+                case 'add':
                     $this->canUseAction("ROL_USUARIO", "ADD") ? $this->addUsuarioRol() : $this->forbidden("ROL_USUARIO", "ADD");
                     break;
-                case 'info_add'://Get info to add
+                case 'info_add':
                     $this->canUseAction("ROL_USUARIO", "ADD") ? $this->info_add() : $this->forbidden("ROL_USUARIO", "ADD");
                     break;
-                case 'showall'://ver todas
+                case 'showall':
                     $this->canUseAction("ROL_USUARIO", "SHOWALL") ? $this->mostrarTodos() : $this->forbidden("ROL_USUARIO", "SHOWALL");
                     break;
-                case 'delete'://borrar
+                case 'delete':
                     $this->canUseAction("ROL_USUARIO", "DELETE") ? $this->deleteUsuario_rol() : $this->forbidden("ROL_USUARIO", "DELETE");
                     break;
-                default://caso default
-                    $this->notFound("No se puede realizar esa acción");
+                default: 
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
 
@@ -42,7 +42,7 @@ class Rol_Usuario_controller extends Basic_Controller
     private function addUsuarioRol()
     {
         if (!isset($_POST['usuario']) || !isset($_POST['rol'])) {
-            $this->notFound("Es necesario enviar el usuario y el rol para asignar un rol a un usuario");
+            $this->NoEncontrado("Es necesario enviar el usuario y el rol para asignar un rol a un usuario");
         }else{
             $usuario = $_POST['usuario'];
             $rol = $_POST['rol'];
@@ -51,22 +51,22 @@ class Rol_Usuario_controller extends Basic_Controller
                 $Rol_Usuario_Service = new Rol_Usuario_service();
                 $resultado = $Rol_Usuario_Service->addUsuarioRol($usuario,$rol);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => $resultado));
+                    $this->TodoOK(array("resultado" => $resultado));
                 } else {
-                    $this->echoOk(array("resultado" => "El rol no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "El rol no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
             catch (DBException $ex) {
                 switch ($ex->getERROR()){
                     case "4002":
-                        $this->notFound("Ese rol ya esta asignado a ese usuario");
+                        $this->ErrorDuplicado("Ese rol ya esta asignado a ese usuario");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los campos no existe en la base de datos");
+                        $this->ErrorNoExistente("Alguno de los campos no existe en la base de datos");
                         break;
                 }
             }
@@ -77,20 +77,20 @@ class Rol_Usuario_controller extends Basic_Controller
     {
         $Rol_Usuario_Service = new Rol_Usuario_service();
         $resultado = $Rol_Usuario_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     private function mostrarTodos()
     {
         $Rol_Usuario_Service = new Rol_Usuario_service();
         $resultado = $Rol_Usuario_Service->mostrarTodos();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     private function deleteUsuario_rol()
     {
         if (!isset($_POST['usuario']) || !isset($_POST['rol'])) {
-            $this->notFound("Es necesario enviar el usuario y el rol para asignar un rol a un usuario");
+            $this->NoEncontrado("Es necesario enviar el usuario y el rol para asignar un rol a un usuario");
         }else{
             $usuario = $_POST['usuario'];
             $rol = $_POST['rol'];
@@ -99,14 +99,14 @@ class Rol_Usuario_controller extends Basic_Controller
                 $Rol_Usuario_Service = new Rol_Usuario_service();
                 $resultado = $Rol_Usuario_Service->deleteUsuarioRol($usuario,$rol);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Se ha eliminado el rol '" . $rol . "' al usuario " . $usuario));
+                    $this->TodoOK(array("resultado" => "Se ha eliminado el rol '" . $rol . "' al usuario " . $usuario));
                 } else {
-                    $this->echoOk(array("resultado" => "No se ha podido eliminar el rol"));
+                    $this->TodoOK(array("resultado" => "No se ha podido eliminar el rol"));
                 }
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
         }
     }

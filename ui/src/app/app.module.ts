@@ -18,7 +18,7 @@ import { JwtAuthenticationInterceptor } from './lifecycle/jwt-authentication.int
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipe } from './utils/FilterPipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
@@ -73,6 +73,8 @@ import { MostrarHorariosComponent } from './components/gestion-horarios/mostrar-
 import { AddTutoriaComponent } from './components/gestion-tutorias/add-tutoria/add-tutoria.component';
 import { EditTutoriaComponent } from './components/gestion-tutorias/edit-tutoria/edit-tutoria.component';
 import { MostrarTutoriasComponent } from './components/gestion-tutorias/mostrar-tutorias/mostrar-tutorias.component';
+import { CalendarioComponent,NgbdModalMarcarAsistencia } from './components/calendario/calendario.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -138,6 +140,8 @@ if (localStorage.getItem('selectedLanguage') == null) {
     AddTutoriaComponent,
     EditTutoriaComponent,
     MostrarTutoriasComponent,
+    CalendarioComponent,
+    NgbdModalMarcarAsistencia
   ],
   imports: [
     BrowserModule,
@@ -146,6 +150,7 @@ if (localStorage.getItem('selectedLanguage') == null) {
     ReactiveFormsModule,
     FormsModule,
     Ng2SearchPipeModule,
+    NgbModalModule,
     HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({

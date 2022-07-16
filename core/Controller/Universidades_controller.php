@@ -16,7 +16,7 @@ class Universidades_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar un acción");
+            $this->NoEncontrado("Es necesario indicar un acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add': 
@@ -38,7 +38,7 @@ class Universidades_controller extends Basic_Controller
                     $this->canUseAction("UNIVERSIDAD", "EDIT") ? $this->editUniversidad() : $this->forbidden("UNIVERSIDAD", "EDIT");
                     break;
                 default: 
-                    $this->notFound("No se puede realizar esa acción");
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
     }
@@ -46,11 +46,11 @@ class Universidades_controller extends Basic_Controller
     function addUniversidad()
     {
         if (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir una universidad");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir una universidad");
         } elseif (!isset($_POST['ciudad'])) {
-            $this->notFound("Es necesario enviar el nombre de la ciudad para añadir una universidad");
+            $this->NoEncontrado("Es necesario enviar el nombre de la ciudad para añadir una universidad");
         } elseif (!isset($_POST['responsable'])) {
-            $this->notFound("Es necesario enviar el nombre del responsable para añadir una universidad");
+            $this->NoEncontrado("Es necesario enviar el nombre del responsable para añadir una universidad");
         } else {
             $nombre = $_POST['nombre'];
             $ciudad = $_POST['ciudad'];
@@ -60,19 +60,19 @@ class Universidades_controller extends Basic_Controller
                 $Universidades_Service = new Universidades_service();
                 $resultado = $Universidades_Service->addUniversidad($nombre, $ciudad, $responsable);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "La universidad no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "La universidad no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Universidad duplicada");
+                        $this->ErrorDuplicado("Universidad duplicada");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos");
                         break;
                 }
             }
@@ -83,25 +83,25 @@ class Universidades_controller extends Basic_Controller
     {
         $Universidades_Service = new Universidades_service();
         $resultado = $Universidades_Service->mostrarTodas();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function deleteUniversidad()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar");
+            $this->NoEncontrado("Es necesario enviar el id para borrar");
         } else {
             $id = $_POST['id'];
             try {
                 $Universidades_Service = new Universidades_service();
                 $resultado = $Universidades_Service->deleteUniversidad($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Universidad eliminada"));
+                    $this->TodoOK(array("resultado" => "Universidad eliminada"));
                 } else {
-                    $this->notFound(array("resultado" => "La universidad no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "La universidad no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
         }
     }
@@ -109,13 +109,13 @@ class Universidades_controller extends Basic_Controller
     function editUniversidad()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id de la universidad para editarla");
+            $this->NoEncontrado("Es necesario enviar el id de la universidad para editarla");
         } elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre de la universidad para editarla");
+            $this->NoEncontrado("Es necesario enviar el nombre de la universidad para editarla");
         } elseif (!isset($_POST['ciudad'])) {
-            $this->notFound("Es necesario enviar el nombre de la ciudad para añadir editarla");
+            $this->NoEncontrado("Es necesario enviar el nombre de la ciudad para añadir editarla");
         } elseif (!isset($_POST['responsable'])) {
-            $this->notFound("Es necesario enviar el nombre del responsable para editarla");
+            $this->NoEncontrado("Es necesario enviar el nombre del responsable para editarla");
         } else {
             $id = $_POST['id'];
             $nombre = $_POST['nombre'];
@@ -126,18 +126,18 @@ class Universidades_controller extends Basic_Controller
                 $Universidades_Service = new Universidades_service();
                 $resultado = $Universidades_Service->editUniversidad($id, $nombre, $ciudad, $responsable);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "la universidad no se pudo editar"));
+                    $this->ErrorRestriccion(array("resultado" => "la universidad no se pudo editar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Universidad duplicada");
+                        $this->ErrorDuplicado("Universidad duplicada");
                         break;
                 }
             }
@@ -147,21 +147,21 @@ class Universidades_controller extends Basic_Controller
     function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar la universidad");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar la universidad");
         } else {
             $id = $_POST['id'];
             try {
                 $Universidades_Service = new Universidades_service();
                 $resultado = $Universidades_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "La universidad no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "La universidad no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -171,6 +171,6 @@ class Universidades_controller extends Basic_Controller
 
         $Universidades_Service = new Universidades_service();
         $resultado = $Universidades_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 }

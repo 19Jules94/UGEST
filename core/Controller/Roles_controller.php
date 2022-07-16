@@ -16,7 +16,7 @@ class Roles_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add':
@@ -29,7 +29,7 @@ class Roles_controller extends Basic_Controller
                     $this->canUseAction("ROL", "DELETE") ? $this->deleteRol() : $this->forbidden("ROL", "DELETE");
                     break;
                 default:
-                    $this->notFound("No se puede realizar esa acción");
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
 
@@ -38,7 +38,7 @@ class Roles_controller extends Basic_Controller
     function addRol()
     {
         if (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir un rol");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir un rol");
         } else {
             $nombre = $_POST['nombre'];
 
@@ -46,17 +46,17 @@ class Roles_controller extends Basic_Controller
                 $Roles_Service = new Roles_service();
                 $resultado = $Roles_Service->addRol($nombre);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => $resultado));
+                    $this->TodoOK(array("resultado" => $resultado));
                 } else {
-                    $this->echoOk(array("resultado" => "El rol no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "El rol no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
             catch (DBException $ex) {
                 switch ($ex->getERROR()){
                     case "4002":
-                        $this->notFound("Accion duplicada");
+                        $this->ErrorDuplicado("Accion duplicada");
                         break;
                 }
             }
@@ -68,25 +68,25 @@ class Roles_controller extends Basic_Controller
     {
         $Roles_Service = new Roles_service();
         $resultado = $Roles_Service->mostrarRoles();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function deleteRol()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar");
+            $this->NoEncontrado("Es necesario enviar el id para borrar");
         } else {
             $id = $_POST['id'];
             try {
                 $Roles_Service = new Roles_service();
                 $resultado = $Roles_Service->deleteRol($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Rol eliminado"));
+                    $this->TodoOK(array("resultado" => "Rol eliminado"));
                 } else {
-                    $this->notFound(array("resultado" => "El rol no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "El rol no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
         }
 

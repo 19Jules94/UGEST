@@ -17,7 +17,7 @@ class Centros_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add': 
@@ -39,7 +39,7 @@ class Centros_controller extends Basic_Controller
                     $this->canUseAction("CENTRO", "EDIT") ? $this->editCentro() : $this->forbidden("CENTRO", "EDIT");
                     break;
                 default: 
-                    $this->notFound("No se puede realizar esa acción");
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
     }
@@ -47,13 +47,13 @@ class Centros_controller extends Basic_Controller
     function addCentro()
     {
         if (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir un centro");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir un centro");
         } elseif (!isset($_POST['universidad'])) {
-            $this->notFound("Es necesario enviar id de la universidad para añadir un centro");
+            $this->NoEncontrado("Es necesario enviar id de la universidad para añadir un centro");
         } elseif (!isset($_POST['ciudad'])) {
-            $this->notFound("Es necesario enviar el nombre de la ciudad para añadir un centro");
+            $this->NoEncontrado("Es necesario enviar el nombre de la ciudad para añadir un centro");
         } elseif (!isset($_POST['responsable'])) {
-            $this->notFound("Es necesario enviar el nombre del responsable para añadir un centro");
+            $this->NoEncontrado("Es necesario enviar el nombre del responsable para añadir un centro");
         } else {
             $nombre = $_POST['nombre'];
             $universidad = $_POST['universidad'];
@@ -64,19 +64,19 @@ class Centros_controller extends Basic_Controller
                 $Centros_Service = new Centros_service();
                 $resultado = $Centros_Service->addCentro($nombre, $universidad, $ciudad, $responsable);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "El centro no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "El centro no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Centro duplicado");
+                        $this->ErrorDuplicado("Centro duplicado");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos.");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos.");
                         break;
                 }
             }
@@ -87,28 +87,28 @@ class Centros_controller extends Basic_Controller
     {
         $Centros_Service = new Centros_service();
         $resultado = $Centros_Service->mostrarTodos();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function deleteCentro()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar un centro");
+            $this->NoEncontrado("Es necesario enviar el id para borrar un centro");
         } else {
             $id = $_POST['id'];
             try {
                 $Centros_Service = new Centros_service();
                 $resultado = $Centros_Service->deleteCentro($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Centro eliminado"));
+                    $this->TodoOK(array("resultado" => "Centro eliminado"));
                 } else {
-                    $this->notFound(array("resultado" => "El centro no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "El centro no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
             catch (ResourceNotFound $rnf){
-                $this->notFound("No se ha podido encontrar el id introducido.");
+                $this->ErrorNoExistente("No se ha podido encontrar el id introducido.");
             }
         }
     }
@@ -116,15 +116,15 @@ class Centros_controller extends Basic_Controller
     function editCentro()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id del centro para editarlo");
+            $this->NoEncontrado("Es necesario enviar el id del centro para editarlo");
         } elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre del centro para editarlo");
+            $this->NoEncontrado("Es necesario enviar el nombre del centro para editarlo");
         } elseif (!isset($_POST['universidad'])) {
-            $this->notFound("Es necesario enviar id de la universidad para editar un centro");
+            $this->NoEncontrado("Es necesario enviar id de la universidad para editar un centro");
         } elseif (!isset($_POST['ciudad'])) {
-            $this->notFound("Es necesario enviar el nombre de la ciudad para editar el centro");
+            $this->NoEncontrado("Es necesario enviar el nombre de la ciudad para editar el centro");
         } elseif (!isset($_POST['responsable'])) {
-            $this->notFound("Es necesario enviar el nombre del responsable para editar el centro");
+            $this->NoEncontrado("Es necesario enviar el nombre del responsable para editar el centro");
         } else {
             $id = $_POST['id'];
             $nombre = $_POST['nombre'];
@@ -136,26 +136,26 @@ class Centros_controller extends Basic_Controller
                 $Centros_Service = new Centros_service();
                 $resultado = $Centros_Service->editCentro($id, $nombre, $universidad, $ciudad, $responsable);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "El centro no se pudo editar"));
+                    $this->TodoOK(array("resultado" => "El centro no se pudo editar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Centro duplicado");
+                        $this->ErrorDuplicado("Centro duplicado");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos");
                         break;
                 }
             }
             catch (ResourceNotFound $rnf){
-                $this->notFound("No se ha podido encontrar el id introducido.");
+                $this->ErrorNoExistente("No se ha podido encontrar el id introducido.");
             }
         }
     }
@@ -163,21 +163,21 @@ class Centros_controller extends Basic_Controller
     function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar el centro");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar el centro");
         } else {
             $id = $_POST['id'];
             try {
                 $Centros_Service = new Centros_service();
                 $resultado = $Centros_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "El centro no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "El centro no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -187,6 +187,6 @@ class Centros_controller extends Basic_Controller
 
         $Centros_Service = new Centros_service();
         $resultado = $Centros_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 }

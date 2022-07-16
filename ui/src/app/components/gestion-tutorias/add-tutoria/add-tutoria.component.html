@@ -72,7 +72,7 @@
             
             <div class="form-group row mb-2">
                 <div class="col-3" [style.z-index]="10000">
-                    <label class="col-4 col-form-label form-control-label" >{{'gestion-tutorias.fecha'
+                    <label class="col-6 col-form-label form-control-label" >{{'gestion-tutorias.fecha'
                         |
                         translate}}</label>
                         <div>
@@ -80,7 +80,14 @@
                         </div>
     
                 </div>
-             
+                <div class="col-3 mb-4" [style.z-index]="10000">
+                    <label class="col-6 col-form-label form-control-label" >Fecha fin</label>
+                        <div>
+                            <input class="form-control" type="date" formControlName="fecha_fin" name="fecha_fin"  min="2000-01-01" max="2100-12-31">
+                        </div>
+    
+                
+            </div>
     
                 <div class="col-3">
                     <label class="col-6 col-form-label form-control-label"
@@ -100,26 +107,11 @@
                         </div>
                 </div>
 
-                <div class="col-3">
-                    <label class="col-12 col-form-label form-control-label" for="repetir">
-                        Repetir horario
-                      </label>
-                    <input class=" form-check-input" type="checkbox" value="" id="repetir" name="repetir" (click)="ocultar()">
-                 
-                </div>
+            
             </div>
        
-            <div *ngIf="isShown">
-            <div class="col-12 mb-4" [style.z-index]="10000">
-                <label class="col-4 col-form-label form-control-label" >{{'gestion-tutorias.fecha'
-                    |
-                    translate}}</label>
-                    <div>
-                        <input class="form-control" type="date" formControlName="fecha_fin" name="fecha_fin"  min="2000-01-01" max="2100-12-31">
-                    </div>
-
-            
-        </div>
+            <div >
+         
     </div>
                 <div class="float-end">
                     <button class="btn btn-secondary" [routerLink]="['/panel-principal/gestion-horarios/showall']">{{'app.cancelar' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>

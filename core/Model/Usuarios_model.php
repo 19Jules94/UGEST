@@ -116,4 +116,5 @@ class Usuarios_model extends Base_model
 
         return $resultado;
     }
+ 
 }

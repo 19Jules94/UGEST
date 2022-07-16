@@ -16,7 +16,7 @@ class Permisos_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add': 
@@ -32,7 +32,7 @@ class Permisos_controller extends Basic_Controller
                     $this->canUseAction("PERMISO", "DELETE") ? $this->deletePermiso() : $this->forbidden("PERMISO", "DELETE");
                     break;
                 default: 
-                    $this->notFound("No se puede realizar esa acción");
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
     }
@@ -41,11 +41,11 @@ class Permisos_controller extends Basic_Controller
     {
 
         if (!isset($_POST['rol'])) {
-            $this->notFound("Es necesario enviar el rol para añadir un permiso");
+            $this->NoEncontrado("Es necesario enviar el rol para añadir un permiso");
         } else if (!isset($_POST['funcionalidad'])) {
-            $this->notFound("Es necesario enviar la funcionalidad para añadir un permiso");
+            $this->NoEncontrado("Es necesario enviar la funcionalidad para añadir un permiso");
         } else if (!isset($_POST['accion'])) {
-            $this->notFound("Es necesario enviar la accion para añadir un permiso");
+            $this->NoEncontrado("Es necesario enviar la accion para añadir un permiso");
         } else {
 
             $rol = $_POST['rol'];
@@ -57,21 +57,21 @@ class Permisos_controller extends Basic_Controller
                 $resultado = $Permisos_Service->addPermiso($rol, $funcionalidad, $action);
 
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => $resultado));
+                    $this->TodoOK(array("resultado" => $resultado));
                 } else {
-                    $this->echoOk(array("resultado" => "El permiso no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "El permiso no se pudo añadir"));
                 }
 
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Permiso duplicado");
+                        $this->ErrorDuplicado("Permiso duplicado");
                         break;
 
                     case "4004":
-                        $this->notFound("Alguno de los campos no existe en la base de datos.");
+                        $this->ErrorNoExistente("Alguno de los campos no existe en la base de datos.");
                         break;
                 }
             }
@@ -82,18 +82,18 @@ class Permisos_controller extends Basic_Controller
     {
         $Permisos_Service = new Permisos_service();
         $resultado = $Permisos_Service->mostrarTodos();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function deletePermiso()
     {
 
         if (!isset($_POST['rol'])) {
-            $this->notFound("Es necesario enviar el rol para añadir un permiso");
+            $this->NoEncontrado("Es necesario enviar el rol para añadir un permiso");
         } else if (!isset($_POST['funcionalidad'])) {
-            $this->notFound("Es necesario enviar la funcionalidad para añadir un permiso");
+            $this->NoEncontrado("Es necesario enviar la funcionalidad para añadir un permiso");
         } else if (!isset($_POST['accion'])) {
-            $this->notFound("Es necesario enviar la accion para añadir un permiso");
+            $this->NoEncontrado("Es necesario enviar la accion para añadir un permiso");
         } else {
 
             $rol = $_POST['rol'];
@@ -103,18 +103,18 @@ class Permisos_controller extends Basic_Controller
                 $Permisos_Service = new Permisos_service();
                 $resultado = $Permisos_Service->deletePermiso($rol, $funcionalidad, $action);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Permiso eliminado"));
+                    $this->TodoOK(array("resultado" => "Permiso eliminado"));
                 } else {
-                    $this->notFound(array("resultado" => "El permiso no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "El permiso no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4004":
-                        $this->notFound("Alguno de los campos no existe en la base de datos.");
+                        $this->ErrorNoExistente("Alguno de los campos no existe en la base de datos.");
                         break;
                 }
             }
@@ -125,7 +125,7 @@ class Permisos_controller extends Basic_Controller
     {
         $Permisos_Service = new Permisos_service();
         $resultado = $Permisos_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
 }

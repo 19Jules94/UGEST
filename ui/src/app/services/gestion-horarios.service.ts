@@ -31,6 +31,23 @@ export class GestionHorariosService {
       );
   }
 
+  public calendar(): Observable<Horarios> {
+    return this.http.post<MostrarHorariosWrapper>(`${environment.api}/?controller=horarios&action=calendar`, null)
+      .pipe(
+        map(resultado => {
+
+            switch (resultado.CODE) {
+              case '200':
+                return resultado.RESOURCES;
+              default:
+                throw new Error(resultado.CODE);
+            }
+          }
+        )
+      );
+  }
+
+
 
   public addHorario(titulacion: string, anho: string,
     asignatura: string, grupo: string, profesor: string, espacio: string,
@@ -168,6 +185,25 @@ export class GestionHorariosService {
                 throw new Error();
             }
 
+          }
+        )
+      );
+  }
+
+  asistencia(id: string, asistencia: string) {
+    var formData: any = new FormData();
+    formData.append("id", id);
+    formData.append("asistencia", asistencia);
+
+    return this.http.post<HorariosWrapper>(`${environment.api}/?controller=horarios&action=asistencia`, formData)
+      .pipe(
+        map(resultado => {
+            switch (resultado.CODE) {
+              case '200':
+                return true;
+              default:
+                throw new Error(resultado.CODE);
+            }
           }
         )
       );

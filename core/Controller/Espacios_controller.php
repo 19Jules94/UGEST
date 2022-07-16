@@ -17,7 +17,7 @@ class Espacios_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add':
@@ -46,7 +46,7 @@ class Espacios_controller extends Basic_Controller
     private function addEspacio()
     {
         if (!isset($_POST['edificio']) || !isset($_POST['nombre']) || !isset($_POST['tipo'])) {
-            $this->notFound("Es necesario enviar el edificio, el nombre y el tipo para crear un espacio");
+            $this->NoEncontrado("Es necesario enviar el edificio, el nombre y el tipo para crear un espacio");
         } else {
             $edificio = $_POST['edificio'];
             $nombre = $_POST['nombre'];
@@ -56,19 +56,19 @@ class Espacios_controller extends Basic_Controller
                 $Espacios_Service = new Espacios_service();
                 $resultado = $Espacios_Service->addEspacio($edificio, $nombre, $tipo);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => $resultado));
+                    $this->TodoOK(array("resultado" => $resultado));
                 } else {
-                    $this->echoOk(array("resultado" => "El espacio no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "El espacio no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Ese espacio ya existe");
+                        $this->ErrorDuplicado("Ese espacio ya existe");
                         break;
                     case "4004":
-                        $this->notFound("No existe ese espacio");
+                        $this->ErrorNoExistente("No existe ese espacio");
                         break;
                 }
             }
@@ -79,34 +79,34 @@ class Espacios_controller extends Basic_Controller
     {
         $Espacios_Service = new Espacios_service();
         $resultado = $Espacios_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     private function mostrarTodos()
     {
         $Espacios_Service = new Espacios_service();
         $resultado = $Espacios_Service->mostrarTodos();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     private function deleteEspacio()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar");
+            $this->NoEncontrado("Es necesario enviar el id para borrar");
         } else {
             $id = $_POST['id'];
             try {
                 $Espacios_Service = new Espacios_service();
                 $resultado = $Espacios_Service->deleteEspacio($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Espacio eliminada"));
+                    $this->TodoOK(array("resultado" => "Espacio eliminada"));
                 } else {
-                    $this->notFound(array("resultado" => "El espacio no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "El espacio no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -114,21 +114,21 @@ class Espacios_controller extends Basic_Controller
     private function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar el espacio");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar el espacio");
         } else {
             $id = $_POST['id'];
             try {
                 $Espacios_Service = new Espacios_service();
                 $resultado = $Espacios_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "El espacio no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "El espacio no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -136,13 +136,13 @@ class Espacios_controller extends Basic_Controller
     private function editEspacio()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id del espacio para editarlo");
+            $this->NoEncontrado("Es necesario enviar el id del espacio para editarlo");
         } elseif (!isset($_POST['edificio'])) {
-            $this->notFound("Es necesario enviar el id del edificio para editar el espacio");
+            $this->NoEncontrado("Es necesario enviar el id del edificio para editar el espacio");
         } elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre del espacio para añadir editarlo");
+            $this->NoEncontrado("Es necesario enviar el nombre del espacio para añadir editarlo");
         } elseif (!isset($_POST['tipo'])) {
-            $this->notFound("Es necesario enviar el tipo del espacio para editarlo");
+            $this->NoEncontrado("Es necesario enviar el tipo del espacio para editarlo");
         } else {
             $id = $_POST['id'];
             $edificio = $_POST['edificio'];
@@ -153,25 +153,25 @@ class Espacios_controller extends Basic_Controller
                 $Espacios_Service = new Espacios_service();
                 $resultado = $Espacios_Service->editEspacio($id, $edificio, $nombre, $tipo);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "El espacio no se pudo editar"));
+                    $this->TodoOK(array("resultado" => "El espacio no se pudo editar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Espacio duplicado");
+                        $this->ErrorDuplicado("Espacio duplicado");
                         break;
                     case "4004":
-                        $this->notFound("Edificio no existente");
+                        $this->ErrorNoExistente("Edificio no existente");
                         break;
                 }
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
 
         }

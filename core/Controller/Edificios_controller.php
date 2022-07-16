@@ -18,7 +18,7 @@ class Edificios_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add':
@@ -47,7 +47,7 @@ class Edificios_controller extends Basic_Controller
     private function addEdificio()
     {
         if (!isset($_POST['universidad']) || !isset($_POST['nombre']) || !isset($_POST['ubicacion'])) {
-            $this->notFound("Es necesario enviar la universidad, el nombre y la ubicación para crear un edificio");
+            $this->NoEncontrado("Es necesario enviar la universidad, el nombre y la ubicación para crear un edificio");
         } else {
             $universidad = $_POST['universidad'];
             $nombre = $_POST['nombre'];
@@ -57,19 +57,19 @@ class Edificios_controller extends Basic_Controller
                 $Edificio_Service = new Edificios_service();
                 $resultado = $Edificio_Service->addEdificio($universidad, $nombre, $ubicacion);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => $resultado));
+                    $this->TodoOK(array("resultado" => $resultado));
                 } else {
-                    $this->echoOk(array("resultado" => "El edificio no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "El edificio no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Ese edificio ya existe");
+                        $this->ErrorDuplicado("Ese edificio ya existe");
                         break;
                     case "4004":
-                        $this->notFound("No existe esa universidad");
+                        $this->ErrorNoExistente("No existe esa universidad");
                         break;
                 }
             }
@@ -81,34 +81,34 @@ class Edificios_controller extends Basic_Controller
     {
         $Edificios_Service = new Edificios_service();
         $resultado = $Edificios_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     private function mostrarTodos()
     {
         $Edificios_Service = new Edificios_service();
         $resultado = $Edificios_Service->mostrarTodos();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     private function deleteEdificio()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar");
+            $this->NoEncontrado("Es necesario enviar el id para borrar");
         } else {
             $id = $_POST['id'];
             try {
                 $Edificios_Service = new Edificios_service();
                 $resultado = $Edificios_Service->deleteEdificio($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Edificio eliminado"));
+                    $this->TodoOK(array("resultado" => "Edificio eliminado"));
                 } else {
-                    $this->notFound(array("resultado" => "El edificio no se pudo eliminar"));
+                    $this->ErrorDuplicado(array("resultado" => "El edificio no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -116,21 +116,21 @@ class Edificios_controller extends Basic_Controller
     private function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar el edificio");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar el edificio");
         } else {
             $id = $_POST['id'];
             try {
                 $Edificios_Service = new Edificios_service();
                 $resultado = $Edificios_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "El edificio no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "El edificio no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -138,13 +138,13 @@ class Edificios_controller extends Basic_Controller
     private function editEdificio()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id del edifio para editarlo");
+            $this->NoEncontrado("Es necesario enviar el id del edifio para editarlo");
         } elseif (!isset($_POST['universidad'])) {
-            $this->notFound("Es necesario enviar el id de la universidad para editar el edificio");
+            $this->NoEncontrado("Es necesario enviar el id de la universidad para editar el edificio");
         } elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre del edificio para añadir editarlo");
+            $this->NoEncontrado("Es necesario enviar el nombre del edificio para añadir editarlo");
         } elseif (!isset($_POST['ubicacion'])) {
-            $this->notFound("Es necesario enviar la ubicación del edificio para editarlo");
+            $this->NoEncontrado("Es necesario enviar la ubicación del edificio para editarlo");
         } else {
             $id = $_POST['id'];
             $id_UNIVERSIDAD = $_POST['universidad'];
@@ -155,20 +155,20 @@ class Edificios_controller extends Basic_Controller
                 $Edificios_Service = new Edificios_service();
                 $resultado = $Edificios_Service->editEdificio($id, $id_UNIVERSIDAD, $nombre, $ubicacion);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "El edificio no se pudo editar"));
+                    $this->TodoOK(array("resultado" => "El edificio no se pudo editar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Edificio duplicado");
+                        $this->ErrorDuplicado("Edificio duplicado");
                         break;
                 }
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
 
         }

@@ -32,7 +32,7 @@
         <div>
          
           <i *ngIf="tieneFuncionalidadAction('TUTORIA','EDIT')"
-             [routerLink]="['/panel-principal/gestion-horarios/edit', tutoria.id]" class="fas fa-edit"></i>
+             [routerLink]="['/panel-principal/gestion-tutorias/edit', tutoria.id]" class="fas fa-edit"></i>
           <i *ngIf="tieneFuncionalidadAction('TUTORIA','DELETE')" 
              (click)="deleteTutoria(tutoria)" class="fas fa-trash-alt"></i>
         </div>

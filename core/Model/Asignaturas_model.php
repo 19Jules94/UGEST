@@ -173,6 +173,6 @@ class Asignaturas_model extends Base_Model
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-   
+
 
 }

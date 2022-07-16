@@ -16,29 +16,29 @@ class Asignaturas_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar un acción");
+            $this->NoEncontrado("Es necesario indicar un acción");
         } else {
             switch ($_REQUEST['action']) {
-                case 'add': //añadir
+                case 'add':
                     $this->canUseAction("ASIGNATURA", "ADD") ? $this->addAsignatura() : $this->forbidden("ASIGNATURA", "ADD");
                     break;
                 case 'info_add':
                     $this->canUseAction("ESPACIO", "ADD") ? $this->info_add() : $this->forbidden("ESPACIO", "ADD");
                     break;
-                case 'edit': //borrar
+                case 'edit': 
                     $this->canUseAction("ASIGNATURA", "EDIT") ? $this->editAsignaturas() : $this->forbidden("ASIGNATURA", "EDIT");
                     break;
-                case 'delete': //borrar
+                case 'delete': 
                     $this->canUseAction("ASIGNATURA", "DELETE") ? $this->deleteAsignatura() : $this->forbidden("ASIGNATURA", "DELETE");
                     break;
-                case 'show': //borrar
+                case 'show': 
                     $this->canUseAction("ASIGNATURA", "SHOWCURRENT") ? $this->show() : $this->forbidden("ASIGNATURA", "SHOWCURRENT");
                     break;
-                case 'showall': //ver todos
+                case 'showall': 
                     $this->canUseAction("ASIGNATURA", "SHOWALL") ? $this->mostrarTodas() : $this->forbidden("ASIGNATURA", "SHOWALL");
                     break;
-                default: //caso default
-                    $this->notFound("No se puede realizar esa acción");
+                default: 
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
     }
@@ -46,27 +46,27 @@ class Asignaturas_controller extends Basic_Controller
     function addAsignatura()
     {
         if (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir una universidad");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir una universidad");
         } elseif (!isset($_POST['codigo'])) {
-            $this->notFound("Es necesario enviar el codigo de la asignatura para añadirla");
+            $this->NoEncontrado("Es necesario enviar el codigo de la asignatura para añadirla");
         } elseif (!isset($_POST['contenido'])) {
-            $this->notFound("Es necesario enviar el contenido de la asignatura para añadirla");
+            $this->NoEncontrado("Es necesario enviar el contenido de la asignatura para añadirla");
         } elseif (!isset($_POST['creditos'])) {
-            $this->notFound("Es necesario enviar los creditos de la asignatura para añadirla");
+            $this->NoEncontrado("Es necesario enviar los creditos de la asignatura para añadirla");
         } elseif (!isset($_POST['tipo'])) {
-            $this->notFound("Es necesario enviar el tipo de asignatura");
+            $this->NoEncontrado("Es necesario enviar el tipo de asignatura");
         } elseif (!isset($_POST['horas'])) {
-            $this->notFound("Es necesario enviar las horas de la asignatura");
+            $this->NoEncontrado("Es necesario enviar las horas de la asignatura");
         } elseif (!isset($_POST['cuatrimestre'])) {
-            $this->notFound("Es necesario enviar el cuatrimestre en que se impartirá la asignatura");
+            $this->NoEncontrado("Es necesario enviar el cuatrimestre en que se impartirá la asignatura");
         } elseif (!isset($_POST['titulacion'])) {
-            $this->notFound("Es necesario enviar la titulación de la asignatura");
+            $this->NoEncontrado("Es necesario enviar la titulación de la asignatura");
         } elseif (!isset($_POST['anhoacademico'])) {
-            $this->notFound("Es necesario enviar el año académico en que se impartirá la asignatura");
+            $this->NoEncontrado("Es necesario enviar el año académico en que se impartirá la asignatura");
         } elseif (!isset($_POST['departamento'])) {
-            $this->notFound("Es necesario enviar el departamento que impartirá la asignatura");
+            $this->NoEncontrado("Es necesario enviar el departamento que impartirá la asignatura");
         } elseif (!isset($_POST['profesor'])) {
-            $this->notFound("Es necesario enviar el nombre del responsable para añadir una universidad");
+            $this->NoEncontrado("Es necesario enviar el nombre del responsable para añadir una universidad");
         } else {
 
             $nombre = $_POST['nombre'];
@@ -97,19 +97,19 @@ class Asignaturas_controller extends Basic_Controller
                     $profesor
                 );
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "La asignatura no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "La asignatura no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Asignatura duplicada");
+                        $this->ErrorDuplicado("Asignatura duplicada");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos");
                         break; 
                 }
             }
@@ -120,34 +120,34 @@ class Asignaturas_controller extends Basic_Controller
     {
         $Asignaturas_Service = new Asignaturas_service();
         $resultado = $Asignaturas_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function mostrarTodas()
     {
         $Asignaturas_Service = new Asignaturas_service();
         $resultado = $Asignaturas_Service->mostrarTodas();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function deleteAsignatura()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar");
+            $this->NoEncontrado("Es necesario enviar el id para borrar");
         } else {
             $id = $_POST['id'];
             try {
                 $Asignaturas_Service = new Asignaturas_service();
                 $resultado = $Asignaturas_Service->deleteAsignatura($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Asignatura eliminada"));
+                    $this->TodoOK(array("resultado" => "Asignatura eliminada"));
                 } else {
-                    $this->notFound(array("resultado" => "La asignatura no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "La asignatura no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -155,29 +155,29 @@ class Asignaturas_controller extends Basic_Controller
     function editAsignaturas()
     {
         if (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir una universidad");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir una universidad");
         } elseif (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id de la asignatura para editarla");
+            $this->NoEncontrado("Es necesario enviar el id de la asignatura para editarla");
         } elseif (!isset($_POST['codigo'])) {
-            $this->notFound("Es necesario enviar el codigo de la asignatura para editarla");
+            $this->NoEncontrado("Es necesario enviar el codigo de la asignatura para editarla");
         } elseif (!isset($_POST['contenido'])) {
-            $this->notFound("Es necesario enviar el contenido de la asignatura para editarla");
+            $this->NoEncontrado("Es necesario enviar el contenido de la asignatura para editarla");
         } elseif (!isset($_POST['creditos'])) {
-            $this->notFound("Es necesario enviar los creditos de la asignatura para editarla");
+            $this->NoEncontrado("Es necesario enviar los creditos de la asignatura para editarla");
         } elseif (!isset($_POST['tipo'])) {
-            $this->notFound("Es necesario enviar el tipo de asignatura");
+            $this->NoEncontrado("Es necesario enviar el tipo de asignatura");
         } elseif (!isset($_POST['horas'])) {
-            $this->notFound("Es necesario enviar las horas de la asignatura");
+            $this->NoEncontrado("Es necesario enviar las horas de la asignatura");
         } elseif (!isset($_POST['cuatrimestre'])) {
-            $this->notFound("Es necesario enviar el cuatrimestre en que se impartirá la asignatura");
+            $this->NoEncontrado("Es necesario enviar el cuatrimestre en que se impartirá la asignatura");
         } elseif (!isset($_POST['titulacion'])) {
-            $this->notFound("Es necesario enviar la titulación de la asignatura");
+            $this->NoEncontrado("Es necesario enviar la titulación de la asignatura");
         } elseif (!isset($_POST['anhoacademico'])) {
-            $this->notFound("Es necesario enviar el año académico en que se impartirá la asignatura");
+            $this->NoEncontrado("Es necesario enviar el año académico en que se impartirá la asignatura");
         } elseif (!isset($_POST['departamento'])) {
-            $this->notFound("Es necesario enviar el departamento que impartirá la asignatura");
+            $this->NoEncontrado("Es necesario enviar el departamento que impartirá la asignatura");
         } elseif (!isset($_POST['profesor'])) {
-            $this->notFound("Es necesario enviar el nombre del responsable para añadir una universidad");
+            $this->NoEncontrado("Es necesario enviar el nombre del responsable para añadir una universidad");
         } else {
 
             $id = $_POST['id'];
@@ -210,24 +210,24 @@ class Asignaturas_controller extends Basic_Controller
                     $profesor
                 );
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "la universidad no se pudo editar"));
+                    $this->TodoOK(array("resultado" => "la universidad no se pudo editar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Universidad duplicada");
+                        $this->ErrorDuplicado("Universidad duplicada");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos");
                         break;
                     case "4001":
-                        $this->notFound("No se puede editar esta asignatura porque tiene grupos asignados");
+                        $this->ErrorRestriccion("No se puede editar esta asignatura porque tiene grupos asignados");
                         break;
                 }
             }
@@ -237,21 +237,21 @@ class Asignaturas_controller extends Basic_Controller
     function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar la asignatura");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar la asignatura");
         } else {
             $id = $_POST['id'];
             try {
                 $Asignaturas_Service = new Asignaturas_service();
                 $resultado = $Asignaturas_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "La asignatura no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "La asignatura no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }

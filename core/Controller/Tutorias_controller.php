@@ -17,7 +17,7 @@ class Tutorias_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add': 
@@ -30,7 +30,7 @@ class Tutorias_controller extends Basic_Controller
                     $this->canUseAction("TUTORIA", "SHOWALL") ? $this->mostrartodas() : $this->forbidden("TUTORIA", "SHOWALL");
                     break;
                 case 'delete':
-                    $this->canUseAction("TUTORIA", "DELETE") ? $this->delete() : $this->forbidden("TUTORIA", "DELETE");
+                    $this->canUseAction("TUTORIA", "DELETE") ? $this->deleteTutoria() : $this->forbidden("TUTORIA", "DELETE");
                     break;
                 case 'show': 
                     $this->canUseAction("TUTORIA", "SHOWCURRENT") ? $this->show() : $this->forbidden("TUTORIA", "SHOWCURRENT");
@@ -45,7 +45,7 @@ class Tutorias_controller extends Basic_Controller
                     $this->canUseAction("TUTORIA", "ASISTENCIA") ? $this->asistencia() : $this->forbidden("TUTORIA", "ASISTENCIA");
                     break;
                 default: 
-                    $this->notFound("No se puede realizar esa acción");
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
     }
@@ -53,19 +53,19 @@ class Tutorias_controller extends Basic_Controller
     function addTutoria()
     {
         if (!isset($_POST['anho'])) {
-            $this->notFound("Es necesario enviar el id del año académico para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar el id del año académico para añadir una tutoría");
         } elseif (!isset($_POST['profesor'])) {
-            $this->notFound("Es necesario enviar id del profesor para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar id del profesor para añadir una tutoría");
         } elseif (!isset($_POST['espacio'])) {
-            $this->notFound("Es necesario enviar id del espacio para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar id del espacio para añadir una tutoría");
         }  elseif (!isset($_POST['asistencia'])) {
-            $this->notFound("Es necesario enviar la asistencia para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar la asistencia para añadir una tutoría");
         }  elseif (!isset($_POST['fecha'])) {
-            $this->notFound("Es necesario enviar la fecha para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar la fecha para añadir una tutoría");
         }   elseif (!isset($_POST['hora_inicio'])) {
-            $this->notFound("Es necesario enviar la hora de inicio para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar la hora de inicio para añadir una tutoría");
         }   elseif (!isset($_POST['hora_fin'])) {
-            $this->notFound("Es necesario enviar la hora de fin para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar la hora de fin para añadir una tutoría");
         }else {
             $anho = $_POST['anho'];
             $profesor = $_POST['profesor'];
@@ -79,19 +79,19 @@ class Tutorias_controller extends Basic_Controller
                 $Tutorias_Service = new Tutorias_service();
                 $resultado = $Tutorias_Service->addTutoria($anho, $profesor, $espacio, $asistencia, $fecha, $hora_inicio, $hora_fin);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "La tutoria no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "La tutoria no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Tutoria duplicada");
+                        $this->ErrorDuplicado("Tutoria duplicada");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos.");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos.");
                         break;
                 }
             }
@@ -102,28 +102,28 @@ class Tutorias_controller extends Basic_Controller
     {
         $Tutorias_Service = new Tutorias_service();
         $resultado = $Tutorias_Service->mostrarTodas();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
-    function delete()
+    function deleteTutoria()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar una tutoria.");
+            $this->NoEncontrado("Es necesario enviar el id para borrar una tutoria.");
         } else {
             $id = $_POST['id'];
             try {
                 $Tutorias_Service = new Tutorias_service();
                 $resultado = $Tutorias_Service->delete($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Horario eliminado"));
+                    $this->TodoOK(array("resultado" => "Horario eliminado"));
                 } else {
-                    $this->notFound(array("resultado" => "La tutoria no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "La tutoria no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
             catch (ResourceNotFound $rnf){
-                $this->notFound("No se ha podido encontrar el id introducido.");
+                $this->ErrorRestriccion("No se ha podido encontrar el id introducido.");
             }
         }
     }
@@ -131,21 +131,21 @@ class Tutorias_controller extends Basic_Controller
     function editTutoria()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para editar una tutoría");
+            $this->NoEncontrado("Es necesario enviar el id para editar una tutoría");
         } elseif (!isset($_POST['anho'])) {
-            $this->notFound("Es necesario enviar el id del año académico para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar el id del año académico para añadir una tutoría");
         } elseif (!isset($_POST['profesor'])) {
-            $this->notFound("Es necesario enviar id del profesor para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar id del profesor para añadir una tutoría");
         } elseif (!isset($_POST['espacio'])) {
-            $this->notFound("Es necesario enviar id del espacio para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar id del espacio para añadir una tutoría");
         }  elseif (!isset($_POST['asistencia'])) {
-            $this->notFound("Es necesario enviar la asistencia para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar la asistencia para añadir una tutoría");
         }  elseif (!isset($_POST['fecha'])) {
-            $this->notFound("Es necesario enviar la fecha para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar la fecha para añadir una tutoría");
         }   elseif (!isset($_POST['hora_inicio'])) {
-            $this->notFound("Es necesario enviar la hora de inicio para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar la hora de inicio para añadir una tutoría");
         }   elseif (!isset($_POST['hora_fin'])) {
-            $this->notFound("Es necesario enviar la hora de fin para añadir una tutoría");
+            $this->NoEncontrado("Es necesario enviar la hora de fin para añadir una tutoría");
         }else {
             $id = $_POST['id'];
             $anho = $_POST['anho'];
@@ -160,24 +160,24 @@ class Tutorias_controller extends Basic_Controller
                 $Tutorias_Service = new Tutorias_service();
                 $resultado = $Tutorias_Service->editTutoria($id, $anho, $profesor, $espacio, $asistencia, $fecha, $hora_inicio, $hora_fin);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "No se ha podido editar la tutoría"));
+                    $this->ErrorRestriccion(array("resultado" => "No se ha podido editar la tutoría"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Tutoría duplicada");
+                        $this->ErrorDuplicado("Tutoría duplicada");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos");
                         break;
                 }
             }
             catch (ResourceNotFound $rnf){
-                $this->notFound("No se ha podido encontrar el id introducido.");
+                $this->ErrorRestriccion("No se ha podido encontrar el id introducido.");
             }
         }
     }
@@ -185,21 +185,21 @@ class Tutorias_controller extends Basic_Controller
     function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar la tutoría");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar la tutoría");
         } else {
             $id = $_POST['id'];
             try {
                 $Tutorias_Service = new Tutorias_service();
                 $resultado = $Tutorias_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "La tutoría no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "La tutoría no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -207,9 +207,9 @@ class Tutorias_controller extends Basic_Controller
     function asistencia()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para marcar la asistencia");
+            $this->NoEncontrado("Es necesario enviar el id para marcar la asistencia");
         } elseif (!isset($_POST['asistencia'])) {
-            $this->notFound("Es necesario enviar la asistencia");
+            $this->NoEncontrado("Es necesario enviar la asistencia");
         } else {
             $id = $_POST['id'];
             $asistencia= $_POST['asistencia'];
@@ -217,25 +217,25 @@ class Tutorias_controller extends Basic_Controller
                 $Tutorias_Service = new Tutorias_service();
                 $resultado = $Tutorias_Service->asistencia($id,$asistencia);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "La asistencia no se pudo marcar"));
+                    $this->ErrorRestriccion(array("resultado" => "La asistencia no se pudo marcar"));
                 }
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
     function calendar(){
         $Tutorias_Service = new Tutorias_service();
         $resultado = $Tutorias_Service->getTutorias($this->DNI);
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function info_add()
     {
         $Tutorias_Service = new Tutorias_service();
         $resultado = $Tutorias_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 }

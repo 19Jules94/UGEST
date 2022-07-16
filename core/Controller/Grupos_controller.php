@@ -17,7 +17,7 @@ class Grupos_controller extends Basic_Controller
         if (!$this->IS_LOGGED) {
             $this->unauthorized();
         } else if (!isset($_REQUEST['action'])) {
-            $this->notFound("Es necesario indicar una acción");
+            $this->NoEncontrado("Es necesario indicar una acción");
         } else {
             switch ($_REQUEST['action']) {
                 case 'add': 
@@ -39,7 +39,7 @@ class Grupos_controller extends Basic_Controller
                     $this->canUseAction("GRUPO", "EDIT") ? $this->editGrupo() : $this->forbidden("GRUPO", "EDIT");
                     break;
                 default: 
-                    $this->notFound("No se puede realizar esa acción");
+                    $this->NoEncontrado("No se puede realizar esa acción");
             }
         }
     }
@@ -47,19 +47,19 @@ class Grupos_controller extends Basic_Controller
     function addGrupo()
     {
         if (!isset($_POST['anho'])) {
-            $this->notFound("Es necesario enviar el id del año académico para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el id del año académico para añadir una titulación");
         }  elseif (!isset($_POST['asignatura'])) {
-            $this->notFound("Es necesario enviar id de la asignatura para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar id de la asignatura para añadir una titulación");
         }  elseif (!isset($_POST['titulacion'])) {
-            $this->notFound("Es necesario enviar el id de la titulación para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el id de la titulación para añadir una titulación");
         }   elseif (!isset($_POST['codigo'])) {
-            $this->notFound("Es necesario enviar el código para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el código para añadir una titulación");
         }   elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir una titulación");
         }   elseif (!isset($_POST['tipo'])) {
-            $this->notFound("Es necesario enviar el tipo para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el tipo para añadir una titulación");
         }   elseif (!isset($_POST['horas'])) {
-            $this->notFound("Es necesario enviar las horas para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar las horas para añadir una titulación");
         } else {
             $anho = $_POST['anho'];
             $asignatura = $_POST['asignatura'];
@@ -73,19 +73,19 @@ class Grupos_controller extends Basic_Controller
                 $Grupos_Service = new Grupos_service();
                 $resultado = $Grupos_Service->addGrupo($anho, $asignatura, $titulacion, $codigo, $nombre, $tipo, $horas);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => strval($resultado)));
+                    $this->TodoOK(array("resultado" => strval($resultado)));
                 } else {
-                    $this->echoOk(array("resultado" => "El grupo no se pudo añadir"));
+                    $this->TodoOK(array("resultado" => "El grupo no se pudo añadir"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (DBException $ex) {
                 switch ($ex->getERROR()) {
                     case "4002":
-                        $this->notFound("Grupo duplicado");
+                        $this->ErrorDuplicado("Grupo duplicado");
                         break;
                     case "4004":
-                        $this->notFound("Alguno de los elementos introducidos no existe en la base de datos.");
+                        $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos.");
                         break;
                 }
             }
@@ -96,28 +96,28 @@ class Grupos_controller extends Basic_Controller
     {
         $Grupos_Service = new Grupos_service();
         $resultado = $Grupos_Service->mostrarTodos();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 
     function deleteGrupo()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para borrar un grupo.");
+            $this->NoEncontrado("Es necesario enviar el id para borrar un grupo.");
         } else {
             $id = $_POST['id'];
             try {
                 $Grupos_Service = new Grupos_service();
                 $resultado = $Grupos_Service->deleteGrupo($id);
                 if ($resultado) {
-                    $this->echoOk(array("resultado" => "Grupo eliminado"));
+                    $this->TodoOK(array("resultado" => "Grupo eliminado"));
                 } else {
-                    $this->notFound(array("resultado" => "El grupo no se pudo eliminar"));
+                    $this->ErrorRestriccion(array("resultado" => "El grupo no se pudo eliminar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             }
             catch (ResourceNotFound $rnf){
-                $this->notFound($rnf);
+                $this->ErrorNoExistente($rnf);
             }
         }
     }
@@ -125,21 +125,21 @@ class Grupos_controller extends Basic_Controller
     function editGrupo()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id del departamento para editarlo");
+            $this->NoEncontrado("Es necesario enviar el id del departamento para editarlo");
         } if (!isset($_POST['anho'])) {
-            $this->notFound("Es necesario enviar el id del año académico para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el id del año académico para añadir una titulación");
         }  elseif (!isset($_POST['asignatura'])) {
-            $this->notFound("Es necesario enviar id de la asignatura para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar id de la asignatura para añadir una titulación");
         }  elseif (!isset($_POST['titulacion'])) {
-            $this->notFound("Es necesario enviar el id de la titulación para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el id de la titulación para añadir una titulación");
         }   elseif (!isset($_POST['codigo'])) {
-            $this->notFound("Es necesario enviar el código para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el código para añadir una titulación");
         }   elseif (!isset($_POST['nombre'])) {
-            $this->notFound("Es necesario enviar el nombre para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el nombre para añadir una titulación");
         }   elseif (!isset($_POST['tipo'])) {
-            $this->notFound("Es necesario enviar el tipo para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar el tipo para añadir una titulación");
         }   elseif (!isset($_POST['horas'])) {
-            $this->notFound("Es necesario enviar las horas para añadir una titulación");
+            $this->NoEncontrado("Es necesario enviar las horas para añadir una titulación");
         }else {
             $id = $_POST['id'];
             $anho = $_POST['anho'];
@@ -154,24 +154,24 @@ class Grupos_controller extends Basic_Controller
             $Grupos_Service = new Grupos_service();
             $resultado = $Grupos_Service->editGrupo($id, $anho, $asignatura, $titulacion, $codigo, $nombre, $tipo, $horas);
             if ($resultado) {
-                $this->echoOk(array("resultado" => strval($resultado)));
+                $this->TodoOK(array("resultado" => strval($resultado)));
             } else {
-                $this->echoOk(array("resultado" => "EL grupo"));
+                $this->TodoOK(array("resultado" => "EL grupo"));
             }
         } catch (ValidationException $ex) {
-            $this->notFound($ex->getERROR());
+            $this->NoEncontrado($ex->getERROR());
         } catch (DBException $ex) {
             switch ($ex->getERROR()) {
                 case "4002":
-                    $this->notFound("Grupo duplicado");
+                    $this->ErrorDuplicado("Grupo duplicado");
                     break;
                 case "4004":
-                    $this->notFound("Alguno de los elementos introducidos no existe en la base de datos");
+                    $this->ErrorNoExistente("Alguno de los elementos introducidos no existe en la base de datos");
                     break;
             }
         }
         catch (ResourceNotFound $rnf){
-            $this->notFound("No se ha podido encontrar el id introducido.");
+            $this->ErrorNoExistente("No se ha podido encontrar el id introducido.");
         }
     }
     }
@@ -179,21 +179,21 @@ class Grupos_controller extends Basic_Controller
     function show()
     {
         if (!isset($_POST['id'])) {
-            $this->notFound("Es necesario enviar el id para mostrar el grupo");
+            $this->NoEncontrado("Es necesario enviar el id para mostrar el grupo");
         } else {
             $id = $_POST['id'];
             try {
                 $Grupos_Service = new Grupos_service();
                 $resultado = $Grupos_Service->show($id);
                 if ($resultado) {
-                    $this->echoOk($resultado);
+                    $this->TodoOK($resultado);
                 } else {
-                    $this->notFound(array("resultado" => "El grupo no se pudo mostrar"));
+                    $this->ErrorRestriccion(array("resultado" => "El grupo no se pudo mostrar"));
                 }
             } catch (ValidationException $ex) {
-                $this->notFound($ex->getERROR());
+                $this->NoEncontrado($ex->getERROR());
             } catch (ResourceNotFound $ex) {
-                $this->notFound($ex->getERROR());
+                $this->ErrorRecursoNoEncontrado($ex->getERROR());
             }
         }
     }
@@ -203,6 +203,6 @@ class Grupos_controller extends Basic_Controller
 
         $Grupos_Service = new Grupos_service();
         $resultado = $Grupos_Service->info_add();
-        $this->echoOk($resultado);
+        $this->TodoOK($resultado);
     }
 }
