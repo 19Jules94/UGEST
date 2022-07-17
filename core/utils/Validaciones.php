@@ -31,9 +31,13 @@ function validarNombreDep($nombre){
         || $nombre == "P5"
         || $nombre == "P6";
 }
+function validarNombreUsuario($nombre)
+{
+    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,20}$/", $nombre);
+}
 function validarEmail($email)
 {
-    return (false !== filter_var($email, FILTER_VALIDATE_EMAIL));
+    return preg_match("/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/", $email);
 }
 
 function validarNombreAccion($nombreAccion)
@@ -115,4 +119,15 @@ function validarAsistencia($asistencia){
 
 function validarDia($dia){
     return ($dia=='lunes' or $dia=='martes' or $dia=='miercoles' or $dia=='jueves' or $dia=='viernes');
+}
+
+function validarNombreFuncionalidad($nombre){
+    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]{3,20}$/",$nombre);
+}
+
+function validarDescripcionFuncionalidad($descripcion){
+    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]{3,200}$/",$descripcion);
+}
+function validarUbicacion($nombre){
+    return preg_match("/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{3,100}$/",$nombre);
 }

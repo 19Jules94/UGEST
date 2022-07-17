@@ -26,7 +26,7 @@ class Edificios_Service
             throw new ValidationException("El nombre proporcionado no es válido");
         }
 
-        if (validarNombre($ubicacion)!=true){
+        if (validarUbicacion($ubicacion)!=true){
             throw new ValidationException("La ubicación proporcionado no es válido");
         }
 
@@ -47,7 +47,7 @@ class Edificios_Service
             throw new ValidationException("El nombre proporcionado no es válido");
         }
 
-        if (validarNombre($ubicacion)!=true){
+        if (validarUbicacion($ubicacion)!=true){
             throw new ValidationException("La ubicación proporcionado no es válido");
         }
 

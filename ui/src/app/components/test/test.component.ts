@@ -172,7 +172,7 @@ export class TestComponent implements OnInit {
     this.gestionAsignaturasTest();
     this.gestionGruposTest();
     //this.gestionHorariosTest();
-    this.gestionTutoriasTest();
+    //this.gestionTutoriasTest();
   }
 
   doTestsGrupos() {
@@ -332,7 +332,7 @@ export class TestComponent implements OnInit {
 
     localStorage.setItem('credentials', token);
     localStorage.setItem('acciones_funcionalidades', acc_func);
-       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
     //TEST PARA SHOWALL
@@ -400,7 +400,7 @@ export class TestComponent implements OnInit {
           });
           localStorage.setItem('credentials', token);
           localStorage.setItem('acciones_funcionalidades', acc_func);
-             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
           this.gestionAccionesService.addAccion("ACCIONPRUEBA", "DESCRIPCIONPRUEBA").subscribe(
             () => {
@@ -420,7 +420,7 @@ export class TestComponent implements OnInit {
 
                 localStorage.setItem('credentials', token);
                 localStorage.setItem('acciones_funcionalidades', acc_func);
-                   localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                   localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
                 this.gestionAccionesService.deleteAccion(id).subscribe(
                   () => {
@@ -500,7 +500,7 @@ export class TestComponent implements OnInit {
 
     localStorage.setItem('credentials', token);
     localStorage.setItem('acciones_funcionalidades', acc_func);
-       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
     //TEST PARA SHOWALL
     this.gestionRolesService.mostrarTodos()
@@ -531,7 +531,7 @@ export class TestComponent implements OnInit {
           });
           localStorage.setItem('credentials', token);
           localStorage.setItem('acciones_funcionalidades', acc_func);
-             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
           this.gestionRolesService.addRol("NUEVOROL").subscribe(
             value => {
@@ -551,7 +551,7 @@ export class TestComponent implements OnInit {
                 //TEST PARA DELETE OK
                 localStorage.setItem('credentials', token);
                 localStorage.setItem('acciones_funcionalidades', acc_func);
-                   localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                   localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
                 this.gestionRolesService.deleteRol(result).subscribe(
                   value => {
@@ -657,7 +657,7 @@ export class TestComponent implements OnInit {
 
     localStorage.setItem('credentials', token);
     localStorage.setItem('acciones_funcionalidades', acc_func);
-       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
     //TEST PARA SHOWALL
@@ -725,7 +725,7 @@ export class TestComponent implements OnInit {
           });
           localStorage.setItem('credentials', token);
           localStorage.setItem('acciones_funcionalidades', acc_func);
-             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
           this.gestionFuncionalidadesService.addFuncionalidad("ACCIONPRUEBA", "DESCRIPCIONPRUEBA").subscribe(
             () => {
@@ -743,7 +743,7 @@ export class TestComponent implements OnInit {
                 });
                 localStorage.setItem('credentials', token);
                 localStorage.setItem('acciones_funcionalidades', acc_func);
-                   localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                   localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
                 this.gestionFuncionalidadesService.deleteFuncionalidad(id).subscribe(
                   () => {
@@ -814,7 +814,7 @@ export class TestComponent implements OnInit {
 
     localStorage.setItem('credentials', token);
     localStorage.setItem('acciones_funcionalidades', acc_func);
-       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
     //TEST PARA ADD Valido
@@ -829,7 +829,7 @@ export class TestComponent implements OnInit {
 
           localStorage.setItem('credentials', token);
           localStorage.setItem('acciones_funcionalidades', acc_func);
-             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
           this.gestionUsauriosService.addUsuario("35577002G", "nuevo", "usuario", "imblanco18@esei.uvigo.es", "P4ssword")
             .subscribe(
@@ -850,7 +850,7 @@ export class TestComponent implements OnInit {
 
                   localStorage.setItem('credentials', token);
                   localStorage.setItem('acciones_funcionalidades', acc_func);
-                     localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                     localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
                   //TEST PARA ADD CON EMAIL REPETIDO
                   this.gestionUsauriosService.addUsuario("18171619D", "nuevo", "usuario", "jpsilva17@esei.uvigo.es", "P4ssword")
@@ -872,7 +872,7 @@ export class TestComponent implements OnInit {
 
                           localStorage.setItem('credentials', token);
                           localStorage.setItem('acciones_funcionalidades', acc_func);
-                             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                             localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
                           //TEST PARA EDIT Valido
                           this.gestionUsauriosService.editUsuario(dni, "nombre", "apellidos", "jpsilva17@esei.uvigo.es","password")
@@ -889,7 +889,7 @@ export class TestComponent implements OnInit {
 
                                   localStorage.setItem('credentials', token);
                                   localStorage.setItem('acciones_funcionalidades', acc_func);
-                                     localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                                     localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
                                   this.gestionUsauriosService.editUsuario(dni, "nombre", "nombre", "jpsilva17@esei.uvigo.es","12345678Z")
                                     .subscribe(
@@ -902,7 +902,7 @@ export class TestComponent implements OnInit {
 
                                         localStorage.setItem('credentials', token);
                                         localStorage.setItem('acciones_funcionalidades', acc_func);
-                                           localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                                           localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
                                         this.gestionUsauriosService.deleteUsuario(dni).subscribe(
                                           () => {
@@ -1196,7 +1196,7 @@ export class TestComponent implements OnInit {
 
     localStorage.setItem('credentials', token);
     localStorage.setItem('acciones_funcionalidades', acc_func);
-       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+       localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
     this.gestionDepartamentosService.addDepartamento("Departamento de Lenguajes", "D00x00", "1").subscribe(
@@ -1209,7 +1209,7 @@ export class TestComponent implements OnInit {
 
         localStorage.setItem('credentials', token);
         localStorage.setItem('acciones_funcionalidades', acc_func);
-           localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+           localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
         this.gestionDepartamentosService.addDepartamento("Departamento de Lenguajes", "D00x00", "1").subscribe(
@@ -1230,7 +1230,7 @@ export class TestComponent implements OnInit {
 
               localStorage.setItem('credentials', token);
               localStorage.setItem('acciones_funcionalidades', acc_func);
-                 localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                 localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
               this.gestionDepartamentosService.addDepartamento("Departamento de Lenguajes II", "D00x77", "1").subscribe(
@@ -1238,7 +1238,7 @@ export class TestComponent implements OnInit {
 
                   localStorage.setItem('credentials', token);
                   localStorage.setItem('acciones_funcionalidades', acc_func);
-                     localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                     localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
                   this.gestionDepartamentosService.editDepartamento(id2, "Departamento de Lenguajes", "D00x00", "1").subscribe(
@@ -1259,7 +1259,7 @@ export class TestComponent implements OnInit {
 
                         localStorage.setItem('credentials', token);
                         localStorage.setItem('acciones_funcionalidades', acc_func);
-                           localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                           localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
                         this.gestionDepartamentosService.deleteDepartamento(id2).subscribe()
@@ -1302,7 +1302,7 @@ export class TestComponent implements OnInit {
 
         localStorage.setItem('credentials', token);
         localStorage.setItem('acciones_funcionalidades', acc_func);
-           localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+           localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
         this.gestionDepartamentosService.editDepartamento(id, "Departamento de Lenguajes", "D00x02", "1").subscribe(
@@ -1315,7 +1315,7 @@ export class TestComponent implements OnInit {
 
             localStorage.setItem('credentials', token);
             localStorage.setItem('acciones_funcionalidades', acc_func);
-               localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+               localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
             this.gestionDepartamentosService.editDepartamento(id, "Departamento de Lenguajes", "D00x02", "1").subscribe(
@@ -1336,7 +1336,7 @@ export class TestComponent implements OnInit {
 
                   localStorage.setItem('credentials', token);
                   localStorage.setItem('acciones_funcionalidades', acc_func);
-                     localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                     localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
                   this.gestionDepartamentosService.show(id).subscribe(
@@ -1348,7 +1348,7 @@ export class TestComponent implements OnInit {
                       });
                       localStorage.setItem('credentials', token);
                       localStorage.setItem('acciones_funcionalidades', acc_func);
-                         localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"OuTech\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}");
+                         localStorage.setItem('profile', "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}");
 
 
                       this.gestionDepartamentosService.deleteDepartamento(id).subscribe(
@@ -7136,7 +7136,7 @@ export class TestComponent implements OnInit {
   private static initFakeCredentials() {
     const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJETkkiOiIxMjM0NTY3OFoifQ.A965i7M-G9NMX8FO38YTWcNxyVSleOfks7yHCL1hNp8";
     const acc_func = "{\"ACCION\":[\"ADD\",\"DELETE\",\"SHOWALL\"],\"FUNCIONALIDAD\":[\"ADD\",\"DELETE\",\"SHOWALL\"],\"ROL\":[\"ADD\",\"DELETE\",\"SHOWALL\"]}";
-    const profile = "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"Solutions\",\"email\":\"admin@outech.com\"}";
+    const profile = "{\"dni\":\"12345678Z\",\"nombre\":\"ADMIN\",\"apellidos\":\"UVIGO\",\"email\":\"admin@uvigo.com\"}";
 
     localStorage.setItem('credentials', token);
     localStorage.setItem('acciones_funcionalidades', acc_func);

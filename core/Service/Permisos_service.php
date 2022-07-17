@@ -24,15 +24,15 @@ class Permisos_service
     function addPermiso($rol, $funcionalidad, $accion)
     {
 
-        if (!$this->validarId($rol)){
+        if (validarID($rol)!=true){
             throw new ValidationException("El rol proporcionado no es válido");
         }
 
-        if (!$this->validarId($funcionalidad)){
+        if (validarID($funcionalidad)!=true){
             throw new ValidationException("La funcionalidad proporcionada no es válida");
         }
 
-        if (!$this->validarId($accion)){
+        if (validarID($accion)!=true){
             throw new ValidationException("La acción proporcionada no es válida");
         }
 
@@ -51,15 +51,15 @@ class Permisos_service
     function deletePermiso($rol, $funcionalidad, $accion)
     {
 
-        if (!$this->validarId($rol)){
+        if (validarID($rol)!=true){
             throw new ValidationException("El rol proporcionado no es válido");
         }
 
-        if (!$this->validarId($funcionalidad)){
+        if (validarID($funcionalidad)!=true){
             throw new ValidationException("La funcionalidad proporcionada no es válida");
         }
 
-        if (!$this->validarId($accion)){
+        if (validarID($accion)!=true){
             throw new ValidationException("La acción proporcionada no es válida");
         }
 
@@ -78,8 +78,6 @@ class Permisos_service
         return array("roles" => $roles, "funcionalidades" => $funcionalidades, "acciones" => $acciones);
     }
 
-    function validarId($id){
-        return preg_match("/^[0-9]+$/",$id);
-    }
+   
 
 }

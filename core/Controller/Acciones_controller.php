@@ -36,7 +36,7 @@ class Acciones_controller extends Basic_Controller
     function mostrarTodas()
     {
         $Acciones_Service = new Acciones_service();
-        $resultado = $Acciones_Service->showall();
+        $resultado = $Acciones_Service->mostrarTodas();
         $this->TodoOK($resultado);
     }
     function addAccion()

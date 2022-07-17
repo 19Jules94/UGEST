@@ -36,7 +36,7 @@ class Funcionalidades_controller extends Basic_Controller
     function mostrarTodas()
     {
         $Funcionalidades_Service = new Funcionalidades_service();
-        $resultado = $Funcionalidades_Service->showall();
+        $resultado = $Funcionalidades_Service->mostrarTodas();
         $this->TodoOK($resultado);
     }
     function addFuncionalidad()

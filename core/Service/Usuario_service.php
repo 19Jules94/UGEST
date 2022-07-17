@@ -17,7 +17,7 @@ class Usuarios_service
             throw new ValidationException("El dni proporcionado no es válido.");
         }
 
-        if (validarNombre($nombre) != true) {
+        if (validarNombreUsuario($nombre) != true) {
             throw new ValidationException("El nombre introducido no es válido, solo se permiten caracteres alfabéticos.");
         }
 
@@ -50,7 +50,7 @@ class Usuarios_service
     function deleteUsuario($dni)
     {
         if (validarDNI($dni)!=true) {
-            throw new ValidationException("El id proporcionado no es válido");
+            throw new ValidationException("El dni proporcionado no es válido");
         }
         return $this->USUARIOS_MODEL->deleteUsuario($dni);
     }
@@ -61,7 +61,7 @@ class Usuarios_service
             throw new ValidationException("El dni proporcionado no es válido.");
         }
 
-        if (validarNombre($nombre)!=true) {
+        if (validarNombreUsuario($nombre)!=true) {
             throw new ValidationException("El nombre introducido no es válido, solo se permiten caracteres alfabéticos.");
         }
 
@@ -85,11 +85,15 @@ class Usuarios_service
     public function modificarPasswordEmail($dni, $email, $password)
     {
 
-        if (validarEmail($email) == true && validarPass($password) == true) {
+        if (validarPass($password)!=true) {
+            throw new ValidationException("La contraseña dada no es válida.");
+        }
+        if (validarEmail($email)!=true) {
+            throw new ValidationException("Email  no es válido.");
+        }
+        
 
             return $this->USUARIOS_MODEL->modificarPasswordEmail($dni, $email, $password);
-        } else {
-            return null;
-        }
+       
     }
 }
