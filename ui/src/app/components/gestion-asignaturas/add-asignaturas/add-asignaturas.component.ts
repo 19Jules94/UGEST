@@ -105,7 +105,7 @@ export class AddAsignaturasComponent implements OnInit {
     const profesor = this.asignaturaForm.get("profesor")?.value;
 
     const titulacionCompleta = this.titulacionSelect?.find(value => value.id = titulacion);
-
+    console.log(titulacionCompleta)
     this.gestionASignaturasService.addAsignatura(nombre, creditos,contenido,tipo,horas,cuatrimestre,titulacion,titulacionCompleta!.anho_id, departamento, codigo,profesor)
       .subscribe(
         value => {

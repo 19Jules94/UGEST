@@ -73,6 +73,7 @@ if (!isset($_REQUEST['controller'])) {
             break;
         case 'tutorias':
             new Tutorias_controller();
+            break;
         case 'pod':
             new POD_Controller();
             break;

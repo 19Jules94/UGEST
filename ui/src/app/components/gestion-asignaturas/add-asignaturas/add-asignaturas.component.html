@@ -47,12 +47,41 @@
                     translate}}</small>
             </div>
 
-                <div class="input-group mb-3">
-                    <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.codigo' | translate}}</label>
-                    <input class="form-control" type="text" formControlName="codigo" name="codigo" placeholder="Ejemplo de codigo V55G020V44123" >
-                    <label class="col-2 col-form-label form-control-label" >{{'gestion-asignaturas.creditos' | translate}}</label>
-                    <input class="form-control" type="text" formControlName="creditos" name="creditos" >
+            <div class="form-group row mb-2">
+
+
+                <div class="col-9">
+                    <label class="col-9 col-form-label form-control-label">{{'gestion-asignaturas.codigo' | translate}}</label>
+                    <input class="form-control" type="text" formControlName="codigo" name="codigo" maxlength="100">
+                    <div *ngIf="asignaturaForm.get('codigo')?.errors && asignaturaForm.get('codigo')?.dirty"
+                    class="form-text text-danger">
+                    <small class="col-9"
+                        *ngIf="asignaturaForm.get('codigo')?.hasError('required')">{{'gestion-asignaturas.add-codigo-req' |
+                        translate}}</small>
+                    <small class="col-9"
+                        *ngIf="asignaturaForm.get('codigo')?.hasError('pattern')">{{'gestion-asignaturas.add-codigo-pat' |
+                        translate}}</small>
                 </div>
+                </div>
+    
+    
+                <div class="col-3">
+                    <label class="col-3 col-form-label form-control-label">{{'gestion-asignaturas.creditos' | translate}}</label>
+                    <select class="form-control" formControlName="creditos" name="creditos" id="creditos">
+                        <option value="" selected="true" disabled="disabled">{{'gestion-asignaturas.select-creditos' |
+                            translate}}</option>
+                        <option>6</option>
+                        <option>12</option>
+                    </select>
+                    <div *ngIf="asignaturaForm.get('creditos')?.errors && asignaturaForm.get('creditos')?.dirty"
+                    class="form-text text-danger">
+                    <small class="col-3"
+                        *ngIf="asignaturaForm.get('creditos')?.hasError('required')">{{'gestion-asignaturas.add-creditos-req'
+                        | translate}}</small>
+                </div>
+                </div>
+    
+            </div>
                 <div *ngIf="asignaturaForm.get('codigo')?.errors && asignaturaForm.get('codigo')?.dirty"
                 class="form-text text-danger">
                 <small class="col-9"

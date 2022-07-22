@@ -36,7 +36,7 @@ export class MostrarFuncionalidadesComponent implements OnInit {
       this.gestionFuncionalidadesService.deleteFuncionalidad(funcionalidad.id).subscribe(
         () => {
           this.remove()
-
+          this.actualizarFuncionalidades();
         },
 
         error => {
@@ -50,7 +50,7 @@ export class MostrarFuncionalidadesComponent implements OnInit {
           }
         }
       )
-      this.actualizarFuncionalidades();
+      
     }
   }  
   private remove() {
