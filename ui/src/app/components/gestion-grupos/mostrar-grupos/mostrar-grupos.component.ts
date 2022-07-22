@@ -13,6 +13,7 @@ import { GestionGruposService } from 'src/app/services/gestion-grupos.service';
 export class MostrarGruposComponent implements OnInit {
 
   public grupos?: Array<Grupo>;
+  public error?:string;
   constructor(private readonly gestionGrupos: GestionGruposService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -34,21 +35,21 @@ export class MostrarGruposComponent implements OnInit {
       this.gestionGrupos.deleteGrupo(grupo.id).subscribe(
         () => {
           this.remove()
-
+this.actualizarGrupos();
         },
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.error=this.ts.instant("gestion-grupos.eliminar-error-foreign-key");
               break;
             default:
-              console.log("error")
+              this.error =this.ts.instant("gestion-grupos.eliminar-error");
               break;
           }
         }
       )
-      this.actualizarGrupos();
+      
     }
   }  
   private remove() {
@@ -56,5 +57,11 @@ export class MostrarGruposComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+  this.error = undefined;
+  }
 }

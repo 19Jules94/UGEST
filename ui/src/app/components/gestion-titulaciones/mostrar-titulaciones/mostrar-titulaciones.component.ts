@@ -13,6 +13,7 @@ import { GestionTitulacionesService } from 'src/app/services/gestion-titulacione
 export class MostrarTitulacionesComponent implements OnInit {
 
   public titulaciones?: Array<Titulacion>;
+  public error?:string;
   constructor(private readonly gestionTitulaciones: GestionTitulacionesService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -34,16 +35,16 @@ export class MostrarTitulacionesComponent implements OnInit {
       this.gestionTitulaciones.deleteTitulacion(titulacion.id).subscribe(
         () => {
           this.remove()
-
+this.actualizarTitulaciones();
         },
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.error = this.ts.instant("gestion-roles.eliminar-error-foreign");
               break;
             default:
-              console.log("error")
+              this.error =this.ts.instant("gestion-roles.eliminar-error");
               break;
           }
         }
@@ -56,5 +57,11 @@ export class MostrarTitulacionesComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+  this.error = undefined;
+  }
 }

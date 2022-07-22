@@ -11,12 +11,13 @@ import {AuthenticationService} from "../../../services/authentication.service";
 })
 export class MostrarUsuariosComponent implements OnInit {
   public usuarios?: Array<Usuario>;
+  public error?:string;
   constructor(private readonly gestionarUsuarioService: GestionarUsuarioService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     public ts: TranslateService,
     private readonly authenticationService: AuthenticationService,
-  
+    
 ) {
 
 }
@@ -38,26 +39,33 @@ export class MostrarUsuariosComponent implements OnInit {
       this.gestionarUsuarioService.deleteUsuario(usuario.dni).subscribe(
         () => {
           this.remove()
-
+this.actualizarUsuarios();
         },
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.error = this.ts.instant("gestion-usuarios.eliminar-error-foreign");
               break;
             default:
-              console.log("error")
+              this.error = this.ts.instant("gestion-usuarios.eliminar-error");
               break;
           }
         }
       )
-      this.actualizarUsuarios();
+     
     }
   }  
   private remove() {
     this.router.navigate(['/panel-principal/gestion-usuarios/showall']);
     window.scrollTo({top: 0, behavior: 'smooth'});
   
+  }
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+  this.error = undefined;
   }
 }

@@ -13,6 +13,7 @@ import { GestionEspacioService } from 'src/app/services/gestion-espacio.service'
 export class MostrarEspaciosComponent implements OnInit {
 
   public espacios?: Array<Espacio>;
+  public error?:string;
   constructor(private readonly gestionEspacios: GestionEspacioService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -34,21 +35,21 @@ export class MostrarEspaciosComponent implements OnInit {
       this.gestionEspacios.deleteEspacio(espacio.id).subscribe(
         () => {
           this.remove()
-
+this.actualizarEspacios();
         },
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.error = this.ts.instant("gestion-espacios.eliminar-error-foreign-key");
               break;
             default:
-              console.log("error")
+              this.error = this.ts.instant("gestion-espacios.eliminar-error");
               break;
           }
         }
       )
-      this.actualizarEspacios();
+      
     }
   }  
   private remove() {
@@ -56,4 +57,12 @@ export class MostrarEspaciosComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+  this.error = undefined;
+  }
+  
 }

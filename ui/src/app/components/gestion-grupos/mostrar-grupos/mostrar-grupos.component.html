@@ -3,6 +3,12 @@
     <button class="btn btn-success mb-2"
       [routerLink]="['/panel-principal/gestion-grupos/add']">{{'gestion-grupos.add' | translate}}<i
         style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+        <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{getflashError()}}
+          <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
     <table class="table">
       <thead class="thead-dark">
         <tr>

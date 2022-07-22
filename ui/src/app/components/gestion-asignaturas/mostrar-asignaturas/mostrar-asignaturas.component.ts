@@ -13,6 +13,7 @@ import { GestionAsignaturasService } from 'src/app/services/gestion-asignaturas.
 export class MostrarAsignaturasComponent implements OnInit {
 
   public asignaturas?: Array<Asignatura>;
+  public error? :string;
   constructor(private readonly gestionAsignaturas: GestionAsignaturasService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -34,21 +35,21 @@ export class MostrarAsignaturasComponent implements OnInit {
       this.gestionAsignaturas.deleteAsignatura(asignatura.id).subscribe(
         () => {
           this.remove()
-
+           this.actualizarAsignaturas();
         },
 
         error => {
           switch (error.message) {
             case '4001':
-              this.removeError4001();
+              this.error=this.ts.instant("gestion-asignaturas.eliminar-error-foreign-key");
               break;
             default:
-              this.removeError();
+              this.error = this.ts.instant("gestion-asignaturas.eliminar-error-foreign-key");
               break;
           }
         }
       )
-      this.actualizarAsignaturas();
+      
     }
   }  
   private remove() {
@@ -56,13 +57,13 @@ export class MostrarAsignaturasComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
-  private removeError() {
-    this.router.navigate(['/panel-principal/gestion-asignaturas/showall'], {queryParams: {flasherror: this.ts.instant("gestion-asignaturas.eliminar-error")}});
-    
+ 
+
+  getflashError() {
+    return this.error;
   }
 
-  private removeError4001() {
-    this.router.navigate(['/panel-principal/gestion-asignaturas/showall'], {queryParams: {flasherror: this.ts.instant("gestion-asignaturas.eliminar-error-foreign-key")}});
-  
+  onCloseFlash() {
+  this.error = undefined;
   }
 }

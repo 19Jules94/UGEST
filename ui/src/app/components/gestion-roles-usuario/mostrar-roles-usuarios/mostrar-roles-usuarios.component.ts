@@ -12,7 +12,10 @@ import { GestionRolesUsuarioService } from 'src/app/services/gestion-roles-usuar
   styleUrls: ['./mostrar-roles-usuarios.component.css']
 })
 export class MostrarRolesUsuariosComponent implements OnInit {
+
   public roles_usuario?: Array<Rol_Usuario>;
+  public error?:string;
+  
   constructor(private readonly GestionRolesUsuario: GestionRolesUsuarioService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -35,21 +38,14 @@ export class MostrarRolesUsuariosComponent implements OnInit {
       this.GestionRolesUsuario.deleteRolUsuario(rol_usuario.usuario,rol_usuario.id_rol).subscribe(
         () => {
           this.remove()
-
+this.actualizarRolesUsuario();
         },
 
         error => {
-          switch (error.message) {
-            case '1451':
-             console.log("error")
-              break;
-            default:
-              console.log("error")
-              break;
-          }
+          this.error = this.ts.instant("gestion-roles-usuario.eliminar-error");
         }
       )
-      this.actualizarRolesUsuario();
+     
     }
   }  
   private remove() {
@@ -57,5 +53,11 @@ export class MostrarRolesUsuariosComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+  this.error = undefined;
+  }
 }

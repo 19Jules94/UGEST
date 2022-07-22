@@ -28,7 +28,7 @@
                 </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label">{{'gestion-grupos.codigo' | translate}}</label>
-                    <input class="form-control" type="text" formControlName="codigo" name="codigo" >
+                    <input class="form-control" type="text" formControlName="codigo" name="codigo" placeholder="Ejemplo de codigo A00d00 ">
                 </div>
                 <div *ngIf="grupoForm.get('codigo')?.errors && grupoForm.get('codigo')?.dirty" class="form-text text-danger">
                     <small class="col-12"

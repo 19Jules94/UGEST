@@ -133,17 +133,17 @@ export class AddHorarioComponent implements OnInit {
 
   onSubmit() {
   
-    var grupo = this.horarioForm.get("grupo")?.value;
-    var espacio = this.horarioForm.get("espacio")?.value;
-    var profesor = this.horarioForm.get("profesor")?.value;
-    var asignatura = this.horarioForm.get("asignatura")?.value;
-    var titulacion = this.horarioForm.get("titulacion")?.value;
+    const grupo = this.horarioForm.get("grupo")?.value;
+    const espacio = this.horarioForm.get("espacio")?.value;
+    const profesor = this.horarioForm.get("profesor")?.value;
+    const asignatura = this.horarioForm.get("asignatura")?.value;
+    const titulacion = this.horarioForm.get("titulacion")?.value;
     var fecha = this.horarioForm.get("fecha")?.value;
-    var hora_inicio = this.horarioForm.get("hora_inicio")?.value + ':00';
-    var hora_fin = this.horarioForm.get("hora_fin")?.value + ':00';
-    var asistencia = this.horarioForm.get("asistencia")?.value;
-    var dia = this.dias_semana[new Date(this.horarioForm.get("fecha")?.value).getDay()]
-    var titulacionCompleta = this.titulacionSelect?.find(value => value.id = titulacion);
+    const hora_inicio = this.horarioForm.get("hora_inicio")?.value + ':00';
+    const hora_fin = this.horarioForm.get("hora_fin")?.value + ':00';
+    const asistencia = this.horarioForm.get("asistencia")?.value;
+    const dia = this.dias_semana[new Date(this.horarioForm.get("fecha")?.value).getDay()]
+    const titulacionCompleta = this.titulacionSelect?.find(value => value.id = titulacion);
     var fecha_fin = this.horarioForm.get("fecha_fin")?.value;
 
     
@@ -154,13 +154,14 @@ export class AddHorarioComponent implements OnInit {
 
  
    var numero_dias=this.d_fin-this.d_inicio;
+    console.log(numero_dias);
     
     if(numero_dias==0){
-    this.gestionHorarios.addHorario(titulacion, titulacionCompleta!.anho_id, asignatura, grupo, profesor,
-      espacio, "Pendiente", hora_inicio, hora_fin, dia, fecha)
-      .subscribe(
+      this.gestionHorarios.addHorario(titulacion, titulacionCompleta!.anho_id, asignatura, grupo, profesor,
+        espacio, "Pendiente", hora_inicio, hora_fin, dia, fecha)
+        .subscribe(
         value => {
-          this.router.navigate(['/panel-principal/gestion-horarios/showall'], {queryParams: {flashok: this.ts.instant("gestion-horarios.add-ok")}});
+          this.router.navigate(['/panel-principal/gestion-horarios/showall']);
         },
         error => {
 
@@ -193,9 +194,9 @@ export class AddHorarioComponent implements OnInit {
     }
     if(numero_dias>0){
      
-
+console.log("entra >0")
        
-       while(this.d_inicio<=this.d_fin){
+       while(this.d_inicio<=this.d_fin&& this.d_fin <= 31){
         console.log("d_inicio "+this.d_inicio);
         console.log("fecha "+fecha)
         
@@ -235,7 +236,6 @@ export class AddHorarioComponent implements OnInit {
               }
             }
           )
-          console.log(numero_dias)
           if (
             this.comprobarFindeSemana(
               (fecha = new Date(fecha)),
@@ -245,19 +245,16 @@ export class AddHorarioComponent implements OnInit {
           ) {
             this.d_inicio = this.d_inicio + 1;
             fecha = this.formatDate(this.sumarDias((fecha = new Date(fecha)), 1));
-          }
-          
-          if (
+          } else if (
             this.comprobarFindeSemana(
               (fecha = new Date(fecha)),
               (fecha_fin = new Date(fecha_fin))
             ) == true &&
-            numero_dias % 7 ==0)
-           {
+            numero_dias % 7 == 0) {
             this.d_inicio = this.d_inicio + 7;
             console.log(this.d_inicio)
             fecha = this.formatDate(this.sumarDias((fecha = new Date(fecha)), 7));
-            console.log("fFF",fecha )
+            console.log("fFF", fecha)
           }
         }
   
@@ -293,9 +290,9 @@ export class AddHorarioComponent implements OnInit {
   
       var day = fecha.getDate().toString();
   
-      if(parseInt(day) <10){
-      var fecha_final = year + '-' + 0 + month + '-' + 0+day;
-      }else{
+      if (parseInt(day) < 10) {
+        var fecha_final = year + '-' + 0 + month + '-' + 0 + day;
+      } else {
         var fecha_final = year + '-' + 0 + month + '-' + day;
       }
       return fecha_final;

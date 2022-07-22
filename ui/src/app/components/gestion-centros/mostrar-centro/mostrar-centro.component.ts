@@ -12,6 +12,7 @@ import { GestionCentrosService } from 'src/app/services/gestion-centros.service'
 })
 export class MostrarCentroComponent implements OnInit {
   public centros?: Array<Centro>;
+  public error?:string;
   constructor(private readonly gestionCentrosService: GestionCentrosService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -34,21 +35,15 @@ export class MostrarCentroComponent implements OnInit {
       this.gestionCentrosService.deleteCentro(centro.id).subscribe(
         () => {
           this.remove()
+          this.actualizarCentros();
 
         },
 
         error => {
-          switch (error.message) {
-            case '1451':
-             console.log("error")
-              break;
-            default:
-              console.log("error")
-              break;
-          }
+          this.error = this.ts.instant("gestion-centros.eliminar-error");
         }
       )
-      this.actualizarCentros();
+      
     }
   }  
   private remove() {
@@ -56,5 +51,11 @@ export class MostrarCentroComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+  this.error = undefined;
+  }
 }

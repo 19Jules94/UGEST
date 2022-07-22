@@ -13,6 +13,7 @@ import { GestionDepartamentosService } from 'src/app/services/gestion-departamen
 export class MostrarDepartamentosComponent implements OnInit {
 
   public departamentos?: Array<Departamento>;
+  public error?:string;
   constructor(private readonly gestionDepartamentos: GestionDepartamentosService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -35,21 +36,15 @@ export class MostrarDepartamentosComponent implements OnInit {
       this.gestionDepartamentos.deleteDepartamento(departamento.id).subscribe(
         () => {
           this.remove()
-
+this.actualizarDepartamentos();
         },
 
         error => {
-          switch (error.message) {
-            case '1451':
-             console.log("error")
-              break;
-            default:
-              console.log("error")
-              break;
-          }
+          this.error = this.ts.instant("gestion-departamentos.eliminar-error");
+        
         }
       )
-      this.actualizarDepartamentos();
+      
     }
   }  
   private remove() {
@@ -57,5 +52,11 @@ export class MostrarDepartamentosComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+  this.error = undefined;
+  }
 }

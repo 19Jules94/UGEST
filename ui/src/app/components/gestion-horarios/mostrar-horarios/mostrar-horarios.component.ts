@@ -13,7 +13,7 @@ import { GestionHorariosService } from 'src/app/services/gestion-horarios.servic
 export class MostrarHorariosComponent implements OnInit {
 
   public horarios?: Array<Horario>;
-  
+  public error?:string;
   constructor(private readonly gestionHorarios: GestionHorariosService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -38,26 +38,33 @@ export class MostrarHorariosComponent implements OnInit {
       this.gestionHorarios.deleteHorario(horario.id).subscribe(
         () => {
           this.remove()
-
+this.actualizarHorarios();
         },
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.error = this.ts.instant("gestion-horarios.eliminar-error-foreign-key");
               break;
             default:
-              console.log("error")
+              this.error =  this.ts.instant("gestion-horarios.eliminar-error");
               break;
           }
         }
       )
-      this.actualizarHorarios();
+      
     }
   }  
   private remove() {
     this.router.navigate(['/panel-principal/gestion-horarios/showall']);
     window.scrollTo({top: 0, behavior: 'smooth'});
   
+  }
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+  this.error = undefined;
   }
 }

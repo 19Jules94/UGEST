@@ -73,17 +73,23 @@ export class GestionHorariosService {
       .pipe(
         map(resultado => {
           switch (resultado.CODE) {
-           
             case '200':
               return resultado.RESOURCES.resultado;
+            case '404':
+              throw new Error('404');
+            case '4001':
+              throw new Error('4001');
             case '4002':
-              console.log(resultado.CODE)
               throw new Error('4002');
             case '4004':
-              console.log(resultado.CODE)
               throw new Error('4004');
+            case '40011':
+              throw new Error('40011');
+            case '40012':
+              throw new Error('40012');
+            case '40013':
+              throw new Error('40013');
             default:
-              console.log(resultado.CODE)
               throw new Error();
               
           }

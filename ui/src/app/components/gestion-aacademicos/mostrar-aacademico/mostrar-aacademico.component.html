@@ -5,6 +5,12 @@
     <button class="btn btn-success mb-2"
     [routerLink]="['/panel-principal/gestion-aacademico/add']">{{'gestion-aacademico.add-anho' | translate}}<i
         style="margin-left: 1em; margin-right: 0;" class="fa-solid fa-circle-plus"></i></button>
+        <div *ngIf="getflashError()" class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{getflashError()}}
+          <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -13,15 +19,20 @@
           <th scope="col" class="text-center" *ngIf="tieneFuncionalidadAction('EDIFICIO','DELETE')">{{'app.options' | translate}}</th>
         </tr>
       </thead>
+      
+     
       <tbody>
       
         <tr *ngFor="let an of anhos ;let indice=index">
             <th scope="row">{{indice+1}}</th>
             <td>{{an.anho}}</td>          
-            <td *ngIf="tieneFuncionalidadAction('AACADEMICO','DELETE')"><div (click)="deleteAAcademico(an)"><i style="margin-left: 2em;" class="far fa-trash-alt"></i></div></td>
-          </tr>
-  
+            <td *ngIf="tieneFuncionalidadAction('AACADEMICO','DELETE')"><div (click)="deleteAAcademico(an)"><i style="margin-left: 2em;" class="far fa-trash-alt"></i></div>
+             
+            </td>            
+         </tr>    
+          
       </tbody>
+
     </table>
     <button class="btn btn-danger" [routerLink]="['/panel-principal']">{{'gestion-usuarios.volver' | translate}}<i
         style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>

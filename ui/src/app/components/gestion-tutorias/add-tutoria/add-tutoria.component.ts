@@ -126,12 +126,12 @@ export class AddTutoriaComponent implements OnInit {
         );
     }
     if (numero_dias > 0) {
-   
-      console.log("fecha inicio1",this.d_inicio)
-      console.log("fecha fin1",this.d_fin)
-      while (this.d_inicio <= this.d_fin && this.d_fin<=31) {
-        console.log("fecha inicio2",this.d_inicio)
-        console.log("fecha fin2",this.d_fin)
+
+      console.log("fecha inicio1", this.d_inicio)
+      console.log("fecha fin1", this.d_fin)
+      while (this.d_inicio <= this.d_fin && this.d_fin <= 31) {
+        console.log("fecha inicio2", this.d_inicio)
+        console.log("fecha fin2", this.d_fin)
         this.gestionTutoriasService
           .addTutoria(
             anho,
@@ -183,24 +183,21 @@ export class AddTutoriaComponent implements OnInit {
         ) {
           this.d_inicio = this.d_inicio + 1;
           fecha = this.formatDate(this.sumarDias((fecha = new Date(fecha)), 1));
-        }
-        
-        if (
+        } else if (
           this.comprobarFindeSemana(
             (fecha = new Date(fecha)),
             (fecha_fin = new Date(fecha_fin))
           ) == true &&
-          numero_dias % 7 ==0)
-         {
+          numero_dias % 7 == 0) {
           this.d_inicio = this.d_inicio + 7;
           console.log(this.d_inicio)
           fecha = this.formatDate(this.sumarDias((fecha = new Date(fecha)), 7));
-          console.log("fFF",fecha )
+          console.log("fFF", fecha)
         }
       }
 
-      
-    
+
+
       this.router.navigate(['/panel-principal/gestion-tutorias/showall']);
     }
   }
@@ -231,9 +228,9 @@ export class AddTutoriaComponent implements OnInit {
 
     var day = fecha.getDate().toString();
 
-    if(parseInt(day) <10){
-    var fecha_final = year + '-' + 0 + month + '-' + 0+day;
-    }else{
+    if (parseInt(day) < 10) {
+      var fecha_final = year + '-' + 0 + month + '-' + 0 + day;
+    } else {
       var fecha_final = year + '-' + 0 + month + '-' + day;
     }
     return fecha_final;

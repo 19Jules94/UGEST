@@ -62,6 +62,10 @@ import { AddTutoriaComponent } from './components/gestion-tutorias/add-tutoria/a
 import { EditTutoriaComponent } from './components/gestion-tutorias/edit-tutoria/edit-tutoria.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { TestComponent } from './components/test/test.component';
+import { GestionPDAComponent } from './components/gestion-pda/gestion-pda.component';
+import { GestionPODComponent } from './components/gestion-pod/gestion-pod.component';
+import { GestionPDAGuard } from 'src/guards/gestion-pda.guard';
+import { GestionPODGuard } from 'src/guards/gestion-pod.guard';
 
 const routes: Routes = [
   {path: 'inicio', component: InicioComponent, canActivate: [NotAuthenticatedGuard]},
@@ -157,7 +161,9 @@ const routes: Routes = [
 
   {path: 'panel-principal/calendario', component: CalendarioComponent, canActivate: []},
   {path: 'test', component: TestComponent, canActivate: [NotAuthenticatedGuard]},
-  
+
+    {path: 'panel-principal/gestion-pda', component: GestionPDAComponent, canActivate: [GestionPDAGuard]},
+  {path: 'panel-principal/gestion-pod', component: GestionPODComponent, canActivate: [GestionPODGuard]},
 
   {path: '', redirectTo: '/inicio', pathMatch: 'full'},
   {path: '**', redirectTo: '/inicio', pathMatch: 'full'}

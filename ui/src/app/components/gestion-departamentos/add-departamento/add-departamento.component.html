@@ -20,7 +20,7 @@
                   </div>
                 <div class="input-group mb-3">
                     <label class="col-2 col-form-label form-control-label" >{{'gestion-departamentos.codigo' | translate}}</label>
-                    <input class="form-control" type="text" formControlName="codigo" name="codigo" >
+                    <input class="form-control" type="text" formControlName="codigo" name="codigo" placeholder="Ejemplo de codigo D00x50" >
                 </div>
                 <div *ngIf="departamentoForm.get('codigo')?.errors && departamentoForm.get('codigo')?.dirty" class="form-text text-danger">
                     <small class="col-12" *ngIf="departamentoForm.get('codigo')?.hasError('required')">{{'gestion-departamentos.add-codigo-req' | translate}}</small>

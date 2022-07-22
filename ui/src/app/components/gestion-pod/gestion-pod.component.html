@@ -1,0 +1,41 @@
+<div class="container mt-5">
+    <h3 class="text-center">{{'gestion-pod.pod' | translate}}</h3>
+  
+    <p class="mt-3">{{'gestion-pod.msg' | translate}}</p>
+  
+    <form class="bg-white mt-3 pt-4 px-4 mb-3 pb-2 rounded" style="border: black 1px solid;" [formGroup]="podForm">
+  
+      <div class="form-group row">
+        <label class="col-12 col-form-label form-control-label" >
+          {{'gestion-pod.archivo-pod' | translate}}</label>
+  
+        <div class="col-12">
+          <input type="file" accept="application/pdf" (change)="onFileChange($event)" class="form-control-file text-black" id="file" formControlName="file" name="file">
+        </div>
+      </div>
+  
+      <div class="float-end mt-4">
+          <button class="btn btn-secondary"
+                  [routerLink]="['/panel-principal']">{{'gestion-permisos.cancelar' | translate}}<i
+            style="margin-left: 1em; margin-right: 0;" class="fas fa-times-circle"></i></button>
+  
+  
+          <button type="button" class="btn btn-success" (click)="onSubmit()" [disabled]="!podForm.valid" >{{'gestion-pod.subir' | translate}}<i
+            style="margin-left: 1em; margin-right: 0;" class="fas fa-file-upload"></i></button>
+        
+      </div>
+  
+      <div *ngIf="getflashError()" style="margin-top: 1em;" class="alert alert-danger alert-dismissible fade show"
+           role="alert">
+        {{getflashError()}}
+        <button (click)="onCloseFlash()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  
+    </form>
+  
+    <button class="btn btn-secondary" [routerLink]="['/panel-principal']">{{'gestion-usuarios.volver' | translate}}<i style="margin-left: 1em; margin-right: 0;" class="fas fa-long-arrow-alt-left"></i></button>
+  
+  
+  </div>

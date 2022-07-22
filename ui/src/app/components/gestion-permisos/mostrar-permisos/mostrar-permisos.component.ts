@@ -13,6 +13,7 @@ import { GestionPermisosService } from 'src/app/services/gestion-permisos.servic
 })
 export class MostrarPermisosComponent implements OnInit {
   public permisos?: Array<Permiso>;
+  public error?:string;
   constructor(
     private readonly gestionPermisosService: GestionPermisosService,
     public ts: TranslateService,
@@ -41,18 +42,12 @@ export class MostrarPermisosComponent implements OnInit {
       this.gestionPermisosService.deletePermiso(permiso.rol_id,permiso.func_id,permiso.accion_id).subscribe(
         () => {
           this.remove()
-
+this.actualizarPermisos();
         },
 
         error => {
-          switch (error.message) {
-            case '1451':
-             console.log("error")
-              break;
-            default:
-              console.log("error")
-              break;
-          }
+          this.error =this.ts.instant("gestion-permisos.eliminar-error");
+        
         }
       )
       this.actualizarPermisos();
@@ -64,7 +59,13 @@ export class MostrarPermisosComponent implements OnInit {
   
   }
 
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+  this.error = undefined;
+  }
 }
 
 

@@ -75,10 +75,12 @@ import { EditTutoriaComponent } from './components/gestion-tutorias/edit-tutoria
 import { MostrarTutoriasComponent } from './components/gestion-tutorias/mostrar-tutorias/mostrar-tutorias.component';
 import { CalendarioComponent,NgbdModalMarcarAsistencia } from './components/calendario/calendario.component';
 import { TestComponent } from './components/test/test.component';
+import { GestionPDAComponent } from './components/gestion-pda/gestion-pda.component';
+import { GestionPODComponent } from './components/gestion-pod/gestion-pod.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http,'./assets/i18n/', '.json');
 }
 
 if (localStorage.getItem('selectedLanguage') == null) {
@@ -143,7 +145,9 @@ if (localStorage.getItem('selectedLanguage') == null) {
     MostrarTutoriasComponent,
     CalendarioComponent,
     NgbdModalMarcarAsistencia,
-    TestComponent
+    TestComponent,
+    GestionPDAComponent,
+    GestionPODComponent
   ],
   imports: [
     BrowserModule,

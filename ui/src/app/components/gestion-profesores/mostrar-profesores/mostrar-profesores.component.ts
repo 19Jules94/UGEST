@@ -17,6 +17,7 @@ import { Profesores } from 'src/app/models/Gestion-Profesores/Profesores';
 })
 export class MostrarProfesoresComponent implements OnInit {
   public profesores?: Array<Profesor>;
+  public error?:string;
   constructor(private readonly gestionProfesoresService: GestionProfesoresService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -38,16 +39,16 @@ export class MostrarProfesoresComponent implements OnInit {
       this.gestionProfesoresService.deleteProfesor(profesor.dni).subscribe(
         () => {
           this.remove()
-
+this.actualizarProfesores();
         },
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.error =this.ts.instant("gestion-profesores.eliminar-error-foreign-key") 
               break;
             default:
-              console.log("error")
+              this.error =this.ts.instant("gestion-profesores.eliminar-error");
               break;
           }
         }
@@ -59,5 +60,12 @@ export class MostrarProfesoresComponent implements OnInit {
     this.router.navigate(['/panel-principal/gestion-profesores/showall']);
     window.scrollTo({top: 0, behavior: 'smooth'});
   
+  }
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+  this.error = undefined;
   }
 }

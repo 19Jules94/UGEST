@@ -13,6 +13,7 @@ import { GestionUniversidadesService } from 'src/app/services/gestion-universida
 export class MostrarUniversidadComponent implements OnInit {
 
   public universidades?: Array<Universidad>;
+  public error?:string;
   constructor(private readonly gestionUniversidades: GestionUniversidadesService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -35,21 +36,13 @@ export class MostrarUniversidadComponent implements OnInit {
       this.gestionUniversidades.deleteUniversidad(universidad.id).subscribe(
         () => {
           this.remove()
-
+        this.actualizarUniversidades();
         },
-
         error => {
-          switch (error.message) {
-            case '1451':
-             console.log("error")
-              break;
-            default:
-              console.log("error")
-              break;
-          }
+          this.error =this.ts.instant("gestion-universidades.eliminar-error") ;
         }
       )
-      this.actualizarUniversidades();
+      
     }
   }  
   private remove() {
@@ -58,5 +51,11 @@ export class MostrarUniversidadComponent implements OnInit {
   
   }
 
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+  this.error = undefined;
+  }
 }

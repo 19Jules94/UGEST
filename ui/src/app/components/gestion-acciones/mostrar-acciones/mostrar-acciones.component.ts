@@ -12,7 +12,7 @@ import {AuthenticationService} from "../../../services/authentication.service";
 })
 export class MostrarAccionesComponent implements OnInit {
   public acciones?: Array<Accion>;
-  
+  public error?:string;
 
   constructor(private readonly gestionAccionesService: GestionAccionesService,
     private readonly router: Router,
@@ -34,21 +34,21 @@ export class MostrarAccionesComponent implements OnInit {
       this.gestionAccionesService.deleteAccion(accion.id).subscribe(
         () => {
           this.remove()
-
+          this.actualizarAcciones();
         },
 
         error => {
           switch (error.message) {
             case '4001':
-              this.removeError(this.ts.instant("gestion-acciones.eliminar-error-foreign"))
+              this.error =this.ts.instant("gestion-acciones.eliminar-error-foreign")
               break;
             default:
-              this.removeError(this.ts.instant("gestion-acciones.eliminar-error"))
+              this.error=this.ts.instant("gestion-acciones.eliminar-error")
               break;
           }
         }
       )
-      this.actualizarAcciones();
+      
     }
   }  
   private remove() {
@@ -56,9 +56,13 @@ export class MostrarAccionesComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
-  private removeError(msg: string) {
-    this.router.navigate(['/panel-principal/gestion-acciones/showall'], {queryParams: {flasherror: msg}});
-    window.scrollTo({top: 0, behavior: 'smooth'});
-    
+  
+
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+  this.error = undefined;
   }
 }

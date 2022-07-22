@@ -15,7 +15,7 @@ import { Espacio } from 'src/app/models/Gestion-espacios/Espacio';
 export class MostrarAAcademicoComponent implements OnInit {
 
   public anhos?: Array<AAcademico>;
-  
+  public error?: string;
   constructor(private readonly gestionAAcademicoService: GestionAacademicoService,
               private readonly router: Router,
               private readonly route: ActivatedRoute,
@@ -40,21 +40,21 @@ export class MostrarAAcademicoComponent implements OnInit {
       this.gestionAAcademicoService.deleteAAcademico(aacademico.id).subscribe(
         () => {
           this.remove()
-
+          this.actualizarAnhos();
         },
 
         error => {
           switch (error.message) {
             case '4001':
-              this.removeError4001();
+              this.error = this.ts.instant("gestion-aacademico.eliminar-error");
               break;
             default:
-              this.removeError();
+              this.error = this.ts.instant("gestion-aacademico.eliminar-error-foreign-key");
               break;
           }
         }
       )
-      this.actualizarAnhos();
+      
     }
   }  
   private remove() {
@@ -62,13 +62,13 @@ export class MostrarAAcademicoComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
-  private removeError() {
-    this.router.navigate(['/panel-principal/gestion-aacademicoshowall'], {queryParams: {flasherror: this.ts.instant("gestion-aacademico.eliminar-error")}});
-   
+
+
+  getflashError() {
+    return this.error;
   }
 
-  private removeError4001() {
-    this.router.navigate(['/panel-principal/gestion-aacademico/showall'], {queryParams: {flasherror: this.ts.instant("gestion-aacademico.eliminar-error-foreign-key")}});
-    
+  onCloseFlash() {
+  this.error = undefined;
   }
 }

@@ -13,6 +13,7 @@ import { Edificio } from 'src/app/models/Gestion-edificios/Edificio';
 })
 export class MostrarEdificiosComponent implements OnInit {
   public edificios?: Array<Edificio>;
+  public error?:string;
   constructor(private readonly gestionEdificiosService: GestionEdificiosService,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -35,26 +36,27 @@ export class MostrarEdificiosComponent implements OnInit {
       this.gestionEdificiosService.deleteEdificio(edificio.id).subscribe(
         () => {
           this.remove()
-
+this.actualizarEdificios();
         },
 
         error => {
-          switch (error.message) {
-            case '1451':
-             console.log("error")
-              break;
-            default:
-              console.log("error")
-              break;
-          }
+          this.error = this.ts.instant("gestion-edificios.eliminar-error");
         }
       )
-      this.actualizarEdificios();
+      
     }
   }  
   private remove() {
     this.router.navigate(['/panel-principal/gestion-edificios']);
     window.scrollTo({top: 0, behavior: 'smooth'});
   
+  }
+
+  getflashError() {
+    return this.error;
+  }
+
+  onCloseFlash() {
+  this.error = undefined;
   }
 }

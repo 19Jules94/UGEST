@@ -14,7 +14,7 @@ import {AuthenticationService} from "../../../services/authentication.service";
 export class MostrarRolesComponent implements OnInit {
 
   public roles?: Array<Rol>;
-
+  public error?:string;
 
   constructor(private readonly gestionRolesService: GestionRolesService,
               private readonly router: Router,
@@ -40,21 +40,21 @@ export class MostrarRolesComponent implements OnInit {
       this.gestionRolesService.deleteRol(rol.id).subscribe(
         () => {
           this.remove()
-
+this.actualizarRoles();
         },
 
         error => {
           switch (error.message) {
-            case '1451':
-             console.log("error")
+            case '4001':
+              this.error =(this.ts.instant("gestion-roles.eliminar-error-foreign"))
               break;
             default:
-              console.log("error")
+              this.error =(this.ts.instant("gestion-roles.eliminar-error"))
               break;
           }
         }
       )
-      this.actualizarRoles();
+     
     }
   }  
   private remove() {
@@ -62,5 +62,11 @@ export class MostrarRolesComponent implements OnInit {
     window.scrollTo({top: 0, behavior: 'smooth'});
   
   }
+  getflashError() {
+    return this.error;
+  }
 
+  onCloseFlash() {
+  this.error = undefined;
+  }
 }
